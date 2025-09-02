@@ -1,0 +1,327 @@
+body {
+    font-family: "Jost", sans-serif;
+}
+
+div#navbarNav a.nav-link {
+    color: #1c1c1e;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.login-btn-add {
+    background: #ee127b;
+    border: none;
+    border-radius: 50px;
+    font-family: jost;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    padding: 6px 23px !important;
+}
+
+.login-btn-add:hover {
+    background: #ee127b;
+}
+
+.login-btn-add i.bi.bi-person-plus {
+    font-size: 20px;
+}
+
+.right-side-login {
+    align-items: center;
+    gap: 15px;
+}
+
+.right-side-login i.bi.bi-bag {
+    color: #000;
+    font-size: 18px;
+}
+
+nav.navbar.navbar-expand-lg {
+    background: #faf6f4;
+    padding: 0px;
+}
+
+nav.navbar.navbar-expand-lg a.navbar-brand.fw-bold img {
+    width: 100%;
+}
+
+nav.navbar.navbar-expand-lg a.nav-link.active:hover {
+    color: #f9037a !important;
+}
+
+nav.navbar.navbar-expand-lg a.nav-link:hover {
+    color: #f9037a !important;
+}
+
+/* Hero Background */
+.our-next-hero {
+    background: url("./images/our-banner.png") no-repeat center center/cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    text-align: center;
+    position: relative;
+    height: 600px;
+}
+
+.our-next-hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+}
+
+.our-next-hero .hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.our-next-hero .search-box {
+    background: #fff;
+    border-radius: 50px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    flex-wrap: wrap;
+    width: 81%;
+    margin: auto;
+}
+
+.our-next-hero .search-box input,
+.search-box select {
+    border: solid 1px #f9037a;
+    outline: none;
+    box-shadow: none !important;
+    padding: 10px 15px;
+    border-radius: 30px;
+    flex: 1;
+    min-width: 150px;
+    color: #1c1c1e;
+}
+
+.our-next-hero input.form-control::placeholder {
+    color: #1c1c1e;
+}
+
+.our-next-hero .search-box button {
+    border-radius: 30px;
+    padding: 10px 24px;
+    background: #1c1c1e;
+}
+
+section.our-next-hero .hero-content p {
+    font-weight: 600;
+    font-size: 18px;
+    padding-bottom: 15px;
+}
+
+section.our-next-hero .hero-content h1 {
+    font-size: 50px;
+}
+
+.trusted-winners .feature-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+    margin-right: 12px;
+    color: #743289;
+}
+
+.trusted-winners .feature-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.trusted-winners .feature-item h6 {
+    margin: 0;
+    font-weight: 600;
+    color: #1C1C1E;
+}
+
+.trusted-winners .btn-play {
+    border-radius: 30px;
+    padding: 10px 35px;
+    font-weight: 500;
+    background: #1C1C1E;
+}
+
+.trusted-winners-left i.bi.bi-trophy {
+    color: #743289;
+    font-size: 18px;
+    padding-right: 8px;
+}
+
+.trusted-winners {
+    padding: 50px 0px;
+}
+
+.trusted-winners span.fifty-text-add {
+    color: #f9037a;
+    background: url("./images/fifty-icon-text.png") no-repeat center center/cover;
+    background-position: bottom;
+    background-size: 100%;
+}
+
+.trusted-winners-left p {
+    color: #1C1C1E;
+    padding-bottom: 16px;
+    font-weight: 600;
+    padding-top: 16px;
+}
+
+.trusted-winners-left h2 {
+    font-size: 42px;
+    color: #1C1C1E;
+}
+
+.trusted-winners-left p.text-simply-add.mb-4 {
+    font-weight: 400;
+    font-size: 16px;
+    padding-top: 15px;
+}
+
+.trusted-winners .feature-item small.text-muted {
+    color: #1C1C1E !important;
+}
+
+.trusted-winners .feature-item .pin::after {
+    content: "";
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 22px;
+    background: #6a1b9a;
+}
+
+.trusted-winners .feature-item .pin {
+    position: relative;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+i.bi.bi-check-circle-fill {
+    color: #6a1b9a;
+}
+
+section.winning-numbers {
+    background: #000 url("./images/winning-img.png") no-repeat center center/cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    text-align: center;
+    position: relative;
+}
+
+
+.winning-numbers .card {
+    background: #1c1c1e;
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.winning-numbers .card img {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    height: 180px;
+    object-fit: cover;
+    width: 100%;
+}
+
+.winning-numbers .badge-featured {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: #F9037A;
+    color: #fff;
+    padding: 5px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.winning-numbers .card-price {
+    position: absolute;
+    bottom: 132px;
+    right: 15px;
+    background: #F9037A;
+    color: #fff;
+    /* padding: 8px 14px; */
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: bold;
+    width: 50px;
+    height: 50px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.winning-numbers .btn-custom {
+    background: #F9037A;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-weight: 600;
+    color: #fff;
+    width: 100%;
+}
+
+.winning-numbers .btn-custom:hover {
+    background: #e6004f;
+}
+
+.winning-numbers .view-all-btn {
+    background: #fff;
+    color: #111;
+    font-weight: 600;
+    padding: 12px 28px;
+    border-radius: 30px;
+    margin-top: 30px;
+}
+
+.winning-numbers .view-all-btn:hover {
+    background: #ddd;
+}
+
+.winning-numbers .section-title p {
+    font-size: 18px;
+}
+
+.winning-numbers .section-title h2 {
+    font-size: 42px;
+    font-family: 'Jost';
+}
+
+.winning-numbers p.winning-numbers-text {
+    width: 61%;
+    margin: auto;
+    padding: 20px 0;
+    margin-bottom: 30px;
+}
+
+.winning-numbers .section-title i.bi.bi-trophy {
+    padding-right: 5px;
+}
