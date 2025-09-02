@@ -57,11 +57,13 @@ const LoginModal = ({ open, handleClose, handleSignupClick }) => {
       const user = result.user;
       let token = await user.getIdToken();
 
+      console.log(token)
+
       // Send token to Laravel backend
-      let res = await axios.post("/api/social-login", {
-        provider: type,
-        token
-      });
+      // let res = await axios.post("/api/social-login", {
+      //   provider: type,
+      //   token
+      // });
 
       toast.success(res.data.message || `${type} login successful!`);
       handleClose();
@@ -227,7 +229,7 @@ const LoginModal = ({ open, handleClose, handleSignupClick }) => {
             <a href="#">
               <img src="/images/facebook.png" alt="Facebook" width="40" />
             </a>
-            <a href="#">
+            <a href="#" onClick={() => socialLogin(googleProvider, "google")}>
               <img src="/images/google-play.png" alt="Google" width="40" />
             </a>
           </Box>
