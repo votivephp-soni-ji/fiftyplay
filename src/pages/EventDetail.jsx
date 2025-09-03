@@ -1,112 +1,160 @@
-import React, { useState } from "react";
-import { Container, Row, Col, Button, ProgressBar, Card } from "react-bootstrap";
-import Countdown from "react-countdown";
+import { useState, useEffect } from "react";
+import { Carousel } from "react-bootstrap";
 
-const EventDetail = () => {
-  const [soldTickets, setSoldTickets] = useState(200); // Example
-  const maxTickets = 500;
-  const ticketPrice = 200;
+import "../assets/css/event_details.css";
 
-  const renderer = ({ days, hours, minutes, seconds }) => (
-    <span>
-      {days} Days {hours} Hours {minutes} Minutes {seconds} Seconds
-    </span>
-  );
+export default function EventDetail({
+  title = "The Breeze Zodiac IX",
+  contestNo = "B27",
+  drawDate = "30 August 2025",
+  pricePerTicket = 200,
+  totalAmount = 20000,
+  images = [
+    "./images/event-img-main.png",
+    "./images/event-img-two.png",
+    "./images/event-img-three.png",
+    "./images/event-img-four.png",
+    "./images/event-img-five.png",
+    "./images/event-img-six.png"
+  ],
+}) {
+  const [timeLeft, setTimeLeft] = useState({
+    days: 2,
+    hours: 10,
+    minutes: 57,
+    seconds: 15,
+  });
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => {
+        let { days, hours, minutes, seconds } = prev;
+        if (seconds > 0) seconds--;
+        else if (minutes > 0) {
+          minutes--;
+          seconds = 59;
+        } else if (hours > 0) {
+          hours--;
+          minutes = 59;
+          seconds = 59;
+        } else if (days > 0) {
+          days--;
+          hours = 23;
+          minutes = 59;
+          seconds = 59;
+        }
+        return { days, hours, minutes, seconds };
+      });
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
 
   return (
-    <div>
-      {/* Hero Section */}
-      <div
-        className="text-white text-center p-5"
-        style={{
-          background: "linear-gradient(90deg, #ec008c, #fc6767)",
-        }}
-      >
-        <h2>The Breeze Zodiac IX</h2>
-        <p>HOME / CONTEST / TITLE GOES HERE</p>
+    <>
+      {/* Banner */}
+      <section className="event-details-add">
+        <div className="container">
+          <h1 className="text-center">{title}</h1>
+          <ul className="event-list-add">
+            <li>
+              <a href="#">HOME</a>
+            </li>
+            <li>/</li>
+            <li>
+              <a href="#">CONTEST</a>
+            </li>
+            <li>/</li>
+            <li>
+              <a href="#">{title}</a>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      {/* Carousel */}
+      <div className="event-testimonials">
+        <div className="container">
+          <Carousel>
+            {images.map((src, idx) => (
+              <Carousel.Item key={idx}>
+                <img
+                  className="d-block w-100"
+                  src={src}
+                  alt={`Slide ${idx + 1}`}
+                />
+              </Carousel.Item>
+            ))}
+          </Carousel>
+        </div>
+        
       </div>
 
-      {/* Event Banner */}
-      <Container className="my-4">
-        <Row>
-          <Col md={8}>
-            <img
-              src="https://via.placeholder.com/800x400"
-              alt="event"
-              className="img-fluid rounded mb-3"
-            />
-
-            {/* Thumbnails */}
-            <div className="d-flex gap-2">
-              {[1, 2, 3, 4, 5].map((i) => (
-                <img
-                  key={i}
-                  src={`https://via.placeholder.com/120x80?text=Img+${i}`}
-                  alt="thumb"
-                  className="rounded"
-                />
-              ))}
+      {/* Details */}
+      <div className="chance-to-win">
+        <div className="container my-4">
+          <div className="row inner-content-add-win">
+            {/* Left content */}
+            <div className="col-lg-8 inner-content-win-right">
+              <div className="enter-now-chance">
+                <h6>
+                  <i className="bi bi-trophy"></i> Enter now for a chance to win
+                </h6>
+                <p>
+                  <strong>${pricePerTicket}</strong> Per Ticket
+                </p>
+              </div>
+              <h3 className="fw-bold">{title}</h3>
+              <p className="contest-number">
+                Contest No. <b>{contestNo}</b> | Drawn: {drawDate}
+              </p>
+              <h5 className="mt-4">Description</h5>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+              <h5 className="mt-4">Fundraiser Details</h5>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
             </div>
 
-            {/* Event Info */}
-            <div className="mt-4">
-              <h4>Enter now for a chance to win</h4>
-              <h3>The Breeze Zodiac IX</h3>
-              <p>
-                Contest No. <b>B2T</b> | Drawn: 30 August 2025
-              </p>
-              <h5>${ticketPrice} Per Ticket</h5>
-              <p>Maximum of {maxTickets} entries.</p>
+            {/* Right sidebar */}
+            <div className="col-lg-4 inner-content-win-left">
+              <div className="countdown text-center mb-3">
+                <p className="mb-1">This Raffle ends in:</p>
+                <h3>
+                  <span className="number-text-add">
+                    {timeLeft.days}{" "}
+                    <small className="days-text-add">Days</small>
+                  </span>
+                  <span className="number-text-add">
+                    {timeLeft.hours}{" "}
+                    <small className="days-text-add">Hours</small>
+                  </span>
+                  <span className="number-text-add">
+                    {timeLeft.minutes}{" "}
+                    <small className="days-text-add">Minutes</small>
+                  </span>
+                  <span className="number-text-add">
+                    {timeLeft.seconds}{" "}
+                    <small className="days-text-add">Seconds</small>
+                  </span>
+                </h3>
+              </div>
 
-              <h5>Description</h5>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed
-                ex eget mi sollicitudin consequat. Sed rhoncus ligula vel justo
-                dignissim aliquam. 
-              </p>
-
-              <h5>Fundraiser Details</h5>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed
-                ex eget mi sollicitudin consequat. Vestibulum congue laoreet mi.
-              </p>
+              <div className="ticket-box text-center">
+                <h5>Total Amount</h5>
+                <p>${totalAmount.toLocaleString()}</p>
+                <select id="tickets" name="tickets">
+                  {[1, 2, 3, 4].map((n) => (
+                    <option key={n} value={n}>
+                      {n} Ticket{n > 1 ? "s" : ""} - ${n * pricePerTicket}
+                    </option>
+                  ))}
+                </select>
+                <button className="btn btn-buy">
+                  BUY TICKETS <i className="bi bi-arrow-right ms-1"></i>
+                </button>
+              </div>
             </div>
-          </Col>
-
-          {/* Sidebar */}
-          <Col md={4}>
-            <Card className="p-3 shadow-sm">
-              <h6>This competition ends in:</h6>
-              <Countdown
-                date={Date.now() + 1000 * 60 * 60 * 24 * 2}
-                renderer={renderer}
-              />
-
-              <hr />
-
-              <p>Tickets Sold</p>
-              <ProgressBar
-                now={(soldTickets / maxTickets) * 100}
-                label={`${soldTickets}/${maxTickets}`}
-              />
-
-              <h4 className="mt-3">${soldTickets * ticketPrice} Current Total</h4>
-
-              <Button
-                className="mt-3 w-100"
-                style={{
-                  background: "linear-gradient(90deg,#ec008c,#fc6767)",
-                  border: "none",
-                }}
-              >
-                Buy Tickets →
-              </Button>
-            </Card>
-          </Col>
-        </Row>
-      </Container>
-    </div>
+          </div>
+        </div>
+      </div>
+    </>
   );
-};
-
-export default EventDetail;
+}

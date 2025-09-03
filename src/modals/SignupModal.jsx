@@ -14,25 +14,44 @@ import EmailIcon from "@mui/icons-material/Email";
 import LockIcon from "@mui/icons-material/Lock";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import GoogleIcon from "@mui/icons-material/Google";
+import AppleIcon from "@mui/icons-material/Apple";
 import { toast } from "react-toastify";
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { signup } from "../services/AuthService";
+import { signup, socialLogin } from "../services/AuthService";
+import {
+  auth,
+  googleProvider,
+  facebookProvider,
+  appleProvider,
+  requestForToken,
+} from "../firebase";
+import { signInWithPopup } from "firebase/auth";
 
 // ✅ Validation schema
 const schema = yup.object({
-  //name: yup.string().required("Full name is required"),
+  name: yup.string().required("Full name is required"),
   email: yup.string().email("Invalid email").required("Email is required"),
-  password: yup.string().min(6, "At least 6 characters").required("Password is required"),
+  password: yup
+    .string()
+    .min(6, "At least 6 characters")
+    .required("Password is required"),
   password_confirmation: yup
     .string()
     .oneOf([yup.ref("password"), null], "Passwords must match")
     .required("Confirm your password"),
 });
 
-const SignupModal = ({ open, handleClose, handleLoginClick }) => {
+const SignupModal = ({
+  open,
+  handleClose,
+  handleLoginClick,
+  onLoginSuccess,
+}) => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -47,21 +66,50 @@ const SignupModal = ({ open, handleClose, handleLoginClick }) => {
 
   const onSubmit = async (data) => {
     try {
+      res = await signup(data);
+      onLoginSuccess(res);
+    } catch (err) {
+      if (err.response?.status === 422) {
+        const validationErrors = err.response.data.errors;
+        Object.keys(validationErrors).forEach((field) => {
+          setError(field, {
+            type: "server",
+            message: validationErrors[field][0],
+          });
+        });
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
 
-          res = await signup(data)
-        } catch (err) {
-          if (err.response?.status === 422) {
-            const validationErrors = err.response.data.errors;
-            Object.keys(validationErrors).forEach((field) => {
-              setError(field, {
-                type: "server",
-                message: validationErrors[field][0],
-              });
-            });
-          }
-        } finally {
-          setLoading(false);
-        }
+  const socialLoginHandler = async (provider, type) => {
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+      let idToken = await user.getIdToken();
+
+      // Get FCM Device Token (for push notifications)
+
+      let deviceToken = null;
+      try {
+        deviceToken = await requestForToken();
+        console.log("device token", deviceToken);
+      } catch (err) {
+        console.warn("⚠️ Could not get device token:", err.message);
+      }
+
+      let res = await socialLogin({
+        device_token: deviceToken,
+        token: idToken,
+        provider: type,
+      });
+      onLoginSuccess(res);
+      toast.success(res.message || `${type} login successful!`);
+      handleClose();
+    } catch (err) {
+      toast.error(err.message);
+    }
   };
 
   return (
@@ -229,29 +277,47 @@ const SignupModal = ({ open, handleClose, handleLoginClick }) => {
           </Typography>
 
           {/* Divider */}
-          <Typography align="center" variant="body2" color="textSecondary" mb={2}>
+          <Typography
+            align="center"
+            variant="body2"
+            color="textSecondary"
+            mb={2}
+          >
             or continue with
           </Typography>
 
           {/* Social Icons */}
           <Box
-                      sx={{
-                        display: "flex",
-                        justifyContent: "center",
-                        gap: 2,
-                        mb: 3
-                      }}
-                    >
-                      <a href="#">
-                        <img src="/images/apple.png" alt="Apple" width="40" />
-                      </a>
-                      <a href="#">
-                        <img src="/images/facebook.png" alt="Facebook" width="40" />
-                      </a>
-                      <a href="#">
-                        <img src="/images/google-play.png" alt="Google" width="40" />
-                      </a>
-                    </Box>
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              gap: 2,
+              mb: 3,
+            }}
+          >
+            <IconButton
+              sx={{ color: "#1877F2" }}
+              onClick={() => socialLoginHandler(facebookProvider, "facebook")}
+            >
+              <FacebookIcon fontSize="medium" />
+            </IconButton>
+            <IconButton
+              sx={{ color: "black" }}
+              onClick={() => socialLoginHandler(appleProvider, "apple")}
+            >
+              <AppleIcon fontSize="medium" />
+            </IconButton>
+            <IconButton
+              sx={{ color: "#DB4437" }}
+              onClick={() => socialLoginHandler(googleProvider, "google")}
+            >
+              <img
+                src="https://www.google.com/favicon.ico"
+                alt="Google"
+                style={{ width: 24, height: 24 }}
+              />
+            </IconButton>
+          </Box>
         </Box>
       </Box>
     </Modal>

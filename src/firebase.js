@@ -1,30 +1,49 @@
-// src/firebase.js
 import { initializeApp } from "firebase/app";
-import {
-    getAuth, GoogleAuthProvider, FacebookAuthProvider, OAuthProvider
-} from "firebase/auth";
-import { getMessaging } from "firebase/messaging";
+import { getAuth, GoogleAuthProvider, FacebookAuthProvider, OAuthProvider, signInWithPopup } from "firebase/auth";
+import { getMessaging, getToken, onMessage } from "firebase/messaging";
 
+// Your Firebase config (from console)
 const firebaseConfig = {
-    apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-    storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-    messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-    appId: import.meta.env.VITE_FIREBASE_APP_ID,
-    measurementId: "G-WP6LK5EX14"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 };
 
 // Init
 const app = initializeApp(firebaseConfig);
-
-// Auth providers
 export const auth = getAuth(app);
+
+// Social Providers
 export const googleProvider = new GoogleAuthProvider();
 export const facebookProvider = new FacebookAuthProvider();
 export const appleProvider = new OAuthProvider("apple.com");
 
-// Messaging
+// Messaging (Push Notification)
 export const messaging = getMessaging(app);
 
-export default app;
+// Get FCM Device Token
+export const requestForToken = async () => {
+  try {
+    const token = await getToken(messaging, { vapidKey: import.meta.env.VITE_FIREBASE_VAPID_KEY });
+    if (token) {
+      console.log("FCM Token:", token);
+      return token;
+    } else {
+      console.log("No registration token available. Request permission to generate one.");
+    }
+  } catch (err) {
+    console.error("An error occurred while retrieving token. ", err);
+  }
+};
+
+// Listen for messages while in foreground
+export const onMessageListener = () =>
+  new Promise((resolve) => {
+    onMessage(messaging, (payload) => {
+      resolve(payload);
+    });
+  });

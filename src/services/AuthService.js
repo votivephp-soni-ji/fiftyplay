@@ -9,6 +9,10 @@ export const signup = (payload) => {
   return callApi("post", "/auth/signup", payload);
 };
 
+export const socialLogin = (payload) => {
+  return callApi('post', '/auth/social-login', payload);
+}
+
 export const logout = () => {
   return callApi("post", "/auth/logout");
 };

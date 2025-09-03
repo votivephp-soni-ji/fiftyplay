@@ -9,19 +9,29 @@ import {
   Checkbox,
   FormControlLabel,
   Alert,
-  InputAdornment
+  InputAdornment,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import EmailIcon from "@mui/icons-material/Email";
 import LockIcon from "@mui/icons-material/Lock";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import { login } from "../services/AuthService";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import GoogleIcon from "@mui/icons-material/Google";
+import AppleIcon from "@mui/icons-material/Apple";
+import { login, socialLogin } from "../services/AuthService";
 
-import { auth, googleProvider, facebookProvider, appleProvider } from "../firebase";
+import {
+  auth,
+  googleProvider,
+  facebookProvider,
+  appleProvider,
+  requestForToken,
+} from "../firebase";
 import { signInWithPopup } from "firebase/auth";
+import { toast } from "react-toastify";
 
-const LoginModal = ({ open, handleClose, handleSignupClick }) => {
+const LoginModal = ({ open, handleClose, handleSignupClick,onLoginSuccess }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -38,6 +48,8 @@ const LoginModal = ({ open, handleClose, handleSignupClick }) => {
     try {
       const res = await login({ email, password });
       console.log("✅ Login Success:", res);
+      onLoginSuccess(res);
+      toast.success(res.message);
     } catch (err) {
       if (err.response?.status === 422) {
         setErrors(err.response.data.errors || {});
@@ -51,21 +63,29 @@ const LoginModal = ({ open, handleClose, handleSignupClick }) => {
     }
   };
 
-   const socialLogin = async (provider, type) => {
+  const socialLoginHandler = async (provider, type) => {
     try {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
-      let token = await user.getIdToken();
+      let idToken = await user.getIdToken();
 
-      console.log(token)
+      // Get FCM Device Token (for push notifications)
+ 
+      let deviceToken = null;
+      try {
+        deviceToken = await requestForToken();
+        console.log("device token", deviceToken);
+      } catch (err) {
+        console.warn("⚠️ Could not get device token:", err.message);
+      }
 
-      // Send token to Laravel backend
-      // let res = await axios.post("/api/social-login", {
-      //   provider: type,
-      //   token
-      // });
-
-      toast.success(res.data.message || `${type} login successful!`);
+      let res = await socialLogin({
+        device_token: deviceToken,
+        token: idToken,
+        provider: type,
+      });
+      onLoginSuccess(res);
+      toast.success(res.message || `${type} login successful!`);
       handleClose();
     } catch (err) {
       toast.error(err.message);
@@ -81,7 +101,7 @@ const LoginModal = ({ open, handleClose, handleSignupClick }) => {
           alignItems: "center",
           justifyContent: "center",
           px: 2,
-          fontFamily: '"Jost", sans-serif'
+          fontFamily: '"Jost", sans-serif',
         }}
       >
         <Box
@@ -91,7 +111,7 @@ const LoginModal = ({ open, handleClose, handleSignupClick }) => {
             borderRadius: "20px",
             p: { xs: 3, sm: 4 },
             position: "relative",
-            boxShadow: 24
+            boxShadow: 24,
           }}
         >
           {/* Close Button */}
@@ -131,7 +151,7 @@ const LoginModal = ({ open, handleClose, handleSignupClick }) => {
               error={!!errors.email}
               helperText={errors.email ? errors.email[0] : ""}
               InputProps={{
-                style: { fontFamily: '"Jost", sans-serif' }
+                style: { fontFamily: '"Jost", sans-serif' },
               }}
             />
           </Box>
@@ -159,7 +179,7 @@ const LoginModal = ({ open, handleClose, handleSignupClick }) => {
                     </IconButton>
                   </InputAdornment>
                 ),
-                style: { fontFamily: '"Jost", sans-serif' }
+                style: { fontFamily: '"Jost", sans-serif' },
               }}
             />
           </Box>
@@ -170,7 +190,7 @@ const LoginModal = ({ open, handleClose, handleSignupClick }) => {
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
-              mb: 3
+              mb: 3,
             }}
           >
             <FormControlLabel
@@ -199,7 +219,7 @@ const LoginModal = ({ open, handleClose, handleSignupClick }) => {
               fontWeight: "bold",
               fontSize: "16px",
               mb: 3,
-              "&:hover": { bgcolor: "#e60073" }
+              "&:hover": { bgcolor: "#e60073" },
             }}
             onClick={handleSubmit}
             disabled={loading}
@@ -220,18 +240,31 @@ const LoginModal = ({ open, handleClose, handleSignupClick }) => {
               display: "flex",
               justifyContent: "center",
               gap: 2,
-              mb: 3
+              mb: 3,
             }}
           >
-            <a href="#">
-              <img src="/images/apple.png" alt="Apple" width="40" />
-            </a>
-            <a href="#">
-              <img src="/images/facebook.png" alt="Facebook" width="40" />
-            </a>
-            <a href="#" onClick={() => socialLogin(googleProvider, "google")}>
-              <img src="/images/google-play.png" alt="Google" width="40" />
-            </a>
+            <IconButton
+              sx={{ color: "#1877F2" }}
+              onClick={() => socialLoginHandler(facebookProvider, "facebook")}
+            >
+              <FacebookIcon fontSize="medium" />
+            </IconButton>
+            <IconButton
+              sx={{ color: "black" }}
+              onClick={() => socialLoginHandler(appleProvider, "apple")}
+            >
+              <AppleIcon fontSize="medium" />
+            </IconButton>
+            <IconButton
+              sx={{ color: "#DB4437" }}
+              onClick={() => socialLoginHandler(googleProvider, "google")}
+            >
+              <img
+                src="https://www.google.com/favicon.ico"
+                alt="Google"
+                style={{ width: 24, height: 24 }}
+              />
+            </IconButton>
           </Box>
 
           {/* Signup Link */}
@@ -246,7 +279,7 @@ const LoginModal = ({ open, handleClose, handleSignupClick }) => {
               style={{
                 color: "#7b1fa2",
                 cursor: "pointer",
-                fontWeight: "bold"
+                fontWeight: "bold",
               }}
             >
               Sign up
