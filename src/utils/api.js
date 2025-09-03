@@ -18,13 +18,13 @@ API.interceptors.request.use((config) => {
 });
 
 export const callApi = async (method, url, data = {}, params = {}) => {
-    
-        const response = await API({
-            method,
-            url,
-            data,
-            params,
-        });
-        return response.data;
-    
+
+    const response = await API({
+        method,
+        url,
+        data,
+        params,
+    });
+    return response.data;
+
 };

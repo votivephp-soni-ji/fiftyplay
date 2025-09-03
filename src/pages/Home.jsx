@@ -24,7 +24,7 @@ const Home = () => {
 
   useEffect(() => {
     axios
-      .get(`${baseUrl}/api/events`)
+      .get(`${baseUrl}/events`)
       .then((res) => {
         setEvents(res.data.data || []);
         console.log(res.data.data); // assuming response has {data: [...]}

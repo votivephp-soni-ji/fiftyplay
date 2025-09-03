@@ -133,7 +133,8 @@ const Header = () => {
                   aria-expanded="false"
                 >
                   <i className="bi bi-person-circle"></i>
-                  <span>Profile</span> {/* show first name */}
+                  <span> {user?.name || "Profile"} </span>{" "}
+                  {/* show first name */}
                 </button>
                 <ul
                   className="dropdown-menu dropdown-menu-end"
