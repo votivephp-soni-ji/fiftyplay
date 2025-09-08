@@ -65,8 +65,15 @@ const SignupModal = ({
   } = useForm({ resolver: yupResolver(schema) });
 
   const onSubmit = async (data) => {
+    // Add user type
+
+    const payload = {
+      ...data,
+      user_type: 4, // 🔹 change dynamically as needed
+    };
+
     try {
-      res = await signup(data);
+      res = await signup(payload);
       onLoginSuccess(res);
     } catch (err) {
       if (err.response?.status === 422) {

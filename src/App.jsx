@@ -13,6 +13,7 @@ import Login from "./pages/Login";
 import EventDetail from "./pages/EventDetail";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/profile" element={<Profile />} />
           <Route
             path="/fundraising-products"
             element={<FundraisingProducts />}
