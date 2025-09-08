@@ -2,59 +2,59 @@ import { useState, useEffect } from "react";
 import { Carousel } from "react-bootstrap";
 
 import "../assets/css/event_details.css";
+import { useLocation } from "react-router-dom";
 
-export default function EventDetail({
-  title = "The Breeze Zodiac IX",
-  contestNo = "B27",
-  drawDate = "30 August 2025",
-  pricePerTicket = 200,
-  totalAmount = 20000,
-  images = [
-    "./images/event-img-main.png",
-    "./images/event-img-two.png",
-    "./images/event-img-three.png",
-    "./images/event-img-four.png",
-    "./images/event-img-five.png",
-    "./images/event-img-six.png"
-  ],
-}) {
+export default function EventDetail(){
+
+   const { state } = useLocation();
+  const event = state?.event;
+
   const [timeLeft, setTimeLeft] = useState({
-    days: 2,
-    hours: 10,
-    minutes: 57,
-    seconds: 15,
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
   });
+ 
 
+    // countdown timer
   useEffect(() => {
+    if (!event?.draw_time) return;
+
+    const targetDate = new Date(event.draw_time).getTime();
+
     const timer = setInterval(() => {
-      setTimeLeft((prev) => {
-        let { days, hours, minutes, seconds } = prev;
-        if (seconds > 0) seconds--;
-        else if (minutes > 0) {
-          minutes--;
-          seconds = 59;
-        } else if (hours > 0) {
-          hours--;
-          minutes = 59;
-          seconds = 59;
-        } else if (days > 0) {
-          days--;
-          hours = 23;
-          minutes = 59;
-          seconds = 59;
-        }
-        return { days, hours, minutes, seconds };
-      });
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      if (distance <= 0) {
+        clearInterval(timer);
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor(
+        (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      );
+      const minutes = Math.floor(
+        (distance % (1000 * 60 * 60)) / (1000 * 60)
+      );
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      setTimeLeft({ days, hours, minutes, seconds });
     }, 1000);
+
     return () => clearInterval(timer);
-  }, []);
+  }, [event?.draw_time]);
+
 
   return (
     <>
       {/* Banner */}
       <section className="event-details-add">
         <div className="container">
-          <h1 className="text-center">{title}</h1>
+          <h1 className="text-center">{event.title}</h1>
           <ul className="event-list-add">
             <li>
               <a href="#">HOME</a>
@@ -65,7 +65,7 @@ export default function EventDetail({
             </li>
             <li>/</li>
             <li>
-              <a href="#">{title}</a>
+              <a href="#">{event.title}</a>
             </li>
           </ul>
         </div>
@@ -75,7 +75,7 @@ export default function EventDetail({
       <div className="event-testimonials">
         <div className="container">
           <Carousel>
-            {images.map((src, idx) => (
+            {(event.banners || []).map((src, idx) => (
               <Carousel.Item key={idx}>
                 <img
                   className="d-block w-100"
@@ -100,17 +100,17 @@ export default function EventDetail({
                   <i className="bi bi-trophy"></i> Enter now for a chance to win
                 </h6>
                 <p>
-                  <strong>${pricePerTicket}</strong> Per Ticket
+                  <strong>${event.ticker_price}</strong> Per Ticket
                 </p>
               </div>
-              <h3 className="fw-bold">{title}</h3>
+              <h3 className="fw-bold">{event.title}</h3>
               <p className="contest-number">
-                Contest No. <b>{contestNo}</b> | Drawn: {drawDate}
+                Contest No. <b>B2B</b> | Drawn: {event.end_date}
               </p>
               <h5 className="mt-4">Description</h5>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+              <p>{event.description}</p>
               <h5 className="mt-4">Fundraiser Details</h5>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+              <p>{event.description}</p>
             </div>
 
             {/* Right sidebar */}
@@ -139,14 +139,14 @@ export default function EventDetail({
 
               <div className="ticket-box text-center">
                 <h5>Total Amount</h5>
-                <p>${totalAmount.toLocaleString()}</p>
-                <select id="tickets" name="tickets">
+                <p>${event.ticket_price.toLocaleString()}</p>
+                {/* <select id="tickets" name="tickets">
                   {[1, 2, 3, 4].map((n) => (
                     <option key={n} value={n}>
                       {n} Ticket{n > 1 ? "s" : ""} - ${n * pricePerTicket}
                     </option>
                   ))}
-                </select>
+                </select> */}
                 <button className="btn btn-buy">
                   BUY TICKETS <i className="bi bi-arrow-right ms-1"></i>
                 </button>

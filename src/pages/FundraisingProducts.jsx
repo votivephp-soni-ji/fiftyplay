@@ -1,142 +1,200 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
+  Container,
+  Typography,
+  Breadcrumbs,
+  Link,
+  Grid,
   Card,
   CardMedia,
   CardContent,
-  Typography,
-  Grid,
   Button,
   Box,
-  Chip,
-  Stack,
+  IconButton,
+  Pagination,
+  CircularProgress,
 } from "@mui/material";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import { fetchEvents } from "../services/EventService";
+import "../assets/css/event-products.css";
+import { useNavigate } from "react-router-dom";
 
-const events = Array.from({ length: 12 }, (_, i) => ({
-  id: i + 1,
-  title: "Title goes here",
-  price: 12.85,
-  tickets: "95k+ Remaining",
-  date: "30 AUG 2025",
-  image: "/images/event-sample.jpg", // replace with real
-}));
+const FundraisingProducts = () => {
+  const [events, setEvents] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const navigate = useNavigate();
 
-const Fundraising = () => {
+  // ✅ Fetch events from API
+  const loadEvents = async (pageNo = 1) => {
+    setLoading(true);
+    try {
+      const res = await fetchEvents({ page: pageNo });
+      console.log("data", res.data);
+      setEvents(res.data);
+      setTotalPages(res.meta.last_page);
+    } catch (err) {
+      console.error("Error fetching events:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    loadEvents(page);
+  }, [page]);
+
+  const handlePageChange = (event, value) => {
+    setPage(value);
+  };
+
+
+
   return (
-    <Box sx={{ py: 6, px: { xs: 2, md: 6 } }}>
-      {/* Section Header */}
-      <Box textAlign="center" mb={4}>
-        <Typography variant="h4" fontWeight="bold">
-          Latest <span style={{ color: "#EC008C" }}>Events</span>
-        </Typography>
-        <Typography variant="body1" color="text.secondary" mt={1}>
-          We celebrate every win, no matter how big or small. Our platform is
-          buzzing with excitement as players hit jackpots and score massive
-          crypto payouts daily.
-        </Typography>
-      </Box>
+    <>
+      <section className="page-header banner-top-add">
+        <div className="container">
+          <h1>Fundraising Products</h1>
+          <nav aria-label="breadcrumb">
+            <ul className="breadcrumb">
+              <li className="breadcrumb-item">
+                <a href="#">Home</a>
+              </li>
+              <li className="breadcrumb-item active" aria-current="page">
+                Fundraising Products
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </section>
 
-      {/* Event Grid */}
-      <Grid container spacing={3}>
-        {events.map((event) => (
-          <Grid item xs={12} sm={6} md={4} lg={3} key={event.id}>
-            <Card
-              sx={{
-                bgcolor: "#121212",
-                color: "#fff",
-                borderRadius: 3,
-                overflow: "hidden",
-                position: "relative",
-              }}
-            >
-              {/* Image */}
-              <Box position="relative">
-                <CardMedia
-                  component="img"
-                  height="180"
-                  image={event.image}
-                  alt={event.title}
-                />
-                {/* Exclusive Label */}
-                <Chip
-                  label="Exclusive"
-                  size="small"
-                  sx={{
-                    position: "absolute",
-                    top: 10,
-                    left: 10,
-                    bgcolor: "transparent",
-                    border: "1px solid #EC008C",
-                    color: "#EC008C",
-                    fontWeight: "bold",
-                  }}
-                />
-                {/* Favorite Icon */}
-                <Box
-                  sx={{
-                    position: "absolute",
-                    top: 10,
-                    right: 10,
-                    bgcolor: "#00000070",
-                    borderRadius: "50%",
-                    p: 0.5,
-                  }}
-                >
-                  <FavoriteBorderIcon sx={{ color: "#fff" }} />
-                </Box>
-                {/* Contest Badge */}
-                <Chip
-                  label="Contest 582"
-                  size="small"
-                  sx={{
-                    position: "absolute",
-                    bottom: 10,
-                    right: 10,
-                    bgcolor: "#EC008C",
-                    color: "#fff",
-                    fontWeight: "bold",
-                  }}
-                />
+      <div className="latest-events-add">
+        <div className="container">
+          <h1 className="text-center">
+            Latest <span className="events-text">Events</span>
+          </h1>
+          <p className="text-center celebrate-text">
+            We celebrate every win, no matter how big or small. Our platform is
+            buzzing with excitement as players hit jackpots and score massive
+            crypto payouts daily.
+          </p>
+
+          <div className="latest-events-inner-added">
+            {loading ? (
+              <Box sx={{ display: "flex", justifyContent: "center", py: 10 }}>
+                <CircularProgress />
               </Box>
+            ) : (
+              <div className="row g-4">
+                {events.map((event) => (
+                  <div className="col-md-4 col-sm-6">
+                    <div className="card position-relative">
+                      <div className="exclusive-tab">
+                        <button>Exclusive</button>
+                        <i className="bi bi-heart"></i>
+                      </div>
 
-              {/* Content */}
-              <CardContent>
-                <Typography variant="h6" fontWeight="bold" gutterBottom>
-                  {event.title}
-                </Typography>
-                <Typography variant="body2" color="gray">
-                  Ticket Price: ${event.price}
-                </Typography>
-                <Stack
-                  direction="row"
-                  justifyContent="space-between"
-                  alignItems="center"
-                  mt={1}
-                >
-                  <Typography variant="body2">{event.tickets}</Typography>
-                  <Typography variant="body2">{event.date}</Typography>
-                </Stack>
+                      <img
+                        src={event.banners?.[0] || "./images/latest-img.png"}
+                        className="card-img-top"
+                        alt="{event.title}"
+                      />
+                      <span className="card-price">
+                        <span className="contest-add">Contest</span> 5B2
+                      </span>
+                      <div className="card-body">
+                        <h5 className="card-title">{event.title}</h5>
+                        <div className="ticket-price-tab">
+                          <p>Ticket Price:</p>
+                          <p className="inner-price-add">
+                            ${event.ticket_price}
+                          </p>
+                        </div>
 
-                <Button
-                  fullWidth
-                  variant="contained"
-                  sx={{
-                    mt: 2,
-                    bgcolor: "#EC008C",
-                    borderRadius: 5,
-                    textTransform: "none",
-                    "&:hover": { bgcolor: "#d6007f" },
-                  }}
-                >
-                  View Details →
-                </Button>
-              </CardContent>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
-    </Box>
+                        <div className="remaining-tab">
+                          <p>95K+ Remaining</p>
+                          <p className="inner-price-add">
+                            <i className="bi bi-stopwatch"></i> {event.end_date}
+                          </p>
+                        </div>
+                        <button
+                          className="btn btn-custom"
+                          onClick={() => navigate("/event-detail", { state: { event }})}
+                        >
+                          View Details <i className="bi bi-arrow-right"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {totalPages > 1 && (
+              <nav aria-label="Page navigation example">
+                <ul className="pagination justify-content-center">
+                  {/* Back Button */}
+                  <li className={`page-item ${page === 1 ? "disabled" : ""}`}>
+                    <a
+                      className="page-link"
+                      href="#"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        if (page > 1) setPage(page - 1);
+                      }}
+                    >
+                      <i className="bi bi-chevron-left"></i> Back
+                    </a>
+                  </li>
+
+                  {/* Page Numbers */}
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+                    (p) => (
+                      <li
+                        key={p}
+                        className={`page-item ${page === p ? "active" : ""}`}
+                      >
+                        <a
+                          className="page-link"
+                          href="#"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setPage(p);
+                          }}
+                        >
+                          {p}
+                        </a>
+                      </li>
+                    )
+                  )}
+
+                  {/* Next Button */}
+                  <li
+                    className={`page-item ${
+                      page === totalPages ? "disabled" : ""
+                    }`}
+                  >
+                    <a
+                      className="page-link"
+                      href="#"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        if (page < totalPages) setPage(page + 1);
+                      }}
+                    >
+                      Next <i className="bi bi-chevron-right"></i>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            )}
+          </div>
+        </div>
+      </div>
+    </>
   );
 };
 
-export default Fundraising;
+export default FundraisingProducts;
