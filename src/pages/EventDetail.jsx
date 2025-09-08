@@ -2,12 +2,12 @@ import { useState, useEffect } from "react";
 import { Carousel } from "react-bootstrap";
 
 import "../assets/css/event_details.css";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
-export default function EventDetail(){
-
-   const { state } = useLocation();
-  const event = state?.event;
+export default function EventDetail() {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const event = location.state?.event;
 
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
@@ -15,9 +15,14 @@ export default function EventDetail(){
     minutes: 0,
     seconds: 0,
   });
- 
 
-    // countdown timer
+  useEffect(() => {
+    if (!event) {
+      navigate("/fundraising-products");
+    }
+  }, [event, navigate]);
+
+  // countdown timer
   useEffect(() => {
     if (!event?.draw_time) return;
 
@@ -37,9 +42,7 @@ export default function EventDetail(){
       const hours = Math.floor(
         (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
       );
-      const minutes = Math.floor(
-        (distance % (1000 * 60 * 60)) / (1000 * 60)
-      );
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
       setTimeLeft({ days, hours, minutes, seconds });
@@ -47,7 +50,6 @@ export default function EventDetail(){
 
     return () => clearInterval(timer);
   }, [event?.draw_time]);
-
 
   return (
     <>
@@ -86,7 +88,6 @@ export default function EventDetail(){
             ))}
           </Carousel>
         </div>
-        
       </div>
 
       {/* Details */}

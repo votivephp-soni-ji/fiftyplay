@@ -50,8 +50,6 @@ const FundraisingProducts = () => {
     setPage(value);
   };
 
-
-
   return (
     <>
       <section className="page-header banner-top-add">
@@ -84,7 +82,7 @@ const FundraisingProducts = () => {
           <div className="latest-events-inner-added">
             {loading ? (
               <Box sx={{ display: "flex", justifyContent: "center", py: 10 }}>
-                <CircularProgress />
+                <CircularProgress sx={{ color: "#ee127b" }} />
               </Box>
             ) : (
               <div className="row g-4">
@@ -114,14 +112,16 @@ const FundraisingProducts = () => {
                         </div>
 
                         <div className="remaining-tab">
-                          <p>95K+ Remaining</p>
+                          <p>{event.remain_tickets || 0} Remaining</p>
                           <p className="inner-price-add">
                             <i className="bi bi-stopwatch"></i> {event.end_date}
                           </p>
                         </div>
                         <button
                           className="btn btn-custom"
-                          onClick={() => navigate("/event-detail", { state: { event }})}
+                          onClick={() =>
+                            navigate("/event-detail", { state: { event } })
+                          }
                         >
                           View Details <i className="bi bi-arrow-right"></i>
                         </button>
