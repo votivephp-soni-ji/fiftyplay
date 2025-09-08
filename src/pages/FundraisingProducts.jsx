@@ -120,7 +120,9 @@ const FundraisingProducts = () => {
                         <button
                           className="btn btn-custom"
                           onClick={() =>
-                            navigate("/event-detail", { state: { event } })
+                            navigate("/event-detail", {
+                              state: { event: event.id },
+                            })
                           }
                         >
                           View Details <i className="bi bi-arrow-right"></i>

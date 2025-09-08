@@ -3,11 +3,13 @@ import { Carousel } from "react-bootstrap";
 
 import "../assets/css/event_details.css";
 import { useLocation, useNavigate } from "react-router-dom";
+import { eventDetail } from "../services/EventService";
 
 export default function EventDetail() {
+  const [event, setEvent] = useState({});
   const location = useLocation();
   const navigate = useNavigate();
-  const event = location.state?.event;
+  const eventId = location.state?.event;
 
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
@@ -17,10 +19,17 @@ export default function EventDetail() {
   });
 
   useEffect(() => {
-    if (!event) {
-      navigate("/fundraising-products");
-    }
-  }, [event, navigate]);
+    const loadEvent = async () => {
+      try {
+        let res = await eventDetail(eventId);
+        console.log("event info", res);
+        setEvent(res.data);
+      } catch (err) {
+        console.error("Failed to load event", err);
+      }
+    };
+    if (eventId) loadEvent();
+  }, [eventId]);
 
   // countdown timer
   useEffect(() => {
@@ -101,7 +110,7 @@ export default function EventDetail() {
                   <i className="bi bi-trophy"></i> Enter now for a chance to win
                 </h6>
                 <p>
-                  <strong>${event.ticker_price}</strong> Per Ticket
+                  <strong>${event.ticket_price}</strong> Per Ticket
                 </p>
               </div>
               <h3 className="fw-bold">{event.title}</h3>
@@ -140,7 +149,8 @@ export default function EventDetail() {
 
               <div className="ticket-box text-center">
                 <h5>Total Amount</h5>
-                <p>${event.ticket_price.toLocaleString()}</p>
+                {/* // Total Sold Amount */}
+                <p>${Number(event?.total_amount || 0).toLocaleString()}</p>
                 {/* <select id="tickets" name="tickets">
                   {[1, 2, 3, 4].map((n) => (
                     <option key={n} value={n}>

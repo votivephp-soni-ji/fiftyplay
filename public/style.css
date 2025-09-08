@@ -51,7 +51,7 @@ nav.navbar.navbar-expand-lg a.navbar-brand.fw-bold img {
     width: 100%;
 }
 
-nav.navbar.navbar-expand-lg a.nav-link.active:hover {
+nav.navbar.navbar-expand-lg a.nav-link.active {
     color: #f9037a !important;
 }
 
