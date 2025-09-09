@@ -24,7 +24,7 @@ const Home = () => {
 
   useEffect(() => {
     axios
-      .get(`${baseUrl}/events`)
+      .get(`${baseUrl}/events?limit=6`)
       .then((res) => {
         setEvents(res.data.data || []);
         console.log(res.data.data); // assuming response has {data: [...]}
@@ -41,8 +41,8 @@ const Home = () => {
     setOpenLogin(true);
   };
 
-  const handleRedirect = () => {
-    navigate("/event-detail");
+  const handleRedirect = (eventId) => {
+    navigate("/event-detail", { state: { event: eventId } });
   };
 
   return (
@@ -225,7 +225,10 @@ const Home = () => {
                           <i className="bi bi-stopwatch"></i> 30 AUG 2025
                         </p>
                       </div>
-                      <button className="btn btn-custom">
+                      <button
+                        className="btn btn-custom"
+                        onClick={() => handleRedirect(event.id)}
+                      >
                         View Details <i className="bi bi-arrow-right"></i>
                       </button>
                     </div>
@@ -235,109 +238,13 @@ const Home = () => {
             ) : (
               <p className="text-center">No events found</p>
             )}
-
-            <div className="col-md-4 col-sm-6">
-              <div className="card position-relative">
-                <div className="exclusive-tab">
-                  <button>Exclusive</button>
-                  <i className="bi bi-heart"></i>
-                </div>
-                <img
-                  src="./images/latest-img.png"
-                  className="card-img-top"
-                  alt="..."
-                />
-                <span className="card-price">
-                  <span className="contest-add">Contest</span> 5B2
-                </span>
-                <div className="card-body">
-                  <h5 className="card-title">Title goes here</h5>
-                  <div className="ticket-price-tab">
-                    <p>Ticket Price:</p>
-                    <p className="inner-price-add">$12.85</p>
-                  </div>
-                  <div className="remaining-tab">
-                    <p>95K+ Remaining</p>
-                    <p className="inner-price-add">
-                      <i className="bi bi-stopwatch"></i> 30 AUG 2025
-                    </p>
-                  </div>
-                  <button className="btn btn-custom" onClick={handleRedirect}>
-                    View Details <i className="bi bi-arrow-right"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div className="col-md-4 col-sm-6">
-              <div className="card position-relative">
-                <div className="exclusive-tab">
-                  <button>Exclusive</button>
-                  <i className="bi bi-heart"></i>
-                </div>
-                <img
-                  src="./images/latest-img.png"
-                  className="card-img-top"
-                  alt="..."
-                />
-                <span className="card-price">
-                  <span className="contest-add">Contest</span> 5B2
-                </span>
-                <div className="card-body">
-                  <h5 className="card-title">Title goes here</h5>
-                  <div className="ticket-price-tab">
-                    <p>Ticket Price:</p>
-                    <p className="inner-price-add">$12.85</p>
-                  </div>
-                  <div className="remaining-tab">
-                    <p>95K+ Remaining</p>
-                    <p className="inner-price-add">
-                      <i className="bi bi-stopwatch"></i> 30 AUG 2025
-                    </p>
-                  </div>
-                  <button className="btn btn-custom" onClick={handleRedirect}>
-                    View Details <i className="bi bi-arrow-right"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div className="col-md-4 col-sm-6">
-              <div className="card position-relative">
-                <div className="exclusive-tab">
-                  <button>Exclusive</button>
-                  <i className="bi bi-heart"></i>
-                </div>
-                <img
-                  src="./images/latest-img.png"
-                  className="card-img-top"
-                  alt="..."
-                />
-                <span className="card-price">
-                  <span className="contest-add">Contest</span> 5B2
-                </span>
-                <div className="card-body">
-                  <h5 className="card-title">Title goes here</h5>
-                  <div className="ticket-price-tab">
-                    <p>Ticket Price:</p>
-                    <p className="inner-price-add">$12.85</p>
-                  </div>
-                  <div className="remaining-tab">
-                    <p>95K+ Remaining</p>
-                    <p className="inner-price-add">
-                      <i className="bi bi-stopwatch"></i> 30 AUG 2025
-                    </p>
-                  </div>
-                  <button className="btn btn-custom" onClick={handleRedirect}>
-                    View Details <i className="bi bi-arrow-right"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
           </div>
 
           <div className="text-center">
-            <button className="view-all-btn btn">
+            <button
+              className="view-all-btn btn"
+              onClick={() => navigate("/fundraising-products")}
+            >
               View All Contest <i className="bi bi-arrow-right"></i>
             </button>
           </div>
