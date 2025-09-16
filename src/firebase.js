@@ -28,7 +28,14 @@ export const messaging = getMessaging(app);
 // Get FCM Device Token
 export const requestForToken = async () => {
   try {
-    const token = await getToken(messaging, { vapidKey: import.meta.env.VITE_FIREBASE_VAPID_KEY });
+    const registration = await navigator.serviceWorker.register(
+      "/firebase-messaging-sw.js"
+    );
+
+    const token = await getToken(messaging, {
+      vapidKey: import.meta.env.VITE_FIREBASE_VAPID_KEY,
+      serviceWorkerRegistration: registration,
+    });
     if (token) {
       console.log("FCM Token:", token);
       return token;

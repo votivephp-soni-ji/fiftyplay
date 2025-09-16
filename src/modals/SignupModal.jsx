@@ -66,14 +66,14 @@ const SignupModal = ({
 
   const onSubmit = async (data) => {
     // Add user type
-
+    setLoading(true);
     const payload = {
       ...data,
       user_type: 4, // 🔹 change dynamically as needed
     };
 
     try {
-      res = await signup(payload);
+      let res = await signup(payload);
       onLoginSuccess(res);
     } catch (err) {
       if (err.response?.status === 422) {
@@ -263,6 +263,7 @@ const SignupModal = ({
                 textTransform: "none",
                 "&:hover": { bgcolor: "#e60073" },
               }}
+              disabled={loading}
             >
               Register
             </Button>

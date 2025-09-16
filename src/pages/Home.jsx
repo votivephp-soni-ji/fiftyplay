@@ -308,20 +308,21 @@ const Home = () => {
               </p>
             </div>
           </div>
-
-          <div className="cta-box mt-3">
-            <span>
-              <i className="bi bi-person-check"></i> Ready to play? Create your
-              account now.
-            </span>
-            <a
-              href="#"
-              onClick={() => setOpenSignup(true)}
-              className="btn btn-primary ms-auto"
-            >
-              Register Now
-            </a>
-          </div>
+          {!localStorage.getItem("authToken") && (
+            <div className="cta-box mt-3">
+              <span>
+                <i className="bi bi-person-check"></i> Ready to play? Create
+                your account now.
+              </span>
+              <a
+                href="#"
+                onClick={() => setOpenSignup(true)}
+                className="btn btn-primary ms-auto"
+              >
+                Register Now
+              </a>
+            </div>
+          )}
         </div>
       </section>
       {/* Signup Modal */}

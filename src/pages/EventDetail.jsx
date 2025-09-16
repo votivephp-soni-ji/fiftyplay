@@ -7,6 +7,7 @@ import { eventDetail } from "../services/EventService";
 
 export default function EventDetail() {
   const [event, setEvent] = useState({});
+  const [chosenPrice, setChosenPrice] = useState(null);
   const location = useLocation();
   const navigate = useNavigate();
   const eventId = location.state?.event;
@@ -24,6 +25,11 @@ export default function EventDetail() {
         let res = await eventDetail(eventId);
         console.log("event info", res);
         setEvent(res.data);
+
+        // default selected price
+        if (res.data.multiple_price && res.data.prices?.length) {
+          setChosenPrice(res.data.prices[0]);
+        }
       } catch (err) {
         console.error("Failed to load event", err);
       }
@@ -151,14 +157,38 @@ export default function EventDetail() {
                 <h5>Total Amount</h5>
                 {/* // Total Sold Amount */}
                 <p>${Number(event?.total_amount || 0).toLocaleString()}</p>
-                {/* <select id="tickets" name="tickets">
-                  {[1, 2, 3, 4].map((n) => (
-                    <option key={n} value={n}>
-                      {n} Ticket{n > 1 ? "s" : ""} - ${n * pricePerTicket}
-                    </option>
-                  ))}
-                </select> */}
-                <button className="btn btn-buy">
+                {event.multiple_price === true && (
+                  <select
+                    id="tickets"
+                    name="tickets"
+                    onChange={(e) => {
+                      const selected = event.prices.find(
+                        (price) => price.id === parseInt(e.target.value)
+                      );
+                      setChosenPrice(selected);
+                    }}
+                  >
+                    {event.prices.map((price) => (
+                      <option key={price.id} value={price.id}>
+                        {price.quantity} Ticket{price.quantity > 1 ? "s" : ""} -
+                        ${price.price}
+                      </option>
+                    ))}
+                  </select>
+                )}
+                <button
+                  className="btn btn-buy"
+                  onClick={() =>
+                    navigate("/checkout", {
+                      state: {
+                        event,
+                        selectedPrice: event.multiple_price
+                          ? chosenPrice
+                          : null,
+                      },
+                    })
+                  }
+                >
                   BUY TICKETS <i className="bi bi-arrow-right ms-1"></i>
                 </button>
               </div>

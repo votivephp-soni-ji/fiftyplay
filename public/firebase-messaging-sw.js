@@ -1,22 +1,29 @@
-importScripts("https://www.gstatic.com/firebasejs/9.6.11/firebase-app-compat.js");
-importScripts("https://www.gstatic.com/firebasejs/9.6.11/firebase-messaging-compat.js");
+importScripts("https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js");
+importScripts("https://www.gstatic.com/firebasejs/10.12.0/firebase-messaging-compat.js");
 
-// Your Firebase config (from console)
-const firebaseConfig = {
-    apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-    storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-    messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-    appId: import.meta.env.VITE_FIREBASE_APP_ID,
-    measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
-};
+// Your Firebase config
+firebase.initializeApp({
+    apiKey: "AIzaSyAl__sBmfo-et8wlQrPUm3wYo-lySsPNLA",
+    authDomain: "the-fifty-play.firebaseapp.com",
+    projectId: "the-fifty-play",
+    storageBucket: "the-fifty-play.firebasestorage.app",
+    messagingSenderId: "579870241953",
+    appId: "1:579870241953:web:0ce0bf5df79f9909be6ce0",
+});
 
+// Initialize messaging
 const messaging = firebase.messaging();
 
+// Handle background messages
 messaging.onBackgroundMessage((payload) => {
-    self.registration.showNotification(payload.notification.title, {
-        body: payload.notification.body,
-        icon: "/images/logo.png",
-    });
+    console.log("[firebase-messaging-sw.js] Received background message:", payload);
+
+    const notificationTitle = payload.notification?.title || "New Notification";
+    const notificationOptions = {
+        body: payload.notification?.body || "",
+        icon: "/images/favicon.png",
+    };
+
+    self.registration.showNotification(notificationTitle, notificationOptions);
 });
+
