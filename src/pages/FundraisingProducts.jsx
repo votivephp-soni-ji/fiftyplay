@@ -99,9 +99,12 @@ const FundraisingProducts = () => {
                         className="card-img-top"
                         alt="{event.title}"
                       />
+
                       <span className="card-price">
-                        <span className="contest-add">Contest</span> 5B2
+                        <span className="contest-add">Contest</span>{" "}
+                        <small>{event.contest_no}</small>
                       </span>
+
                       <div className="card-body">
                         <h5 className="card-title">{event.title}</h5>
                         <div className="ticket-price-tab">

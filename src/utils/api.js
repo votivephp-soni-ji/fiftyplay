@@ -10,12 +10,15 @@ const API = axios.create({
 
 // 🔹 Interceptors (optional for auth token)
 API.interceptors.request.use((config) => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("authToken");
     if (token) {
-        config.headers.Authorization = `Bearer ${token}`;
+        config.headers = {
+            ...config.headers,
+            Authorization: `Bearer ${token}`,
+        };
     }
     return config;
-});
+}, (error) => Promise.reject(error));
 
 export const callApi = async (method, url, data = {}, params = {}) => {
 

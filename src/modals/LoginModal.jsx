@@ -31,7 +31,12 @@ import {
 import { signInWithPopup } from "firebase/auth";
 import { toast } from "react-toastify";
 
-const LoginModal = ({ open, handleClose, handleSignupClick,onLoginSuccess }) => {
+const LoginModal = ({
+  open,
+  handleClose,
+  handleSignupClick,
+  onLoginSuccess,
+}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -70,7 +75,7 @@ const LoginModal = ({ open, handleClose, handleSignupClick,onLoginSuccess }) => 
       let idToken = await user.getIdToken();
 
       // Get FCM Device Token (for push notifications)
- 
+
       let deviceToken = null;
       try {
         deviceToken = await requestForToken();

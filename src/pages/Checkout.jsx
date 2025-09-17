@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { reserveTicket } from "../services/EventService";
+import { toast } from "react-toastify";
 
 //import "../assets/css/checkout.css";
 
@@ -11,11 +13,11 @@ export default function Checkout() {
   const event = location.state?.event;
   const selectedPrice = location.state?.selectedPrice;
 
-  console.log("state", location.state)
+  console.log("state", location.state);
 
-  const [tickets, setTickets] = useState(1);
   const [quantity, setQuantity] = useState(1);
   const [chosenPrice, setChosenPrice] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (!event) {
@@ -24,23 +26,50 @@ export default function Checkout() {
     }
 
     if (selectedPrice) {
-        console.log("change price")
+      console.log("change price");
       setChosenPrice(selectedPrice.id);
     }
   }, [event, navigate]);
 
   if (!event) return null;
 
-  const handleCheckout = () => {
-    console.log("Proceeding with checkout", {
-      event,
-      selectedPrice,
-      tickets,
-    });
-    // Navigate to payment gateway or confirmation page
-    navigate("/payment", {
-      state: { event, selectedPrice, tickets },
-    });
+  const handleCheckout = async () => {
+    setLoading(true);
+    try {
+      let payload = {
+        event_id: event.id,
+        multiple_price: event.multiple_price,
+        package_id: chosenPrice,
+        quantity: quantity,
+        total_price: selectedPrice
+          ? selectedPrice.price
+          : (event.ticket_price || 0) * quantity,
+      };
+      const res = await reserveTicket(payload);
+      console.log("reserve ticket", res);
+      navigate("/checkout/payment", {
+        state: { event, selectedPrice, chosenPrice, quantity },
+      });
+    } catch (err) {
+      console.log("error", err);
+      if (err.response?.status === 422) {
+        toast.error(err.response.data.error);
+      } else {
+        toast.danger("Something went wrong. Try again.");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const increseQty = () => {
+    setQuantity((prev) => prev + 1);
+  };
+
+  const decreaseQty = () => {
+    if (quantity > 1) {
+      setQuantity((prev) => prev - 1);
+    }
   };
 
   return (
@@ -88,9 +117,9 @@ export default function Checkout() {
           <div className="card p-4 shadow-sm">
             <h5 className="fw-bold mb-3">Order Summary</h5>
             <p>
-              
-              {!selectedPrice && <strong>Ticket Price: ${event.ticket_price}</strong> } 
-                
+              {!selectedPrice && (
+                <strong>Ticket Price: ${event.ticket_price}</strong>
+              )}
             </p>
 
             {selectedPrice ? (
@@ -114,9 +143,19 @@ export default function Checkout() {
               <p>
                 <div className="d-flex align-items-center mb-3">
                   <strong className="me-3">Quantity:</strong>
-                  <button className="btn btn-outline-secondary">-</button>
+                  <button
+                    className="btn btn-outline-secondary"
+                    onClick={decreaseQty}
+                  >
+                    -
+                  </button>
                   <span className="mx-3">{quantity}</span>
-                  <button className="btn btn-outline-secondary">+</button>
+                  <button
+                    className="btn btn-outline-secondary"
+                    onClick={increseQty}
+                  >
+                    +
+                  </button>
                 </div>
               </p>
             )}
@@ -126,11 +165,27 @@ export default function Checkout() {
               Total: $
               {selectedPrice
                 ? selectedPrice.price
-                : (event.ticket_price || 0) * tickets}
+                : (event.ticket_price || 0) * quantity}
             </h5>
 
-            <button onClick={handleCheckout} className="btn btn-buy mt-3 w-100">
-              Proceed to Payment <i className="bi bi-arrow-right ms-1"></i>
+            <button
+              onClick={handleCheckout}
+              className="btn btn-buy mt-3 w-100"
+              disabled={loading}
+            >
+              {loading ? (
+                <>
+                  <span
+                    className="spinner-border spinner-border-sm me-2"
+                    role="status"
+                  ></span>
+                  Processing...
+                </>
+              ) : (
+                <>
+                  Proceed to Payment <i className="bi bi-arrow-right ms-1"></i>
+                </>
+              )}
             </button>
           </div>
         </div>

@@ -3,12 +3,12 @@ importScripts("https://www.gstatic.com/firebasejs/10.12.0/firebase-messaging-com
 
 // Your Firebase config
 firebase.initializeApp({
-    apiKey: "AIzaSyAl__sBmfo-et8wlQrPUm3wYo-lySsPNLA",
-    authDomain: "the-fifty-play.firebaseapp.com",
-    projectId: "the-fifty-play",
-    storageBucket: "the-fifty-play.firebasestorage.app",
-    messagingSenderId: "579870241953",
-    appId: "1:579870241953:web:0ce0bf5df79f9909be6ce0",
+    apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+    storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+    appId: import.meta.env.VITE_FIREBASE_APP_ID,
 });
 
 // Initialize messaging

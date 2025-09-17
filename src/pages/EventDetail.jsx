@@ -3,11 +3,12 @@ import { Carousel } from "react-bootstrap";
 
 import "../assets/css/event_details.css";
 import { useLocation, useNavigate } from "react-router-dom";
-import { eventDetail } from "../services/EventService";
+import { collectedAmount, eventDetail } from "../services/EventService";
 
 export default function EventDetail() {
   const [event, setEvent] = useState({});
   const [chosenPrice, setChosenPrice] = useState(null);
+  const [collectAmt, setCollectAmt] = useState(0);
   const location = useLocation();
   const navigate = useNavigate();
   const eventId = location.state?.event;
@@ -35,6 +36,19 @@ export default function EventDetail() {
       }
     };
     if (eventId) loadEvent();
+  }, [eventId]);
+
+  useEffect(() => {
+    const loadCollectAmt = async () => {
+      try {
+        let res = await collectedAmount(eventId);
+        console.log("event collected", res);
+        setCollectAmt(res.amount);
+      } catch (err) {
+        console.error("Failed to load event", err);
+      }
+    };
+    if (eventId) loadCollectAmt();
   }, [eventId]);
 
   // countdown timer
@@ -156,7 +170,7 @@ export default function EventDetail() {
               <div className="ticket-box text-center">
                 <h5>Total Amount</h5>
                 {/* // Total Sold Amount */}
-                <p>${Number(event?.total_amount || 0).toLocaleString()}</p>
+                <p>${collectAmt}</p>
                 {event.multiple_price === true && (
                   <select
                     id="tickets"
