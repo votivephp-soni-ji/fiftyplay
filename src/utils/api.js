@@ -1,7 +1,7 @@
 // src/utils/api.js
 import axios from "axios";
 
-const API = axios.create({
+export const API = axios.create({
     baseURL: import.meta.env.VITE_BASE_URL, // replace with your API
     headers: {
         "Content-Type": "application/json",
@@ -20,14 +20,20 @@ API.interceptors.request.use((config) => {
     return config;
 }, (error) => Promise.reject(error));
 
-export const callApi = async (method, url, data = {}, params = {}) => {
 
+export const callApi = async (method, url, data = {}, params = {}) => {
+    const isFormData = data instanceof FormData;
     const response = await API({
         method,
         url,
         data,
         params,
+        headers: isFormData
+            ? { "Content-Type": "multipart/form-data" }
+            : { "Content-Type": "application/json" },
     });
     return response.data;
 
 };
+
+

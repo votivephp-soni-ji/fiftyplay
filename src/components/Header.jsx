@@ -10,9 +10,10 @@ const Header = () => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    if (storedUser) {
-      setUser(storedUser);
+    const authUser = localStorage.getItem("user");
+    console.log(authUser);
+    if (authUser) {
+      setUser(JSON.parse(authUser));
     }
   }, []);
 
@@ -124,44 +125,105 @@ const Header = () => {
                 </button>
               </>
             ) : (
-              <div className="dropdown">
-                <button
-                  className="btn btn-light d-flex align-items-center gap-2 px-3 rounded-pill"
-                  type="button"
-                  id="profileDropdown"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  <i className="bi bi-person-circle"></i>
-                  <span> {user?.name || "Profile"} </span>{" "}
-                  {/* show first name */}
-                </button>
-                <ul
-                  className="dropdown-menu dropdown-menu-end"
-                  aria-labelledby="profileDropdown"
-                >
-                  <li>
-                    <NavLink className="dropdown-item" to="/profile">
-                      <i className="bi bi-person"></i> Profile
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink className="dropdown-item" to="/my-orders">
-                      <i className="bi bi-bag-check"></i> My Orders
-                    </NavLink>
-                  </li>
-                  <li>
-                    <hr className="dropdown-divider" />
-                  </li>
-                  <li>
-                    <button
-                      className="dropdown-item text-danger"
-                      onClick={handleLogout}
-                    >
-                      <i className="bi bi-box-arrow-right"></i> Logout
-                    </button>
-                  </li>
-                </ul>
+              <div className="d-flex justify-content-end align-items-center gap-3">
+                <a href="#" className="text-dark">
+                  <i className="bi bi-bag fs-5"></i>
+                </a>
+
+                <div className="dropdown">
+                  <a
+                    className="text-dark position-relative"
+                    href="#"
+                    role="button"
+                    id="notificationDropdown"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    <i className="bi bi-bell fs-5"></i>
+
+                    <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                      3
+                    </span>
+                  </a>
+
+                  <ul
+                    className="dropdown-menu dropdown-menu-end"
+                    aria-labelledby="notificationDropdown"
+                    style={{ width: "300px;" }}
+                  >
+                    <li className="dropdown-header">Notifications</li>
+                    <li>
+                      <a className="dropdown-item" href="#">
+                        New message from John
+                      </a>
+                    </li>
+                    <li>
+                      <a className="dropdown-item" href="#">
+                        Your order has been shipped
+                      </a>
+                    </li>
+                    <li>
+                      <a className="dropdown-item" href="#">
+                        Password changed successfully
+                      </a>
+                    </li>
+                    <li>
+                      <hr className="dropdown-divider" />
+                    </li>
+                    <li>
+                      <a className="dropdown-item text-center" href="#">
+                        View all
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="dropdown">
+                  <a
+                    className="d-flex align-items-center text-decoration-none dropdown-toggle"
+                    href="#"
+                    role="button"
+                    id="dropdownMenuLink"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    <img
+                      src={user?.avatar_url}
+                      alt="Profile"
+                      className="profile-img me-2"
+                      style={{
+                        width: "32px",
+                        height: "32px",
+                        borderRadius: "50%",
+                      }}
+                    />
+                    <span>{user?.name}</span>
+                  </a>
+
+                  <ul
+                    className="dropdown-menu dropdown-menu-end"
+                    aria-labelledby="dropdownMenuLink"
+                  >
+                    <li>
+                      <a className="dropdown-item" href="#">
+                        My Profile
+                      </a>
+                    </li>
+                    <li>
+                      <a className="dropdown-item" href="#">
+                        Settings
+                      </a>
+                    </li>
+                    <li>
+                      <hr className="dropdown-divider" />
+                    </li>
+                    <li>
+                      <a className="dropdown-item" href="#">
+                        Logout
+                      </a>
+                    </li>
+                  </ul>
+                </div>
               </div>
             )}
           </div>

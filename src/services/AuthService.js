@@ -16,3 +16,12 @@ export const socialLogin = (payload) => {
 export const logout = () => {
   return callApi("post", "/auth/logout");
 };
+
+export const authMe = () => {
+  return callApi("get", "/auth/me");
+};
+
+export const updateProfile = (payload) => {
+  return callApi('post', "auth/profile", payload);
+}
+

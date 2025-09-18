@@ -1,0 +1,190 @@
+nav.navbar.navbar-expand-lg .dropdown a#dropdownMenuLink img {
+    width: 45px;
+    height: 45px;
+    object-fit: cover;
+    border-radius: 100px;
+    object-position: center;
+}
+nav.navbar.navbar-expand-lg {
+    background: #fff;
+    padding: 0px;
+}
+nav.navbar.navbar-expand-lg .dropdown a#dropdownMenuLink span {
+    color: #1a1a1a;
+    font-weight: 500;
+}
+
+nav.navbar.navbar-expand-lg .dropdown-toggle::after {
+    color: #000;
+}
+nav.nav.flex-column {
+    padding-bottom: 25px;
+}
+.sidebar.left-sidebar {
+    background: #fff;
+    padding: 0px;
+    border: solid 1px #d7d7d7;
+    border-radius: 12px;
+    height: 100%;
+}
+.sidebar.left-sidebar .profile-info {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 20px 20px;
+}
+.sidebar.left-sidebar .profile-info img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.sidebar.left-sidebar .profile-info h6 {
+    margin: 10px 0 2px;
+    display: flex;
+    align-items: baseline;
+    flex-direction: column;
+    font-family: "Jost";
+    font-size: 20px;
+    color: #191f33;
+    font-weight: 400;
+}
+
+.sidebar.left-sidebar .profile-info i.bi.bi-check-lg {
+    background: #27c200;
+    color: #fff;
+    border-radius: 100px;
+    width: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 20px;
+}
+.sidebar.left-sidebar .profile-info small {
+    color: gray;
+}
+.sidebar.left-sidebar .nav-link {
+    font-size: 18px;
+    color: #333;
+    font-weight: 400;
+    padding: 10px 20px;
+    border-radius: 6px;
+    border-radius: 0px;
+    border-left: solid #fff;
+}
+.sidebar.left-sidebar .nav-link.active,
+.sidebar .nav-link:hover {
+    background: #f9037a33;
+    color: #000;
+    border-radius: 0px;
+    border-left: solid #f9037a;
+    font-size: 18px;
+    font-family: "Jost";
+}
+a.nav-link.active i {
+    color: #000;
+}
+a.nav-link i {
+    font-size: 20px;
+    padding-right: 10px;
+}
+
+.sidebar.left-sidebar .nav-link.active,
+.sidebar .nav-link i {
+    color: #767e94;
+}
+
+.sidebar.left-sidebar .nav-link.active,
+.sidebar .nav-link i:hover {
+    color: #000;
+}
+.profile-card {
+    background: #fff;
+    border-radius: 8px;
+    border: 1px solid #d7d7d7;
+    padding: 0px;
+}
+.profile-card .card-body {
+    padding: 20px 20px;
+}
+.profile-card .card-header {
+    background: #f9037a33;
+    border-bottom: none;
+    font-size: 20px;
+    border-radius: 8px 8px 0 0;
+    padding: 11px 20px;
+    color: #181a20;
+    font-weight: 500;
+}
+.profile-card .upload-btn {
+    border: solid 1px #f9037a;
+    background: #fff;
+    padding: 8px 22px;
+    font-size: 15px;
+    color: #f9037a;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 500;
+}
+.form-check-label {
+    font-size: 14px;
+    color: gray;
+}
+ .profile-card .save-btn {
+    background: #743289;
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    padding: 8px 20px;
+    margin-top: 30px !important;
+}
+
+.profile-section-add {
+    margin-top: 55px;
+}
+.right-side-content h4 {
+    font-size: 32px;
+    width: 30%;
+    font-weight: 400;
+}
+.right-side-content {
+    padding-left: 35px;
+}
+
+.profile-section-add label.form-label {
+    margin-bottom: 0px;
+    font-weight: 500;
+}
+.profile-section-add input.form-control {
+    border: solid 1px #d1d5db;
+    border-radius: 16px;
+    height: 45px;
+    box-shadow: none;
+    padding-left: 20px;
+    font-size: 15px;
+}
+
+.profile-section-add select.form-select {
+    border: solid 1px #d1d5db;
+    border-radius: 16px;
+    height: 45px;
+    box-shadow: none;
+}
+
+.profile-section-add .form-check-label {
+    font-size: 14px;
+    color: #000000;
+}
+.profile-card img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+}
+.profile-card i.bi.bi-upload {
+    padding-right: 8px;
+}
+
+form.profile-form-add {
+    width: 82%;
+}
