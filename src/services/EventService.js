@@ -17,5 +17,5 @@ export const collectedAmount = (id) => {
 
 export const reserveTicket = (payload) => {
 
-    return callApi('POST', `/reserve-ticket`, payload)
+    return callApi('POST', `/event/reserve-ticket`, payload)
 }
