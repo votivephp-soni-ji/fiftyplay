@@ -185,7 +185,7 @@ export default function EventDetail() {
                 <h5>Total Amount</h5>
                 {/* // Total Sold Amount */}
                 <p>${collectAmt}</p>
-                {event.multiple_price === true && (
+                {event.multiple_price == true && (
                   <select
                     id="tickets"
                     name="tickets"

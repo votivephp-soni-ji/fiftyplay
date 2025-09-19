@@ -1,8 +1,8 @@
 import { callApi } from "../utils/api";
 
-export const fetchEvents = (payload) => {
+export const fetchEvents = (params) => {
 
-    return callApi('GET', '/events', payload)
+    return callApi('GET', '/events', {}, params)
 }
 
 export const eventDetail = (id) => {

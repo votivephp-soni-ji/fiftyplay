@@ -31,6 +31,7 @@ const FundraisingProducts = () => {
   const loadEvents = async (pageNo = 1) => {
     setLoading(true);
     try {
+      console.log("page No", pageNo);
       const res = await fetchEvents({ page: pageNo });
       console.log("data", res.data);
       setEvents(res.data);
