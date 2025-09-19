@@ -87,7 +87,7 @@ const FundraisingProducts = () => {
             ) : (
               <div className="row g-4">
                 {events.map((event) => (
-                  <div className="col-md-4 col-sm-6">
+                  <div className="col-md-4 col-sm-6" key={event.id}>
                     <div className="card position-relative">
                       <div className="exclusive-tab">
                         <button>Exclusive</button>

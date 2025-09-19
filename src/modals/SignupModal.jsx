@@ -69,7 +69,7 @@ const SignupModal = ({
     setLoading(true);
     const payload = {
       ...data,
-      user_type: 4, // 🔹 change dynamically as needed
+      user_type: 5, // 🔹 change dynamically as needed
     };
 
     try {

@@ -2,48 +2,18 @@ import { NavLink } from "react-router-dom";
 import LoginModal from "../modals/LoginModal";
 import { useEffect, useState } from "react";
 import SignupModal from "../modals/SignupModal";
+import { useAuth } from "../context/AuthContext";
 
 const Header = () => {
-  const [openLogin, setOpenLogin] = useState(false);
-  const [openSignup, setOpenSignup] = useState(false);
-
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    const authUser = localStorage.getItem("user");
-    console.log(authUser);
-    if (authUser) {
-      setUser(JSON.parse(authUser));
-    }
-  }, []);
-
-  const handleOpenLogin = () => {
-    setOpenSignup(false);
-    setOpenLogin(true);
-  };
-
-  const handleOpenSignup = () => {
-    setOpenLogin(false);
-    setOpenSignup(true);
-  };
-
-  const handleCloseLogin = () => setOpenLogin(false);
-  const handleCloseSignup = () => setOpenSignup(false);
-
-  const handleLoginSuccess = (response) => {
-    setUser(response.user);
-    setOpenLogin(false);
-    setOpenSignup(false);
-    localStorage.setItem("user", JSON.stringify(response.user));
-    localStorage.setItem("authToken", response.token);
-  };
-
-  const handleLogout = () => {
-    localStorage.removeItem("user");
-    localStorage.removeItem("authToken");
-    setUser(null);
-    window.location.href = "/";
-  };
+  const {
+    user,
+    handleLoginSuccess,
+    openLogin,
+    openSignup,
+    setOpenLogin,
+    setOpenSignup,
+    logout,
+  } = useAuth();
 
   return (
     <>
@@ -205,9 +175,9 @@ const Header = () => {
                     aria-labelledby="dropdownMenuLink"
                   >
                     <li>
-                      <a className="dropdown-item" href="#">
+                      <NavLink className="dropdown-item" to="/profile">
                         My Profile
-                      </a>
+                      </NavLink>
                     </li>
                     <li>
                       <a className="dropdown-item" href="#">
@@ -218,7 +188,7 @@ const Header = () => {
                       <hr className="dropdown-divider" />
                     </li>
                     <li>
-                      <a className="dropdown-item" href="#">
+                      <a className="dropdown-item" href="#" onClick={logout}>
                         Logout
                       </a>
                     </li>
@@ -232,15 +202,21 @@ const Header = () => {
       {/* Login Modal */}
       <LoginModal
         open={openLogin}
-        handleClose={handleCloseLogin}
-        handleSignupClick={handleOpenSignup}
+        handleClose={() => setOpenLogin(false)}
+        handleLoginClick={() => {
+          setOpenSignup(false); // close signup
+          setOpenLogin(true); // open login
+        }}
         onLoginSuccess={handleLoginSuccess}
       />
 
       <SignupModal
         open={openSignup}
-        handleClose={handleCloseSignup}
-        handleLoginClick={handleOpenLogin}
+        handleClose={() => setOpenSignup(false)}
+        handleSignupClick={() => {
+          setOpenLogin(false); // close login
+          setOpenSignup(true); // open signup
+        }}
         onLoginSuccess={handleLoginSuccess}
       />
     </>

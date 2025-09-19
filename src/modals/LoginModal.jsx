@@ -52,7 +52,7 @@ const LoginModal = ({
 
     try {
       const res = await login({ email, password });
-      console.log("✅ Login Success:", res);
+      console.log("Login Success:", res);
       onLoginSuccess(res);
       toast.success(res.message);
     } catch (err) {
@@ -63,6 +63,7 @@ const LoginModal = ({
       } else {
         setServerError("Something went wrong. Try again.");
       }
+      console.log("errr", err);
     } finally {
       setLoading(false);
     }

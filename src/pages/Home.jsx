@@ -14,11 +14,19 @@ import { useState, useEffect } from "react";
 import SignupModal from "../modals/SignupModal";
 import LoginModal from "../modals/LoginModal";
 import { Navigate, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const Home = () => {
   const [events, setEvents] = useState([]);
-  const [openSignup, setOpenSignup] = useState(false);
-  const [openLogin, setOpenLogin] = useState(false);
+
+  const {
+    handleLoginSuccess,
+    openLogin,
+    openSignup,
+    setOpenLogin,
+    setOpenSignup,
+  } = useAuth();
+
   const navigate = useNavigate();
   const baseUrl = import.meta.env.VITE_BASE_URL; // replace with your actual base_url
 
@@ -33,13 +41,6 @@ const Home = () => {
         console.error("Error fetching events:", err);
       });
   }, []);
-
-  const handleCloseSignup = () => setOpenSignup(false);
-
-  const handleOpenLogin = () => {
-    setOpenSignup(false);
-    setOpenLogin(true);
-  };
 
   const handleRedirect = (eventId) => {
     navigate("/event-detail", { state: { event: eventId } });
@@ -333,9 +334,9 @@ const Home = () => {
           setOpenSignup(false); // close signup
           setOpenLogin(true); // open login
         }}
+        onLoginSuccess={handleLoginSuccess}
       />
 
-      {/* Login Modal */}
       <LoginModal
         open={openLogin}
         handleClose={() => setOpenLogin(false)}
@@ -343,6 +344,7 @@ const Home = () => {
           setOpenLogin(false); // close login
           setOpenSignup(true); // open signup
         }}
+        onLoginSuccess={handleLoginSuccess}
       />
     </main>
   );

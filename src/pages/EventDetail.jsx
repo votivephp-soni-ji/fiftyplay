@@ -3,15 +3,29 @@ import { Carousel } from "react-bootstrap";
 
 import "../assets/css/event_details.css";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 import { collectedAmount, eventDetail } from "../services/EventService";
+import LoginModal from "../modals/LoginModal";
+import SignupModal from "../modals/SignupModal";
 
 export default function EventDetail() {
   const [event, setEvent] = useState({});
   const [chosenPrice, setChosenPrice] = useState(null);
   const [collectAmt, setCollectAmt] = useState(0);
+
+  const {
+    handleLoginSuccess,
+    openLogin,
+    openSignup,
+    setOpenLogin,
+    setOpenSignup,
+  } = useAuth();
+
   const location = useLocation();
   const navigate = useNavigate();
   const eventId = location.state?.event;
+
+  const isAuthenticated = !!localStorage.getItem("authToken");
 
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
@@ -135,7 +149,7 @@ export default function EventDetail() {
               </div>
               <h3 className="fw-bold">{event.title}</h3>
               <p className="contest-number">
-                Contest No. <b>B2B</b> | Drawn: {event.end_date}
+                Contest No. <b>{event.contest_no}</b> | Drawn: {event.end_date}
               </p>
               <h5 className="mt-4">Description</h5>
               <p>{event.description}</p>
@@ -193,14 +207,16 @@ export default function EventDetail() {
                 <button
                   className="btn btn-buy"
                   onClick={() =>
-                    navigate("/checkout", {
-                      state: {
-                        event,
-                        selectedPrice: event.multiple_price
-                          ? chosenPrice
-                          : null,
-                      },
-                    })
+                    isAuthenticated
+                      ? navigate("/checkout", {
+                          state: {
+                            event,
+                            selectedPrice: event.multiple_price
+                              ? chosenPrice
+                              : null,
+                          },
+                        })
+                      : setOpenLogin(true)
                   }
                 >
                   BUY TICKETS <i className="bi bi-arrow-right ms-1"></i>
@@ -210,6 +226,26 @@ export default function EventDetail() {
           </div>
         </div>
       </div>
+
+      <SignupModal
+        open={openSignup}
+        handleClose={() => setOpenSignup(false)}
+        handleLoginClick={() => {
+          setOpenSignup(false); // close signup
+          setOpenLogin(true); // open login
+        }}
+        onLoginSuccess={handleLoginSuccess}
+      />
+
+      <LoginModal
+        open={openLogin}
+        handleClose={() => setOpenLogin(false)}
+        handleSignupClick={() => {
+          setOpenLogin(false); // close login
+          setOpenSignup(true); // open signup
+        }}
+        onLoginSuccess={handleLoginSuccess}
+      />
     </>
   );
 }
