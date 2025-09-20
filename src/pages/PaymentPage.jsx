@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import "../assets/css/payment.css";
 import "../assets/css/cart.css";
 import { reservedTickets, bookingTickets } from "../services/EventService";
+import { Box, CircularProgress } from "@mui/material";
 
 export default function PaymentPage() {
   const location = useLocation();
@@ -11,15 +12,23 @@ export default function PaymentPage() {
 
   const event = location.state?.event;
   const quantity = location.state?.quantity || 1;
-  const selectedPackage = location.state?.selectedPackage;
+  const packageId = location.state?.packageId;
 
   const [reserved, setReserved] = useState([]);
   const [loading, setLoading] = useState(true);
   const [processing, setProcessing] = useState(false);
 
-  const totalAmount = selectedPackage
-    ? selectedPackage.price
-    : (event?.ticket_price || 0) * quantity;
+  let ticketPrice = null;
+  let packagePrice = null;
+
+  if (packageId) {
+    const selected = event?.prices.find((price) => price.id == packageId);
+    packagePrice = selected.price;
+  } else {
+    ticketPrice = event?.ticket_price || 0;
+  }
+
+  const totalAmount = packageId ? packagePrice : ticketPrice * quantity;
 
   useEffect(() => {
     if (!event) {
@@ -56,7 +65,6 @@ export default function PaymentPage() {
     setProcessing(true);
 
     try {
-     
       //await new Promise((resolve) => setTimeout(resolve, 2000));
 
       // Call booking API
@@ -78,7 +86,12 @@ export default function PaymentPage() {
     }
   };
 
-  if (loading) return <p className="text-center mt-5">Loading...</p>;
+  if (loading)
+    return (
+      <Box sx={{ display: "flex", justifyContent: "center", py: 10 }}>
+        <CircularProgress sx={{ color: "#ee127b" }} />
+      </Box>
+    );
 
   return (
     <>
@@ -214,7 +227,17 @@ export default function PaymentPage() {
                           disabled={processing}
                           onClick={handlePayment}
                         >
-                          {processing ? "Processing..." : `PAY $${totalAmount}`}
+                          {processing ? (
+                            <>
+                              <span
+                                className="spinner-border spinner-border-sm me-2"
+                                role="status"
+                              ></span>
+                              Processing...
+                            </>
+                          ) : (
+                            `PAY $${totalAmount}`
+                          )}
                           <i className="bi bi-arrow-right ms-1"></i>
                         </button>
                       </form>
@@ -248,12 +271,12 @@ export default function PaymentPage() {
                   <h5 className="fw-bold mb-3">{event?.title}</h5>
 
                   {/* If package selected */}
-                  {selectedPackage ? (
+                  {packageId ? (
                     <>
                       <div className="d-flex justify-content-between">
                         <span className="tic-price">Price Package</span>
                         <span className="tic-price">
-                          ${reserved.length} Tickets - {selectedPackage.price}
+                          ${reserved.length} Tickets - {totalAmount}
                         </span>
                       </div>
                     </>
@@ -261,10 +284,10 @@ export default function PaymentPage() {
                     <>
                       <div className="d-flex justify-content-between">
                         <span className="tic-price">Ticket Price</span>
-                        <span className="tic-price">${event.ticket_price}</span>
+                        <span className="tic-price">${ticketPrice}</span>
                       </div>
                       <small className="price-tickets">
-                        ({quantity} Ticket{quantity > 1 ? "s" : ""} × $
+                        ({reserved.length} Ticket{quantity > 1 ? "s" : ""} × $
                         {event.ticket_price})
                       </small>
                     </>

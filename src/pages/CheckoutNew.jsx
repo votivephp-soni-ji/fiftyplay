@@ -49,7 +49,7 @@ export default function CheckoutNew() {
       const res = await reserveTicket(payload);
       console.log("reserve ticket", res);
       navigate("/checkout/payment", {
-        state: { event, selectedPackage, packageId, quantity },
+        state: { event, packageId, quantity },
       });
     } catch (err) {
       console.log("error", err);
