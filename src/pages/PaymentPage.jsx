@@ -125,7 +125,7 @@ export default function PaymentPage() {
                     role="tablist"
                   >
                     <li className="nav-item" role="presentation">
-                      <img src="./images/credit-card.png" alt="card" />
+                      <img src="/images/credit-card.png" alt="card" />
                       <button
                         className="nav-link active"
                         id="credit-tab"
@@ -138,7 +138,7 @@ export default function PaymentPage() {
                     </li>
                     <li className="nav-item" role="presentation">
                       <img
-                        src="./images/apple-pay.png"
+                        src="/images/apple-pay.png"
                         className="apple-pay-img"
                         alt="applepay"
                       />
@@ -153,7 +153,7 @@ export default function PaymentPage() {
                       </button>
                     </li>
                     <li className="nav-item" role="presentation">
-                      <img src="./images/paypal.png" alt="paypal" />
+                      <img src="/images/paypal.png" alt="paypal" />
                       <button
                         className="nav-link"
                         id="paypal-tab"
@@ -165,7 +165,7 @@ export default function PaymentPage() {
                       </button>
                     </li>
                     <li className="nav-item" role="presentation">
-                      <img src="./images/stripe.png" alt="stripe" />
+                      <img src="/images/stripe.png" alt="stripe" />
                       <button
                         className="nav-link"
                         id="stripe-tab"
