@@ -96,10 +96,6 @@ const Header = () => {
               </>
             ) : (
               <div className="d-flex justify-content-end align-items-center gap-3">
-                <a href="#" className="text-dark">
-                  <i className="bi bi-bag fs-5"></i>
-                </a>
-
                 <div className="dropdown">
                   <a
                     className="text-dark position-relative"
@@ -119,7 +115,7 @@ const Header = () => {
                   <ul
                     className="dropdown-menu dropdown-menu-end"
                     aria-labelledby="notificationDropdown"
-                    style={{ width: "300px;" }}
+                    style={{ width: "300px" }}
                   >
                     <li className="dropdown-header">Notifications</li>
                     <li>

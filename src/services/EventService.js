@@ -19,3 +19,11 @@ export const reserveTicket = (payload) => {
 
     return callApi('POST', `/event/reserve-ticket`, payload)
 }
+
+export const reservedTickets = (id) => {
+    return callApi('GET', `/event/${id}/reserve-ticket`)
+}
+
+export const bookingTickets = (payload) => {
+    return callApi('POST', `/event/book-ticket`, payload)
+}

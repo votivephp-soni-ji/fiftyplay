@@ -3,17 +3,19 @@
     list-style: none;
     gap: 8px;
     justify-content: center;
+    padding-left: 0px;
 }
 
 .event-details-add {
     flex-direction: column;
     background: linear-gradient(69deg, #F9037A, #743289);
-    height: 450px;
+    height: 350px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #fff;
 }
+
 .event-details-add ul.event-list-add a {
     color: #fff;
     font-size: 18px;
@@ -27,15 +29,18 @@
 }
 
 .event-testimonials .carousel-indicators button.thumbnail {
-  width: 100px;
+    width: 100px;
 }
+
 .event-testimonials .carousel-indicators button.thumbnail:not(.active) {
-  opacity: 0.7;
+    opacity: 0.7;
 }
+
 .event-testimonials .carousel-indicators {
     position: static;
     gap: 8px;
 }
+
 .event-testimonials {
     margin-top: -160px;
     padding-bottom: 160px;
@@ -47,6 +52,7 @@
     object-fit: cover;
     border-radius: 5px;
 }
+
 .event-testimonials .carousel-indicators img.d-block {
     width: 100px !important;
     height: 90px;
@@ -64,11 +70,11 @@
     left: 160px;
 }
 
- .event-testimonials span.carousel-control-prev-icon {
+.event-testimonials span.carousel-control-prev-icon {
     width: 20px;
 }
 
- .event-testimonials span.carousel-control-next-icon {
+.event-testimonials span.carousel-control-next-icon {
     width: 20px;
 }
 
@@ -81,6 +87,7 @@
     top: 440px;
     right: 160px;
 }
+
 .inner-content-win-left {
     background: #4939C0;
     color: #fff;
@@ -88,6 +95,7 @@
     padding: 26px;
     height: 345px;
 }
+
 .inner-content-win-left button.btn.btn-buy {
     background: #F9037A;
     color: #fff;
@@ -119,7 +127,7 @@
     font-size: 13px;
     font-weight: 400;
 }
- 
+
 .countdown span.number-text-add {
     display: flex;
     flex-direction: column;
@@ -136,22 +144,26 @@
     font-size: 20px;
     color: #1C1C1E;
 }
- 
+
 .inner-content-win-right h3.fw-bold {
     font-size: 45px;
     color: #1C1C1E;
 }
+
 .enter-now-chance {
     display: flex;
     justify-content: space-between;
 }
+
 .enter-now-chance p strong {
     font-weight: 700;
     font-size: 20px;
 }
+
 .enter-now-chance p {
     font-weight: 500;
 }
+
 .inner-content-win-right p.contest-number b {
     color: #F9037A;
 }
@@ -159,19 +171,22 @@
 .inner-content-win-right {
     padding-right: 50px;
 }
+
 .inner-content-win-right h5.mt-4 {
     font-size: 25px;
     color: #1C1C1E;
 }
+
 .inner-content-win-right p.contest-number {
     border-bottom: solid 1px #D7D7D7F5;
     padding-bottom: 15px;
     color: #1C1C1E;
 }
+
 .ticket-box h5 {
     font-size: 25px;
 }
- 
+
 .ticket-box p {
     font-size: 26px;
     font-weight: 600;
@@ -193,4 +208,3 @@
     color: #fff !important;
     background: #4939c0;
 }
-
