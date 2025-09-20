@@ -65,7 +65,7 @@ export default function PaymentPage() {
     setProcessing(true);
 
     try {
-      //await new Promise((resolve) => setTimeout(resolve, 2000));
+      await new Promise((resolve) => setTimeout(resolve, 2000));
 
       // Call booking API
       const res = await bookingTickets({
