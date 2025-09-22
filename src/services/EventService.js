@@ -2,7 +2,11 @@ import { callApi } from "../utils/api";
 
 export const fetchEvents = (params) => {
 
-    return callApi('GET', '/events', {}, params)
+    return callApi('GET', '/events?visiblity=online', {}, params)
+}
+
+export const categories = () => {
+    return callApi('GET', 'event/categories');
 }
 
 export const eventDetail = (id) => {

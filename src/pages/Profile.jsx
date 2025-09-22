@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 import "../assets/css/profile.css";
 import { authMe, updateProfile } from "../services/AuthService";
 import { CircularProgress } from "@mui/material";
+import { AuthTab } from "../components/AuthTab";
 
 export default function Profile() {
   const [formData, setFormData] = useState({
@@ -124,41 +125,8 @@ export default function Profile() {
       <div className="profile-section-add">
         <div className="container">
           <div className="row">
-            {/* Sidebar */}
             <div className="col-md-3 sidebar left-sidebar">
-              <div className="profile-info">
-                <img
-                  src={
-                    formData.avatar
-                      ? URL.createObjectURL(formData.avatar)
-                      : avatar
-                  }
-                  alt="User"
-                />
-                <h6>
-                  {formData.fullName} <small>User</small>
-                </h6>
-                <span className="text-success">
-                  <i className="bi bi-check-lg"></i>
-                </span>
-              </div>
-              <nav className="nav flex-column">
-                <a className="nav-link active" href="#">
-                  <i className="bi bi-person"></i> Profile
-                </a>
-                <a className="nav-link" href="#">
-                  <i className="bi bi-ticket-perforated"></i> Purchased Tickets
-                </a>
-                <a className="nav-link" href="#">
-                  <i className="bi bi-gift"></i> Claim
-                </a>
-                <a className="nav-link" href="#">
-                  <i className="bi bi-heart"></i> Favourite Events
-                </a>
-                <a className="nav-link" href="#">
-                  <i className="bi bi-box-arrow-right"></i> Sign Out
-                </a>
-              </nav>
+              <AuthTab />
             </div>
 
             {/* Profile Section */}

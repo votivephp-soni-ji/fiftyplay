@@ -18,6 +18,7 @@ import { useAuth } from "../context/AuthContext";
 
 const Home = () => {
   const [events, setEvents] = useState([]);
+  const [categories, setCategories] = useState([]);
 
   const {
     handleLoginSuccess,
@@ -32,7 +33,7 @@ const Home = () => {
 
   useEffect(() => {
     axios
-      .get(`${baseUrl}/events?limit=6`)
+      .get(`${baseUrl}/events?visiblity=online&status=active&limit=6`)
       .then((res) => {
         setEvents(res.data.data || []);
         console.log(res.data.data); // assuming response has {data: [...]}

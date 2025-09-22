@@ -14,10 +14,11 @@ import EventDetail from "./pages/EventDetail";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Profile from "./pages/Profile";
-import Checkout from "./pages/Checkout";
 import PaymentPage from "./pages/PaymentPage";
 import Cart from "./pages/Cart";
 import CheckoutNew from "./pages/CheckoutNew";
+import { PurchasedTickets } from "./pages/PurchasedTickets";
+import { FavouriteEvents } from "./pages/FavouriteEvents";
 
 function App() {
   return (
@@ -41,6 +42,8 @@ function App() {
           <Route path="/blog" element={<Blog />} />
           <Route path="/login" element={<Login />} />
           <Route path="/event-detail" element={<EventDetail />} />
+          <Route path="/favourite-events" element={<FavouriteEvents />} />
+          <Route path="/tickets-history" element={<PurchasedTickets />} />
         </Routes>
       </main>
       <Footer />
