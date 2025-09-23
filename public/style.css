@@ -355,8 +355,8 @@ section.winning-numbers {
 }
 
 .exclusive-tab i.bi.bi-heart {
-    color: #ffba23;
-    border: solid 1px #ffba23;
+    color: #ffba23 !important;
+    border: solid 1px #ffba23 !important;
     padding: 5px 8px;
     display: flex;
     align-items: center;

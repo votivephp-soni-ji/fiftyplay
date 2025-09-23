@@ -39,7 +39,8 @@
     justify-content: center;
     display: flex;
     flex-direction: column;
-} 
+}
+
 .favourite-events-add span.contest-add {
     font-size: 11px;
     font-weight: 500;
@@ -53,10 +54,11 @@
 .favourite-events-add h5.card-title {
     font-size: 18px;
 }
-	
+
 .favourite-events-add p.inner-price-add {
     font-weight: 600;
 }
+
 .favourite-events-add .remaining-tab p {
     font-size: 13px;
     display: flex;
@@ -89,7 +91,7 @@
 .favourite-events-add .row {
     row-gap: 11px;
 }
-  
+
 .favourite-events-add .exclusive-tab button {
     border: solid 1px #f9037a;
     background: #2a2d33;
@@ -103,6 +105,3 @@
     font-size: 19px;
     margin-top: 2px;
 }
-
-
-

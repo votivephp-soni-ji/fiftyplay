@@ -15,6 +15,7 @@ import SignupModal from "../modals/SignupModal";
 import LoginModal from "../modals/LoginModal";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { fetchCategories } from "../services/EventService";
 
 const Home = () => {
   const [events, setEvents] = useState([]);
@@ -41,6 +42,15 @@ const Home = () => {
       .catch((err) => {
         console.error("Error fetching events:", err);
       });
+    const getCategories = async () => {
+      let res = await fetchCategories();
+      console.log("categ", res);
+      if (res.status) {
+        setCategories(res.categories);
+      }
+    };
+
+    getCategories();
   }, []);
 
   const handleRedirect = (eventId) => {
@@ -59,9 +69,10 @@ const Home = () => {
           <form className="search-box mt-4">
             <select className="form-select">
               <option selected>Category</option>
-              <option value="1">Football</option>
-              <option value="2">Basketball</option>
-              <option value="3">Esports</option>
+              {categories &&
+                categories.map((category, index) => {
+                  return <option value={category.id}>{category.name}</option>;
+                })}
             </select>
             <input
               type="text"

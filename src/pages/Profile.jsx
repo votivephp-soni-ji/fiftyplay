@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import "../assets/css/profile.css";
 import { authMe, updateProfile } from "../services/AuthService";
-import { CircularProgress } from "@mui/material";
+import { Box, CircularProgress } from "@mui/material";
 import { AuthTab } from "../components/AuthTab";
 
 export default function Profile() {
@@ -109,17 +109,6 @@ export default function Profile() {
     }
   };
 
-  if (profileLoading) {
-    return (
-      <div
-        className="d-flex justify-content-center align-items-center"
-        style={{ minHeight: "60vh" }}
-      >
-        <CircularProgress color="primary" />
-      </div>
-    );
-  }
-
   return (
     <>
       <div className="profile-section-add">
@@ -131,128 +120,145 @@ export default function Profile() {
 
             {/* Profile Section */}
             <div className="col-md-9 right-side-content">
-              <h4>
-                Hi <strong>{formData.fullName.split(" ")[0]}</strong>, Welcome
-                Back
-              </h4>
+              {profileLoading ? (
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    py: 10,
+                  }}
+                >
+                  <CircularProgress sx={{ color: "#ee127b" }} />
+                </Box>
+              ) : (
+                <>
+                  <h4>
+                    Hi <strong>{formData.fullName.split(" ")[0]}</strong>,
+                    Welcome Back
+                  </h4>
 
-              <div className="profile-card mt-4">
-                <div className="card-header">Your Profile</div>
-                <div className="card-body">
-                  <div className="d-flex align-items-center mb-4">
-                    <img
-                      src={
-                        formData.avatar
-                          ? URL.createObjectURL(formData.avatar)
-                          : avatar
-                      }
-                      className="rounded-circle me-3"
-                      width="70"
-                      height="70"
-                      alt="User"
-                    />
-                    <form>
-                      <label htmlFor="file-upload" className="upload-btn">
-                        <i className="bi bi-upload"></i> Upload Photo
-                      </label>
-                      <input
-                        type="file"
-                        id="file-upload"
-                        name="photo"
-                        style={{ display: "none" }}
-                        onChange={handleChange}
-                      />
-                    </form>
-                  </div>
+                  <div className="profile-card mt-4">
+                    <div className="card-header">Your Profile</div>
+                    <div className="card-body">
+                      <div className="d-flex align-items-center mb-4">
+                        <img
+                          src={
+                            formData.avatar
+                              ? URL.createObjectURL(formData.avatar)
+                              : avatar
+                          }
+                          className="rounded-circle me-3"
+                          width="70"
+                          height="70"
+                          alt="User"
+                        />
+                        <form>
+                          <label htmlFor="file-upload" className="upload-btn">
+                            <i className="bi bi-upload"></i> Upload Photo
+                          </label>
+                          <input
+                            type="file"
+                            id="file-upload"
+                            name="photo"
+                            style={{ display: "none" }}
+                            onChange={handleChange}
+                          />
+                        </form>
+                      </div>
 
-                  <form className="profile-form-add" onSubmit={handleSubmit}>
-                    <div className="row g-4">
-                      <div className="col-md-6">
-                        <label className="form-label">Full Name</label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          name="fullName"
-                          value={formData.fullName}
-                          onChange={handleChange}
-                        />
-                      </div>
-                      <div className="col-md-6">
-                        <label className="form-label">Email</label>
-                        <input
-                          type="email"
-                          className="form-control"
-                          name="email"
-                          value={formData.email}
-                          readOnly
-                        />
-                      </div>
-                      <div className="col-md-6">
-                        <label className="form-label">Phone Number</label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          name="phone"
-                          value={formData.phone}
-                          onChange={handleChange}
-                        />
-                      </div>
-                      <div className="col-md-6">
-                        <label className="form-label">
-                          Language Preference
-                        </label>
-                        <select
-                          className="form-select"
-                          name="language"
-                          value={formData.language}
-                          onChange={handleChange}
-                        >
-                          <option value="en">English</option>
-                          <option value="es">Spanish</option>
-                        </select>
-                      </div>
-                    </div>
-
-                    <div className="form-check mt-3">
-                      <input
-                        className="form-check-input"
-                        type="checkbox"
-                        id="updatesCheck"
-                        name="is_notify"
-                        checked={formData.is_notify}
-                        onChange={handleChange}
-                      />
-                      <label
-                        className="form-check-label"
-                        htmlFor="updatesCheck"
+                      <form
+                        className="profile-form-add"
+                        onSubmit={handleSubmit}
                       >
-                        Get instant updates on the latest offers, deals, and
-                        exclusive offers.
-                      </label>
-                    </div>
+                        <div className="row g-4">
+                          <div className="col-md-6">
+                            <label className="form-label">Full Name</label>
+                            <input
+                              type="text"
+                              className="form-control"
+                              name="fullName"
+                              value={formData.fullName}
+                              onChange={handleChange}
+                            />
+                          </div>
+                          <div className="col-md-6">
+                            <label className="form-label">Email</label>
+                            <input
+                              type="email"
+                              className="form-control"
+                              name="email"
+                              value={formData.email}
+                              readOnly
+                            />
+                          </div>
+                          <div className="col-md-6">
+                            <label className="form-label">Phone Number</label>
+                            <input
+                              type="text"
+                              className="form-control"
+                              name="phone"
+                              value={formData.phone}
+                              onChange={handleChange}
+                            />
+                          </div>
+                          <div className="col-md-6">
+                            <label className="form-label">
+                              Language Preference
+                            </label>
+                            <select
+                              className="form-select"
+                              name="language"
+                              value={formData.language}
+                              onChange={handleChange}
+                            >
+                              <option value="en">English</option>
+                              <option value="es">Spanish</option>
+                            </select>
+                          </div>
+                        </div>
 
-                    <button
-                      type="submit"
-                      className="save-btn mt-3"
-                      disabled={loading}
-                    >
-                      {loading ? (
-                        <>
-                          <span
-                            className="spinner-border spinner-border-sm me-2"
-                            role="status"
-                          ></span>
-                          Saving...
-                        </>
-                      ) : (
-                        <>
-                          Save Changes <i className="bi bi-arrow-right"></i>
-                        </>
-                      )}
-                    </button>
-                  </form>
-                </div>
-              </div>
+                        <div className="form-check mt-3">
+                          <input
+                            className="form-check-input"
+                            type="checkbox"
+                            id="updatesCheck"
+                            name="is_notify"
+                            checked={formData.is_notify}
+                            onChange={handleChange}
+                          />
+                          <label
+                            className="form-check-label"
+                            htmlFor="updatesCheck"
+                          >
+                            Get instant updates on the latest offers, deals, and
+                            exclusive offers.
+                          </label>
+                        </div>
+
+                        <button
+                          type="submit"
+                          className="save-btn mt-3"
+                          disabled={loading}
+                        >
+                          {loading ? (
+                            <>
+                              <span
+                                className="spinner-border spinner-border-sm me-2"
+                                role="status"
+                              ></span>
+                              Saving...
+                            </>
+                          ) : (
+                            <>
+                              Save Changes <i className="bi bi-arrow-right"></i>
+                            </>
+                          )}
+                        </button>
+                      </form>
+                    </div>
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </div>

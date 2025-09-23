@@ -2,19 +2,27 @@ thead.table-light th {
     background: none;
     font-weight: 600;
 }
+
 .card-body.purchased-tickets {
     padding-top: 5px;
 }
+
 button.btn.btn-light.btn-sm {
     color: #1C1C1C;
     background: #F5F7FA;
 }
+
 button.btn.btn-light.btn-sm:hover {
     background: #1C1C1C;
     color: #fff;
 }
 
-.ads-table-tickets, td, tfoot, th, thead, tr {
+.ads-table-tickets,
+td,
+tfoot,
+th,
+thead,
+tr {
     border-color: inherit;
     border-style: solid;
     border-width: 0;
@@ -24,6 +32,7 @@ button.btn.btn-light.btn-sm:hover {
 thead.table-light {
     border-bottom: solid 1px #D7D7D7;
 }
+
 tbody.ads-table-tickets {
     line-height: 3.8;
 }
@@ -43,18 +52,22 @@ tbody.ads-table-tickets span.status-expire {
 tbody.ads-table-tickets a.dropdown-item {
     line-height: 1.5;
 }
+
 ul.pagination.justify-content-center i {
     font-size: 12px;
 }
+
 ul.pagination.justify-content-center {
     margin-top: 40px;
 }
+
 ul.pagination a.page-link {
-    color: #313131;
+    color: #313131 !important;
     margin: 0 9px;
     border-radius: 4px;
     box-shadow: none;
 }
+
 ul.pagination a.page-link:hover {
     background: #1C1C1C;
     color: #fff;
@@ -75,11 +88,13 @@ ul.pagination a.page-link.active {
     cursor: pointer;
     box-shadow: 0 0.125rem 3rem rgba(0, 0, 0, 0.075) !important;
 }
+
 p.claim-your-text-add {
     margin-bottom: 0px;
     padding: 10px 0;
     font-size: 20px;
 }
+
 button.claim-btn-add {
     font-size: 14px;
     background: #743289;
@@ -89,6 +104,3 @@ button.claim-btn-add {
     padding: 10px 26px;
     margin-top: 30px !important;
 }
-
-
-

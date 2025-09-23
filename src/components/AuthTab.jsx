@@ -19,7 +19,7 @@ export const AuthTab = () => {
     <>
       <div className="profile-info">
         <img src={user?.avatar_url} alt="User" />
-        <h6>{user.name}</h6>
+        <h6>{user?.name}</h6>
         <span className="text-success">
           <i className="bi bi-check-lg"></i>
         </span>

@@ -19,6 +19,7 @@ import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import { fetchEvents } from "../services/EventService";
 import "../assets/css/event-products.css";
 import { useNavigate } from "react-router-dom";
+import EventCard from "../components/EventCart";
 
 const FundraisingProducts = () => {
   const [events, setEvents] = useState([]);
@@ -88,52 +89,7 @@ const FundraisingProducts = () => {
             ) : (
               <div className="row g-4">
                 {events.map((event) => (
-                  <div className="col-md-4 col-sm-6" key={event.id}>
-                    <div className="card position-relative">
-                      <div className="exclusive-tab">
-                        <button>Exclusive</button>
-                        <i className="bi bi-heart"></i>
-                      </div>
-
-                      <img
-                        src={event.banners?.[0] || "./images/latest-img.png"}
-                        className="card-img-top"
-                        alt="{event.title}"
-                      />
-
-                      <span className="card-price">
-                        <span className="contest-add">Contest</span>{" "}
-                        <small>{event.contest_no}</small>
-                      </span>
-
-                      <div className="card-body">
-                        <h5 className="card-title">{event.title}</h5>
-                        <div className="ticket-price-tab">
-                          <p>Ticket Price:</p>
-                          <p className="inner-price-add">
-                            ${event.ticket_price}
-                          </p>
-                        </div>
-
-                        <div className="remaining-tab">
-                          <p>{event.remain_tickets || 0} Remaining</p>
-                          <p className="inner-price-add">
-                            <i className="bi bi-stopwatch"></i> {event.end_date}
-                          </p>
-                        </div>
-                        <button
-                          className="btn btn-custom"
-                          onClick={() =>
-                            navigate("/event-detail", {
-                              state: { event: event.id },
-                            })
-                          }
-                        >
-                          View Details <i className="bi bi-arrow-right"></i>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
+                  <EventCard key={event.id} event={event} />
                 ))}
               </div>
             )}
