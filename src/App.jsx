@@ -19,18 +19,16 @@ import Cart from "./pages/Cart";
 import CheckoutNew from "./pages/CheckoutNew";
 import { PurchasedTickets } from "./pages/PurchasedTickets";
 import { FavouriteEvents } from "./pages/FavouriteEvents";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
-    <Router>
+    <>
       <Header />
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/checkout" element={<CheckoutNew />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/checkout/payment" element={<PaymentPage />} />
+
           <Route
             path="/fundraising-products"
             element={<FundraisingProducts />}
@@ -42,13 +40,19 @@ function App() {
           <Route path="/blog" element={<Blog />} />
           <Route path="/login" element={<Login />} />
           <Route path="/event-detail" element={<EventDetail />} />
-          <Route path="/favourite-events" element={<FavouriteEvents />} />
-          <Route path="/tickets-history" element={<PurchasedTickets />} />
+          <Route element={<ProtectedRoute />}>
+            <Route path="/favourite-events" element={<FavouriteEvents />} />
+            <Route path="/tickets-history" element={<PurchasedTickets />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/checkout" element={<CheckoutNew />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/checkout/payment" element={<PaymentPage />} />
+          </Route>
         </Routes>
       </main>
       <Footer />
       <ToastContainer position="bottom-right" autoClose={3000} />
-    </Router>
+    </>
   );
 }
 

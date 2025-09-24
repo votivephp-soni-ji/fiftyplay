@@ -1,6 +1,5 @@
 import { AuthTab } from "../components/AuthTab";
 import "../assets/css/favourite-events.css";
-import "../assets/css/purchased-tickets.css";
 import { useEffect, useState } from "react";
 import { addFavoriteEvent, fetchFavourites } from "../services/EventService";
 import { Box, CircularProgress } from "@mui/material";
@@ -29,11 +28,11 @@ export const FavouriteEvents = () => {
         setLoading(false);
       }
     };
-    if (shuldLoad) {
-      favouriteEvents();
-    }
+    
+    favouriteEvents(page);
+    
     setShouldLoad(false);
-  }, [shuldLoad]);
+  }, [shuldLoad, page]);
 
   const handleFavorite = async (eventId) => {
     setLoadingFav(true);

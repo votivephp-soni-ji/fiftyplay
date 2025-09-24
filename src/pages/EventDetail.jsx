@@ -53,16 +53,23 @@ export default function EventDetail() {
   }, [eventId]);
 
   useEffect(() => {
-    const loadCollectAmt = async () => {
+    if (!eventId) return;
+
+    const fetchCollectedAmount = async () => {
       try {
-        let res = await collectedAmount(eventId);
-        console.log("event collected", res);
+        const res = await collectedAmount(eventId);
         setCollectAmt(res.amount);
       } catch (err) {
-        console.error("Failed to load event", err);
+        console.error("Failed to fetch collected amount:", err);
       }
     };
-    if (eventId) loadCollectAmt();
+
+    // initial fetch
+    fetchCollectedAmount();
+
+    // poll every 5 seconds
+    const interval = setInterval(fetchCollectedAmount, 6000);
+    return () => clearInterval(interval);
   }, [eventId]);
 
   // countdown timer

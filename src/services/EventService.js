@@ -39,3 +39,7 @@ export const addFavoriteEvent = (eventId) => {
 export const fetchFavourites = (params) => {
     return callApi('GET', `/event/favourite-events`, {}, params)
 }
+
+export const TicketHistory = (params) => {
+    return callApi('GET', `/event/ticket-history`,{},params);
+}

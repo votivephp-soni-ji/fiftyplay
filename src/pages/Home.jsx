@@ -16,6 +16,7 @@ import LoginModal from "../modals/LoginModal";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { fetchCategories } from "../services/EventService";
+import EventCard from "../components/EventCart";
 
 const Home = () => {
   const [events, setEvents] = useState([]);
@@ -210,43 +211,7 @@ const Home = () => {
           <div className="row g-4">
             {events.length > 0 ? (
               events.map((event, index) => (
-                <div key={index} className="col-md-4 col-sm-6">
-                  <div className="card position-relative">
-                    <div className="exclusive-tab">
-                      <button>Exclusive</button>
-                      <i className="bi bi-heart"></i>
-                    </div>
-
-                    <img
-                      src={event.banners[0]}
-                      className="card-img-top"
-                      alt={event.title}
-                    />
-                    <span className="card-price">
-                      <span className="contest-add">Contest</span> 5B2
-                    </span>
-                    <div className="card-body">
-                      <h5 className="card-title">{event.title}</h5>
-                      <div className="ticket-price-tab">
-                        <p>Ticket Price:</p>
-                        <p className="inner-price-add">${event.ticket_price}</p>
-                      </div>
-
-                      <div className="remaining-tab">
-                        <p>95K+ Remaining</p>
-                        <p className="inner-price-add">
-                          <i className="bi bi-stopwatch"></i> 30 AUG 2025
-                        </p>
-                      </div>
-                      <button
-                        className="btn btn-custom"
-                        onClick={() => handleRedirect(event.id)}
-                      >
-                        View Details <i className="bi bi-arrow-right"></i>
-                      </button>
-                    </div>
-                  </div>
-                </div>
+                <EventCard key={event.id} event={event} />
               ))
             ) : (
               <p className="text-center">No events found</p>

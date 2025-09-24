@@ -17,10 +17,13 @@
 }
 
 .disabled-link-css {
-  pointer-events: none;
-  cursor: default;
-  color: #a0a0a0; /* A gray color */
-  text-decoration: none;
+    pointer-events: none;
+
+    /* Visual styling to make it look disabled */
+    cursor: default;
+    color: #a0a0a0;
+    /* A gray color */
+    text-decoration: none;
 }
 
 .page-header.banner-top-add h1 {
@@ -149,7 +152,7 @@
     background: #743289 !important;
     border: none;
     padding: 9px 15px;
-    color: #fff;
+    color: #fff !important;
 }
 
 .latest-events-inner-added ul.pagination a {

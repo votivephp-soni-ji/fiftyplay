@@ -62,7 +62,7 @@ ul.pagination.justify-content-center {
 }
 
 ul.pagination a.page-link {
-    color: #313131 !important;
+    color: #313131;
     margin: 0 9px;
     border-radius: 4px;
     box-shadow: none;

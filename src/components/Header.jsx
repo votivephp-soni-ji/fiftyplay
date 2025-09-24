@@ -113,31 +113,50 @@ const Header = () => {
                   </a>
 
                   <ul
-                    className="dropdown-menu dropdown-menu-end"
+                    className="dropdown-menu dropdown-menu-end shadow-lg border-0 rounded-3"
                     aria-labelledby="notificationDropdown"
-                    style={{ width: "300px" }}
+                    style={{ width: "320px;" }}
                   >
-                    <li className="dropdown-header">Notifications</li>
-                    <li>
-                      <a className="dropdown-item" href="#">
-                        New message from John
-                      </a>
-                    </li>
-                    <li>
-                      <a className="dropdown-item" href="#">
-                        Your order has been shipped
-                      </a>
-                    </li>
-                    <li>
-                      <a className="dropdown-item" href="#">
-                        Password changed successfully
-                      </a>
+                    <li className="dropdown-header d-flex justify-content-between align-items-center">
+                      Notifications
+                      <span className="badge bg-danger rounded-pill">3</span>
                     </li>
                     <li>
                       <hr className="dropdown-divider" />
                     </li>
+
                     <li>
-                      <a className="dropdown-item text-center" href="#">
+                      <a
+                        className="dropdown-item d-flex align-items-center gap-2 py-2"
+                        href="#"
+                      >
+                        <i className="bi bi-envelope-fill text-primary"></i>
+                        <span>New message from John</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        className="dropdown-item d-flex align-items-center gap-2 py-2"
+                        href="#"
+                      >
+                        <i className="bi bi-box-seam text-success"></i>
+                        <span>Your order has been shipped</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        className="dropdown-item d-flex align-items-center gap-2 py-2"
+                        href="#"
+                      >
+                        <i className="bi bi-shield-lock-fill text-warning"></i>
+                        <span>Password changed successfully</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        className="dropdown-item text-center fw-semibold text-primary"
+                        href="#"
+                      >
                         View all
                       </a>
                     </li>

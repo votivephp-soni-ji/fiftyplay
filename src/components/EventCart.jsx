@@ -4,13 +4,20 @@ import { IconButton } from "@mui/material";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { addFavoriteEvent } from "../services/EventService";
+import { useAuth } from "../context/AuthContext";
+import { toast } from "react-toastify";
 
 const EventCard = ({ event }) => {
   const navigate = useNavigate();
   const [isFavorite, setIsFavorite] = useState(event.is_favourite || false);
   const [loadingFav, setLoadingFav] = useState(false);
 
+  const { user } = useAuth();
+
   const handleFavorite = async () => {
+    if (!user) {
+      return false;
+    }
     setLoadingFav(true);
     try {
       await addFavoriteEvent(event.id); // call API

@@ -4,6 +4,7 @@ import "../assets/css/profile.css";
 import { authMe, updateProfile } from "../services/AuthService";
 import { Box, CircularProgress } from "@mui/material";
 import { AuthTab } from "../components/AuthTab";
+import { useAuth } from "../context/AuthContext";
 
 export default function Profile() {
   const [formData, setFormData] = useState({
@@ -17,6 +18,7 @@ export default function Profile() {
 
   const [avatar, setAvatar] = useState(null);
   const [profileLoading, setProfileLoading] = useState(true);
+  const { setUser } = useAuth();
 
   const [loading, setLoading] = useState(false);
 
@@ -99,7 +101,7 @@ export default function Profile() {
 
       const response = await updateProfile(payload);
 
-      console.log("res", response);
+      setUser(response.user);
 
       toast.success("Profile updated successfully");
     } catch (err) {

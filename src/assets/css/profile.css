@@ -50,7 +50,6 @@ nav.nav.flex-column {
     color: #191f33;
     font-weight: 400;
 }
-
 .sidebar.left-sidebar .profile-info i.bi.bi-check-lg {
     background: #27c200;
     color: #fff;
@@ -60,13 +59,14 @@ nav.nav.flex-column {
     align-items: center;
     justify-content: center;
     height: 20px;
+    margin-top: -10px;
 }
 .sidebar.left-sidebar .profile-info small {
     color: gray;
 }
 .sidebar.left-sidebar .nav-link {
     font-size: 18px;
-    color: #333;
+    color: #767E94;
     font-weight: 400;
     padding: 10px 20px;
     border-radius: 6px;
@@ -81,6 +81,9 @@ nav.nav.flex-column {
     border-left: solid #f9037a;
     font-size: 18px;
     font-family: "Jost";
+}
+.sidebar.left-sidebar .nav-link.active, .sidebar .nav-link:hover i {
+    color: #000;
 }
 a.nav-link.active i {
     color: #000;
@@ -98,6 +101,47 @@ a.nav-link i {
 .sidebar.left-sidebar .nav-link.active,
 .sidebar .nav-link i:hover {
     color: #000;
+}
+
+li.dropdown-header.d-flex.justify-content-between.align-items-center {
+    font-size: 15px;
+    font-weight: 500;
+    padding-bottom: 0px;
+}
+a.dropdown-item.d-flex.align-items-center.gap-2.py-2:hover {
+    background: #fecde4;
+    color: #000;
+}
+a.dropdown-item.text-center.fw-semibold.text-primary {
+    background: #743289;
+    color: #fff !important;
+    padding: 11px 0px;
+    margin-top: 10px;
+}
+
+ a.dropdown-item:hover {
+    background: #fecde4;
+    color: #000;
+}
+
+
+ul.dropdown-menu.dropdown-menu-end.shadow-lg.border-0.rounded-3.show {
+    padding: 0px;
+}
+
+nav.navbar.navbar-expand-lg span.position-absolute.top-0.start-100.translate-middle.badge.rounded-pill.bg-danger {
+    width: 20px;
+    height: 20px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+nav.navbar.navbar-expand-lg span.badge.bg-danger.rounded-pill {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .profile-card {
     background: #fff;
@@ -150,8 +194,8 @@ a.nav-link i {
 }
 .right-side-content {
     padding-left: 35px;
+    margin-bottom: 20px;
 }
-
 .profile-section-add label.form-label {
     margin-bottom: 0px;
     font-weight: 500;
