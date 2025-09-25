@@ -72,7 +72,11 @@ const Home = () => {
               <option selected>Category</option>
               {categories &&
                 categories.map((category, index) => {
-                  return <option value={category.id}>{category.name}</option>;
+                  return (
+                    <option key={index} value={category.id}>
+                      {category.name}
+                    </option>
+                  );
                 })}
             </select>
             <input
