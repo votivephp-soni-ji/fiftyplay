@@ -1,3 +1,8 @@
+.right-side-content {
+    padding-left: 35px;
+    margin-bottom: 20px;
+}
+
 .favourite-events-add .card.position-relative {
     background: #1c1c1e;
     border-radius: 12px;
@@ -53,6 +58,7 @@
 
 .favourite-events-add h5.card-title {
     font-size: 18px;
+    width: 80%;
 }
 
 .favourite-events-add p.inner-price-add {

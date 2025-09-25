@@ -15,7 +15,9 @@
     align-items: center;
     border-radius: 4px;
 }
-
+.latest-events-inner-added h5.card-title {
+    width: 80%;
+}
 .disabled-link-css {
     pointer-events: none;
 
@@ -147,14 +149,22 @@
     color: #626262;
     font-size: 13px;
 }
-
 .latest-events-inner-added li.page-item.active a {
-    background: #743289 !important;
+    background: #000000!important;
     border: none;
     padding: 9px 15px;
     color: #fff !important;
 }
 
+ul.pagination a.page-link:hover {
+    background: #1C1C1C;
+    color: #fff !important;
+}
+ul.pagination a.page-link.active {
+    background: #1C1C1C;
+    color: #fff !important;
+    border: none;
+}
 .latest-events-inner-added ul.pagination a {
     margin: 0px 9px;
     border-radius: 4px;

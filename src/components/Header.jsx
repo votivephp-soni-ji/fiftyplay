@@ -79,138 +79,138 @@ const Header = () => {
                 </NavLink>
               </li>
             </ul>
-          </div>
 
-          {/* Right Side */}
-          <div className="d-flex mt-3 mt-lg-0 right-side-login">
-            {!user ? (
-              <>
-                <i className="bi bi-bag"></i>
-                <button className="btn btn-primary d-flex align-items-center gap-2 px-3 login-btn-add">
-                  <i
-                    className="bi bi-person-plus"
-                    onClick={() => setOpenSignup(true)}
-                  ></i>
-                  <span onClick={() => setOpenLogin(true)}> | Login</span>
-                </button>
-              </>
-            ) : (
-              <div className="d-flex justify-content-end align-items-center gap-3">
-                <div className="dropdown">
-                  <a
-                    className="text-dark position-relative"
-                    href="#"
-                    role="button"
-                    id="notificationDropdown"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                  >
-                    <i className="bi bi-bell fs-5"></i>
+            {/* Right Side */}
+            <div className="d-flex mt-3 mt-lg-0 right-side-login">
+              {!user ? (
+                <>
+                  <i className="bi bi-bag"></i>
+                  <button className="btn btn-primary d-flex align-items-center gap-2 px-3 login-btn-add">
+                    <i
+                      className="bi bi-person-plus"
+                      onClick={() => setOpenSignup(true)}
+                    ></i>
+                    <span onClick={() => setOpenLogin(true)}> | Login</span>
+                  </button>
+                </>
+              ) : (
+                <div className="d-flex justify-content-end align-items-center gap-3">
+                  <div className="dropdown">
+                    <a
+                      className="text-dark position-relative"
+                      href="#"
+                      role="button"
+                      id="notificationDropdown"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      <i className="bi bi-bell fs-5"></i>
 
-                    <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                      3
-                    </span>
-                  </a>
+                      <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        3
+                      </span>
+                    </a>
 
-                  <ul
-                    className="dropdown-menu dropdown-menu-end shadow-lg border-0 rounded-3"
-                    aria-labelledby="notificationDropdown"
-                    style={{ width: "320px;" }}
-                  >
-                    <li className="dropdown-header d-flex justify-content-between align-items-center">
-                      Notifications
-                      <span className="badge bg-danger rounded-pill">3</span>
-                    </li>
-                    <li>
-                      <hr className="dropdown-divider" />
-                    </li>
+                    <ul
+                      className="dropdown-menu dropdown-menu-end shadow-lg border-0 rounded-3"
+                      aria-labelledby="notificationDropdown"
+                      style={{ width: "320px;" }}
+                    >
+                      <li className="dropdown-header notification-text d-flex justify-content-between align-items-center">
+                        Notifications
+                        <span className="badge bg-danger rounded-pill">3</span>
+                      </li>
+                      <li>
+                        <hr className="dropdown-divider" />
+                      </li>
+                      <li>
+                        <a
+                          className="dropdown-item d-flex align-items-center gap-2 py-2"
+                          href="#"
+                        >
+                          <i className="bi bi-envelope-fill text-primary"></i>
+                          <span>New message from John</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          className="dropdown-item d-flex align-items-center gap-2 py-2"
+                          href="#"
+                        >
+                          <i className="bi bi-box-seam text-success"></i>
+                          <span>Your order has been shipped</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          className="dropdown-item d-flex align-items-center gap-2 py-2"
+                          href="#"
+                        >
+                          <i className="bi bi-shield-lock-fill text-warning"></i>
+                          <span>Password changed successfully</span>
+                        </a>
+                      </li>
 
-                    <li>
-                      <a
-                        className="dropdown-item d-flex align-items-center gap-2 py-2"
-                        href="#"
-                      >
-                        <i className="bi bi-envelope-fill text-primary"></i>
-                        <span>New message from John</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        className="dropdown-item d-flex align-items-center gap-2 py-2"
-                        href="#"
-                      >
-                        <i className="bi bi-box-seam text-success"></i>
-                        <span>Your order has been shipped</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        className="dropdown-item d-flex align-items-center gap-2 py-2"
-                        href="#"
-                      >
-                        <i className="bi bi-shield-lock-fill text-warning"></i>
-                        <span>Password changed successfully</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        className="dropdown-item text-center fw-semibold text-primary"
-                        href="#"
-                      >
-                        View all
-                      </a>
-                    </li>
-                  </ul>
+                      <li>
+                        <a
+                          className="dropdown-item text-center fw-semibold text-primary"
+                          href="#"
+                        >
+                          View all
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div className="dropdown">
+                    <a
+                      className="d-flex align-items-center text-decoration-none dropdown-toggle"
+                      href="#"
+                      role="button"
+                      id="dropdownMenuLink"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      <img
+                        src={user?.avatar_url}
+                        alt="Profile"
+                        className="profile-img me-2"
+                        style={{
+                          width: "32px",
+                          height: "32px",
+                          borderRadius: "50%",
+                        }}
+                      />
+                      <span>{user?.name}</span>
+                    </a>
+
+                    <ul
+                      className="dropdown-menu dropdown-menu-end"
+                      aria-labelledby="dropdownMenuLink"
+                    >
+                      <li>
+                        <NavLink className="dropdown-item" to="/profile">
+                          My Profile
+                        </NavLink>
+                      </li>
+                      <li>
+                        <a className="dropdown-item" href="#">
+                          Settings
+                        </a>
+                      </li>
+                      <li>
+                        <hr className="dropdown-divider" />
+                      </li>
+                      <li>
+                        <a className="dropdown-item" href="#" onClick={logout}>
+                          Logout
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
-
-                <div className="dropdown">
-                  <a
-                    className="d-flex align-items-center text-decoration-none dropdown-toggle"
-                    href="#"
-                    role="button"
-                    id="dropdownMenuLink"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                  >
-                    <img
-                      src={user?.avatar_url}
-                      alt="Profile"
-                      className="profile-img me-2"
-                      style={{
-                        width: "32px",
-                        height: "32px",
-                        borderRadius: "50%",
-                      }}
-                    />
-                    <span>{user?.name}</span>
-                  </a>
-
-                  <ul
-                    className="dropdown-menu dropdown-menu-end"
-                    aria-labelledby="dropdownMenuLink"
-                  >
-                    <li>
-                      <NavLink className="dropdown-item" to="/profile">
-                        My Profile
-                      </NavLink>
-                    </li>
-                    <li>
-                      <a className="dropdown-item" href="#">
-                        Settings
-                      </a>
-                    </li>
-                    <li>
-                      <hr className="dropdown-divider" />
-                    </li>
-                    <li>
-                      <a className="dropdown-item" href="#" onClick={logout}>
-                        Logout
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </div>
       </nav>
