@@ -26,6 +26,7 @@ nav.nav.flex-column {
     border: solid 1px #d7d7d7;
     border-radius: 12px;
     height: 100%;
+    margin-bottom: 20px;
 }
 .sidebar.left-sidebar .profile-info {
     text-align: center;
@@ -232,3 +233,7 @@ nav.navbar.navbar-expand-lg span.badge.bg-danger.rounded-pill {
 form.profile-form-add {
     width: 82%;
 }
+
+
+
+

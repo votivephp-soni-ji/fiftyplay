@@ -1,5 +1,6 @@
 import { AuthTab } from "../components/AuthTab";
 import "../assets/css/favourite-events.css";
+import "../assets/css/event-products.css";
 import { useEffect, useState } from "react";
 import { addFavoriteEvent, fetchFavourites } from "../services/EventService";
 import { Box, CircularProgress } from "@mui/material";
@@ -139,51 +140,63 @@ export const FavouriteEvents = () => {
                 </div>
               </div>
               {totalPages > 1 && (
-                <nav aria-label="Page navigation example">
-                  <ul className="pagination justify-content-center">
-                    {/* Previous Button */}
-                    <li className={`page-item ${page === 1 ? "disabled" : ""}`}>
-                      <button
-                        className="page-link"
-                        onClick={() => page > 1 && setPage(page - 1)}
-                      >
-                        <i className="bi bi-chevron-left"></i> Back
-                      </button>
-                    </li>
-
-                    {/* Page Numbers */}
-                    {[...Array(totalPages)].map((_, idx) => (
-                      <li
-                        key={idx + 1}
-                        className={`page-item ${
-                          page === idx + 1 ? "active" : ""
-                        }`}
-                      >
-                        <button
-                          className="page-link"
-                          onClick={() => setPage(idx + 1)}
-                        >
-                          {idx + 1}
-                        </button>
-                      </li>
-                    ))}
-
-                    {/* Next Button */}
-                    <li
-                      className={`page-item ${
-                        page === totalPages ? "disabled" : ""
-                      }`}
+              <nav aria-label="Page navigation example">
+                <ul className="pagination justify-content-center">
+                  {/* Back Button */}
+                  <li className={`page-item ${page === 1 ? "disabled" : ""}`}>
+                    <a
+                      className="page-link"
+                      href="#"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        if (page > 1) setPage(page - 1);
+                      }}
                     >
-                      <button
-                        className="page-link"
-                        onClick={() => page < totalPages && setPage(page + 1)}
+                      <i className="bi bi-chevron-left"></i> Back
+                    </a>
+                  </li>
+
+                  {/* Page Numbers */}
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+                    (p) => (
+                      <li
+                        key={p}
+                        className={`page-item ${page === p ? "active" : ""}`}
                       >
-                        Next <i className="bi bi-chevron-right"></i>
-                      </button>
-                    </li>
-                  </ul>
-                </nav>
-              )}
+                        <a
+                          className="page-link"
+                          href="#"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setPage(p);
+                          }}
+                        >
+                          {p}
+                        </a>
+                      </li>
+                    )
+                  )}
+
+                  {/* Next Button */}
+                  <li
+                    className={`page-item ${
+                      page === totalPages ? "disabled" : ""
+                    }`}
+                  >
+                    <a
+                      className="page-link"
+                      href="#"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        if (page < totalPages) setPage(page + 1);
+                      }}
+                    >
+                      Next <i className="bi bi-chevron-right"></i>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            )}
             </div>
           </div>
         </div>

@@ -16,15 +16,15 @@
     border-radius: 4px;
 }
 .latest-events-inner-added h5.card-title {
-    width: 80%;
+    width: 218px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .disabled-link-css {
     pointer-events: none;
-
-    /* Visual styling to make it look disabled */
     cursor: default;
     color: #a0a0a0;
-    /* A gray color */
     text-decoration: none;
 }
 
