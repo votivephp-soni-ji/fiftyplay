@@ -114,7 +114,7 @@ const Header = () => {
                     <ul
                       className="dropdown-menu dropdown-menu-end shadow-lg border-0 rounded-3"
                       aria-labelledby="notificationDropdown"
-                      style={{ width: "320px;" }}
+                      style={{ width: "320px" }}
                     >
                       <li className="dropdown-header notification-text d-flex justify-content-between align-items-center">
                         Notifications
