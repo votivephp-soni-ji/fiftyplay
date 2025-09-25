@@ -278,7 +278,7 @@ i.bi.bi-arrow-right {
     color: #fff;
     /* padding: 8px 14px; */
     border-radius: 50px;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 500;
     width: 65px;
     height: 65px;
@@ -364,7 +364,14 @@ i.bi.bi-arrow-right {
     align-items: center;
     border-radius: 4px;
 }
-
+.exclusive-tab i.bi.bi-heart-fill {
+    color: #ffba23 !important;
+    border: solid 1px #ffba23;
+    padding: 5px 8px;
+    display: flex;
+    align-items: center;
+    border-radius: 4px;
+}
 .winning-numbers .card-body {
     padding-left: 0px;
     padding-right: 0px;
@@ -373,7 +380,10 @@ i.bi.bi-arrow-right {
 
 .winning-numbers h5.card-title {
     text-align: left;
-    width: 80%;
+    width: 218px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .ticket-price-tab {

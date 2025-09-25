@@ -59,6 +59,10 @@
 .favourite-events-add h5.card-title {
     font-size: 18px;
     width: 80%;
+    width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .favourite-events-add p.inner-price-add {
