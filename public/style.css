@@ -267,11 +267,13 @@ section.winning-numbers {
     font-size: 12px;
     font-weight: 600;
 }
-
+i.bi.bi-arrow-right {
+    padding-left: 5px;
+}
 .winning-numbers .card-price {
     position: absolute;
     top: 218px;
-    right: 45px;
+    right: 38px;
     background: #f9037a;
     color: #fff;
     /* padding: 8px 14px; */
@@ -371,6 +373,7 @@ section.winning-numbers {
 
 .winning-numbers h5.card-title {
     text-align: left;
+    width: 80%;
 }
 
 .ticket-price-tab {
@@ -959,9 +962,39 @@ div#signupModal button.btn-close {
     display: flex;
 }
 
+div#navbarNav a.dropdown-item.text-center.fw-semibold.text-primary {
+    background: #743289;
+    color: #fff !important;
+    padding: 11px 0px;
+    margin-top: 10px;
+}
+div#navbarNav ul.dropdown-menu.dropdown-menu-end.show {
+    padding: 0px;
+}
+div#navbarNav hr.dropdown-divider {
+    margin-top: 0px;
+}
+
+div#navbarNav ul.dropdown-menu a.dropdown-item:hover {
+    background: #fecde4;
+    color: #000;
+}
+
+div#navbarNav li.dropdown-header.notification-text {
+    font-size: 15px;
+    font-weight: 500;
+}
+div#navbarNav span.badge.bg-danger.rounded-pill {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
 
 @media only screen and (max-width: 767px) {
-
 
     #signupModal .btn-register {
         padding: 9px;

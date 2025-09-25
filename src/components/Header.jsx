@@ -79,10 +79,9 @@ const Header = () => {
                 </NavLink>
               </li>
             </ul>
-          </div>
 
-          {/* Right Side */}
-          <div className="d-flex mt-3 mt-lg-0 right-side-login">
+      {/* Right Side */}
+      <div className="d-flex mt-3 mt-lg-0 right-side-login">
             {!user ? (
               <>
                 <i className="bi bi-bag"></i>
@@ -113,33 +112,38 @@ const Header = () => {
                   </a>
 
                   <ul
-                    className="dropdown-menu dropdown-menu-end"
+                    className="dropdown-menu dropdown-menu-end shadow-lg border-0 rounded-3"
                     aria-labelledby="notificationDropdown"
                     style={{ width: "300px" }}
                   >
-                    <li className="dropdown-header">Notifications</li>
+                    <li className="dropdown-header notification-text d-flex justify-content-between align-items-center">
+                                    Notifications
+                                    <span className="badge bg-danger rounded-pill">3</span>
+                                </li>
+                                <li><hr className="dropdown-divider"/></li>
                     <li>
-                      <a className="dropdown-item" href="#">
-                        New message from John
-                      </a>
+                    <a className="dropdown-item d-flex align-items-center gap-2 py-2" href="#">
+                                        <i className="bi bi-envelope-fill text-primary"></i>
+                                        <span>New message from John</span>
+                                    </a>
                     </li>
                     <li>
-                      <a className="dropdown-item" href="#">
-                        Your order has been shipped
-                      </a>
+                    <a className="dropdown-item d-flex align-items-center gap-2 py-2" href="#">
+                                        <i className="bi bi-box-seam text-success"></i>
+                                        <span>Your order has been shipped</span>
+                                    </a>
                     </li>
                     <li>
-                      <a className="dropdown-item" href="#">
-                        Password changed successfully
-                      </a>
+                    <a className="dropdown-item d-flex align-items-center gap-2 py-2" href="#">
+                                        <i className="bi bi-shield-lock-fill text-warning"></i>
+                                        <span>Password changed successfully</span>
+                                    </a>
                     </li>
+            
                     <li>
-                      <hr className="dropdown-divider" />
-                    </li>
-                    <li>
-                      <a className="dropdown-item text-center" href="#">
-                        View all
-                      </a>
+                    <a className="dropdown-item text-center fw-semibold text-primary" href="#">
+                                        View all
+                                    </a>
                     </li>
                   </ul>
                 </div>
@@ -193,6 +197,10 @@ const Header = () => {
               </div>
             )}
           </div>
+
+          </div>
+
+    
         </div>
       </nav>
       {/* Login Modal */}
