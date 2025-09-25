@@ -141,15 +141,15 @@
     padding-bottom: 0px;
 }
 
-.latest-events-inner-added ul.pagination {
+ ul.pagination {
     margin-top: 45px;
 }
 
-.latest-events-inner-added ul.pagination i {
+ul.pagination i {
     color: #626262;
     font-size: 13px;
 }
-.latest-events-inner-added li.page-item.active a {
+ li.page-item.active a {
     background: #000000!important;
     border: none;
     padding: 9px 15px;
@@ -165,14 +165,14 @@ ul.pagination a.page-link.active {
     color: #fff !important;
     border: none;
 }
-.latest-events-inner-added ul.pagination a {
+ ul.pagination a {
     margin: 0px 9px;
     border-radius: 4px;
     padding: 8px 15px;
     box-shadow: none;
 }
 
-.latest-events-inner-added a.page-link {
+ a.page-link {
     color: #313131;
 }
 
