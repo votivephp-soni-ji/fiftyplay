@@ -1006,6 +1006,24 @@ div#navbarNav span.badge.bg-danger.rounded-pill {
 
 @media only screen and (max-width: 767px) {
 
+    tbody.ads-table-tickets td {
+        min-width: 130px;
+    }
+    .right-side-content {
+        padding-left: 0px !important;
+        margin-bottom: 20px !important;
+        padding-right: 0;
+    }
+    .profile-section-add {
+        width: 92%;
+        margin: auto;
+        margin-top: 25px !important;
+    }
+    .right-side-content h4 {
+        font-size: 25px !important;
+        width: 100% !important;
+        text-align: center;
+    }
     #signupModal .btn-register {
         padding: 9px;
     }

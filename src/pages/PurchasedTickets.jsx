@@ -51,6 +51,7 @@ export const PurchasedTickets = () => {
                       <CircularProgress sx={{ color: "#ee127b" }} />
                     </Box>
                   ) : (
+                    <div className="table-responsive">
                     <table className="table align-middle">
                       <thead className="table-light">
                         <tr>
@@ -61,10 +62,10 @@ export const PurchasedTickets = () => {
                           <th className="text-end">Action</th>
                         </tr>
                       </thead>
-
+                  
                       <tbody className="ads-table-tickets">
                         {tickets.map((ticket) => (
-                          <tr>
+                          <tr key={ticket.ticket_number}>
                             <td>
                               <div className="d-flex align-items-center">
                                 <img
@@ -80,15 +81,14 @@ export const PurchasedTickets = () => {
                             <td>
                               <span
                                 className={
-                                  ticket.status == "paid"
+                                  ticket.status === "paid"
                                     ? "status-active"
-                                    : ticket.status == "expired"
+                                    : ticket.status === "expired"
                                     ? "status-expire"
                                     : "status-cancel"
                                 }
                               >
-                                <i className="bi bi-check2-circle me-1"></i>{" "}
-                                {ticket.status}
+                                <i className="bi bi-check2-circle me-1"></i> {ticket.status}
                               </span>
                             </td>
                             <td className="text-end">
@@ -101,22 +101,14 @@ export const PurchasedTickets = () => {
                                   <i className="bi bi-three-dots"></i>
                                 </button>
                                 <ul className="dropdown-menu dropdown-menu-end">
-                                  {/* <li>
-                                  <a className="dropdown-item" href="#">
-                                    <i className="bi bi-eye me-2"></i> View
-                                    Details
-                                  </a>
-                                </li> */}
                                   <li>
                                     <a className="dropdown-item" href="#">
-                                      <i className="bi bi-trash me-2"></i>{" "}
-                                      Delete Tickets
+                                      <i className="bi bi-trash me-2"></i> Delete Tickets
                                     </a>
                                   </li>
                                   <li>
                                     <a className="dropdown-item" href="#">
-                                      <i className="bi bi-gift me-2"></i> Claim
-                                      Now
+                                      <i className="bi bi-gift me-2"></i> Claim Now
                                     </a>
                                   </li>
                                 </ul>
@@ -126,6 +118,8 @@ export const PurchasedTickets = () => {
                         ))}
                       </tbody>
                     </table>
+                  </div>
+                  
                   )}
                 </div>
               </div>
