@@ -3,6 +3,7 @@ import LoginModal from "../modals/LoginModal";
 import { useEffect, useState } from "react";
 import SignupModal from "../modals/SignupModal";
 import { useAuth } from "../context/AuthContext";
+import ForgotPasswordModal from "../modals/ForgotPasswordModal";
 
 const Header = () => {
   const {
@@ -12,6 +13,8 @@ const Header = () => {
     openSignup,
     setOpenLogin,
     setOpenSignup,
+    openForgot,
+    setOpenForgot,
     logout,
   } = useAuth();
 
@@ -218,11 +221,25 @@ const Header = () => {
       <LoginModal
         open={openLogin}
         handleClose={() => setOpenLogin(false)}
-        handleLoginClick={() => {
-          setOpenSignup(false); // close signup
-          setOpenLogin(true); // open login
+        handleSignupClick={() => {
+          setOpenLogin(false);
+          setOpenSignup(true);
         }}
         onLoginSuccess={handleLoginSuccess}
+        handleForgotClick={() => {
+          setOpenLogin(false); // close login
+          setOpenForgot(true); // open forgot password
+        }}
+      />
+
+      {/* Forgot Password Modal */}
+      <ForgotPasswordModal
+        open={openForgot}
+        handleClose={() => setOpenForgot(false)}
+        handleBackToLogin={() => {
+          setOpenForgot(false);
+          setOpenLogin(true);
+        }}
       />
 
       <SignupModal

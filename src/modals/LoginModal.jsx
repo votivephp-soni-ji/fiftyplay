@@ -36,6 +36,7 @@ const LoginModal = ({
   handleClose,
   handleSignupClick,
   onLoginSuccess,
+  handleForgotClick,
 }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -208,6 +209,7 @@ const LoginModal = ({
               variant="body2"
               color="primary"
               sx={{ cursor: "pointer", fontWeight: 500 }}
+              onClick={handleForgotClick}
             >
               Forgot Password?
             </Typography>

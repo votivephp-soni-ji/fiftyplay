@@ -8,6 +8,7 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [openLogin, setOpenLogin] = useState(false);
   const [openSignup, setOpenSignup] = useState(false);
+  const [openForgot, setOpenForgot] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -41,6 +42,8 @@ export function AuthProvider({ children }) {
         openSignup,
         setOpenSignup,
         handleLoginSuccess,
+        openForgot,
+        setOpenForgot,
         logout,
       }}
     >

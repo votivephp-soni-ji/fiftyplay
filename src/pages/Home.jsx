@@ -17,6 +17,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { fetchCategories } from "../services/EventService";
 import EventCard from "../components/EventCart";
+import ForgotPasswordModal from "../modals/ForgotPasswordModal";
 
 const Home = () => {
   const [events, setEvents] = useState([]);
@@ -28,6 +29,8 @@ const Home = () => {
     openSignup,
     setOpenLogin,
     setOpenSignup,
+    openForgot,
+    setOpenForgot,
   } = useAuth();
 
   const navigate = useNavigate();
@@ -69,7 +72,7 @@ const Home = () => {
           {/* Search Box */}
           <form className="search-box mt-4">
             <select className="form-select">
-              <option selected>Category</option>
+              <option value="">Category</option>
               {categories &&
                 categories.map((category, index) => {
                   return (
@@ -318,14 +321,27 @@ const Home = () => {
         onLoginSuccess={handleLoginSuccess}
       />
 
+      <ForgotPasswordModal
+        open={openForgot}
+        handleClose={() => setOpenForgot(false)}
+        handleBackToLogin={() => {
+          setOpenForgot(false);
+          setOpenLogin(true);
+        }}
+      />
+
       <LoginModal
         open={openLogin}
         handleClose={() => setOpenLogin(false)}
         handleSignupClick={() => {
-          setOpenLogin(false); // close login
-          setOpenSignup(true); // open signup
+          setOpenLogin(false);
+          setOpenSignup(true);
         }}
         onLoginSuccess={handleLoginSuccess}
+        handleForgotClick={() => {
+          setOpenLogin(false); // close login
+          setOpenForgot(true); // open forgot password
+        }}
       />
     </main>
   );
