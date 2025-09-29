@@ -1,3 +1,5 @@
+import { Link, NavLink } from "react-router-dom";
+
 const Footer = () => {
   return (
      <footer className="fifty-play-footer">
@@ -15,11 +17,11 @@ const Footer = () => {
 
                     <div className="col-lg-2 col-md-6">
                         <h5>Quick Links</h5>
-                        <a href="#"><i className="bi bi-chevron-right"></i> Home</a>
-                        <a href="#"><i className="bi bi-chevron-right"></i> About Us</a>
-                        <a href="#"><i className="bi bi-chevron-right"></i> Products</a>
-                        <a href="#"><i className="bi bi-chevron-right"></i> Our Team</a>
-                        <a href="#"><i className="bi bi-chevron-right"></i> Lottery</a>
+                        <NavLink to="/"><i className="bi bi-chevron-right"></i> Home</NavLink>
+                        <NavLink to="/about"><i className="bi bi-chevron-right"></i> About Us</NavLink>
+                        <NavLink to="/fundraising-products"><i className="bi bi-chevron-right"></i> Products</NavLink>
+                        <NavLink to="/our-team"><i className="bi bi-chevron-right"></i> Our Team</NavLink>
+                        <NavLink href="#"><i className="bi bi-chevron-right"></i> Lottery</NavLink>
                     </div>
 
                     <div className="col-lg-2 col-md-6">

@@ -68,7 +68,7 @@ export default function EventDetail() {
     fetchCollectedAmount();
 
     // poll every 5 seconds
-    const interval = setInterval(fetchCollectedAmount, 6000);
+    const interval = setInterval(fetchCollectedAmount, 7000);
     return () => clearInterval(interval);
   }, [eventId]);
 

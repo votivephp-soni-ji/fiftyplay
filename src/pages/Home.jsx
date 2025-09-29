@@ -22,6 +22,11 @@ import ForgotPasswordModal from "../modals/ForgotPasswordModal";
 const Home = () => {
   const [events, setEvents] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [filters, setFilters] = useState({
+    category: "",
+    location: "",
+    date: "",
+  });
 
   const {
     handleLoginSuccess,
@@ -61,6 +66,17 @@ const Home = () => {
     navigate("/event-detail", { state: { event: eventId } });
   };
 
+  const handleSearch = (e) => {
+    e.preventDefault();
+
+    const query = new URLSearchParams();
+    if (filters.category) query.append("category", filters.category);
+    if (filters.location) query.append("location", filters.location);
+    if (filters.date) query.append("date", filters.date);
+
+    navigate(`/fundraising-products?${query.toString()}`);
+  };
+
   return (
     <main>
       {/* Hero Section */}
@@ -71,7 +87,13 @@ const Home = () => {
 
           {/* Search Box */}
           <form className="search-box mt-4">
-            <select className="form-select">
+            <select
+              className="form-select"
+              value={filters.category}
+              onChange={(e) =>
+                setFilters((prev) => ({ ...prev, category: e.target.value }))
+              }
+            >
               <option value="">Category</option>
               {categories &&
                 categories.map((category, index) => {
@@ -86,9 +108,18 @@ const Home = () => {
               type="text"
               className="form-control"
               placeholder="Address, neighborhood, city or zip"
+              onChange={(e) =>
+                setFilters((prev) => ({ ...prev, location: e.target.value }))
+              }
             />
-            <input type="date" className="form-control" />
-            <Button variant="contained" color="primary">
+            <input
+              type="date"
+              className="form-control"
+              onChange={(e) =>
+                setFilters((prev) => ({ ...prev, date: e.target.value }))
+              }
+            />
+            <Button variant="contained" color="primary" onClick={handleSearch}>
               Search
             </Button>
           </form>

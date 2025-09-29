@@ -18,7 +18,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import { fetchEvents } from "../services/EventService";
 import "../assets/css/event-products.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import EventCard from "../components/EventCart";
 
 const FundraisingProducts = () => {
@@ -26,14 +26,18 @@ const FundraisingProducts = () => {
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
 
   // ✅ Fetch events from API
   const loadEvents = async (pageNo = 1) => {
     setLoading(true);
     try {
-      console.log("page No", pageNo);
-      const res = await fetchEvents({ page: pageNo });
+      const location = searchParams.get("location") || "";
+      const date = searchParams.get("date") || "";
+      const category = searchParams.get("category") || "";
+
+      const res = await fetchEvents({ page: pageNo, location, date, category });
       console.log("data", res.data);
       setEvents(res.data);
       setTotalPages(res.meta.last_page);
