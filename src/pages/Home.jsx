@@ -22,6 +22,7 @@ import ForgotPasswordModal from "../modals/ForgotPasswordModal";
 const Home = () => {
   const [events, setEvents] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [searchLoad, setSearchLoad] = useState(false);
   const [filters, setFilters] = useState({
     category: "",
     location: "",
@@ -68,13 +69,16 @@ const Home = () => {
 
   const handleSearch = (e) => {
     e.preventDefault();
+    setSearchLoad(true);
+    setTimeout(() => {
+      setSearchLoad(false);
+      const query = new URLSearchParams();
+      if (filters.category) query.append("category", filters.category);
+      if (filters.location) query.append("location", filters.location);
+      if (filters.date) query.append("date", filters.date);
 
-    const query = new URLSearchParams();
-    if (filters.category) query.append("category", filters.category);
-    if (filters.location) query.append("location", filters.location);
-    if (filters.date) query.append("date", filters.date);
-
-    navigate(`/fundraising-products?${query.toString()}`);
+      navigate(`/fundraising-products?${query.toString()}`);
+    }, 2000);
   };
 
   return (
@@ -120,7 +124,7 @@ const Home = () => {
               }
             />
             <Button variant="contained" color="primary" onClick={handleSearch}>
-              Search
+              {searchLoad ? "Searching..." : "Search"}
             </Button>
           </form>
         </div>

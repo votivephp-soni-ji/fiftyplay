@@ -70,7 +70,7 @@ export default function PaymentPage() {
       // Call booking API
       const res = await bookingTickets({
         event_id: event.id,
-        ticket_ids: reserved.map((t) => t.id),
+        ticket_numbers: reserved.map((t) => t.ticket_number),
       });
 
       if (res.status) {
