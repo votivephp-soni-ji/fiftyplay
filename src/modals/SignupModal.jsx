@@ -67,12 +67,25 @@ const SignupModal = ({
   const onSubmit = async (data) => {
     // Add user type
     setLoading(true);
-    const payload = {
+    let payload = {
       ...data,
       user_type: 5, // 🔹 change dynamically as needed
     };
 
     try {
+      let deviceToken = null;
+      try {
+        deviceToken = await requestForToken();
+        payload = {
+          ...payload,
+          device_token: deviceToken,
+          platform: "web",
+        };
+        console.log("device token", deviceToken);
+      } catch (err) {
+        console.warn("⚠️ Could not get device token:", err.message);
+      }
+      console.log("device token", deviceToken);
       let res = await signup(payload);
       onLoginSuccess(res);
     } catch (err) {
