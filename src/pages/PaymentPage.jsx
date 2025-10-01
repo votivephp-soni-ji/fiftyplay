@@ -75,7 +75,7 @@ export default function PaymentPage() {
 
       if (res.status) {
         toast.success("Payment successful! Tickets booked.");
-        //navigate("/fundraising-products"); // redirect
+        navigate("/fundraising-products"); // redirect
       } else {
         toast.error(res.error || "Booking failed after payment");
       }
