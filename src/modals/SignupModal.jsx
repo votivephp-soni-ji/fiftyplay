@@ -85,7 +85,6 @@ const SignupModal = ({
       } catch (err) {
         console.warn("⚠️ Could not get device token:", err.message);
       }
-      console.log("device token", deviceToken);
       let res = await signup(payload);
       onLoginSuccess(res);
     } catch (err) {

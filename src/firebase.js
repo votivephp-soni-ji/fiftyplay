@@ -28,22 +28,25 @@ export const messaging = getMessaging(app);
 // Get FCM Device Token
 export const requestForToken = async () => {
   try {
-    const registration = await navigator.serviceWorker.register(
-      "/firebase-messaging-sw.js"
-    );
+    // Ensure SW is registered
+    await navigator.serviceWorker.register("/firebase-messaging-sw.js");
+
+    // ✅ Wait until service worker is active
+    const registration = await navigator.serviceWorker.ready;
 
     const token = await getToken(messaging, {
       vapidKey: import.meta.env.VITE_FIREBASE_VAPID_KEY,
       serviceWorkerRegistration: registration,
     });
+
     if (token) {
       console.log("FCM Token:", token);
       return token;
     } else {
-      console.log("No registration token available. Request permission to generate one.");
+      console.warn("No registration token available. Request permission.");
     }
   } catch (err) {
-    console.error("An error occurred while retrieving token. ", err);
+    console.error("An error occurred while retrieving token.", err);
   }
 };
 
