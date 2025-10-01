@@ -18,6 +18,8 @@ const Header = () => {
     logout,
   } = useAuth();
 
+  const [notifications, setNotifications] = useState([]);
+
   return (
     <>
       <nav className="navbar navbar-expand-lg shadow-sm sticky-top">
