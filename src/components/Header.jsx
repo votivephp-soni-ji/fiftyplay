@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import SignupModal from "../modals/SignupModal";
 import { useAuth } from "../context/AuthContext";
 import ForgotPasswordModal from "../modals/ForgotPasswordModal";
+import { fetchNotifications } from "../services/WebService";
 
 const Header = () => {
   const {
@@ -19,6 +20,15 @@ const Header = () => {
   } = useAuth();
 
   const [notifications, setNotifications] = useState([]);
+
+  const fetchNoti = async () => {
+    const res = await fetchNotifications();
+    console.log("nofi", res);
+    setNotifications(res.notifications);
+  };
+  useEffect(() => {
+    fetchNoti();
+  }, []);
 
   return (
     <>
@@ -89,7 +99,6 @@ const Header = () => {
             <div className="d-flex mt-3 mt-lg-0 right-side-login">
               {!user ? (
                 <>
-                  <i className="bi bi-bag"></i>
                   <button className="btn btn-primary d-flex align-items-center gap-2 px-3 login-btn-add">
                     <i
                       className="bi bi-person-plus"
@@ -128,33 +137,20 @@ const Header = () => {
                       <li>
                         <hr className="dropdown-divider" />
                       </li>
-                      <li>
-                        <a
-                          className="dropdown-item d-flex align-items-center gap-2 py-2"
-                          href="#"
-                        >
-                          <i className="bi bi-envelope-fill text-primary"></i>
-                          <span>New message from John</span>
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          className="dropdown-item d-flex align-items-center gap-2 py-2"
-                          href="#"
-                        >
-                          <i className="bi bi-box-seam text-success"></i>
-                          <span>Your order has been shipped</span>
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          className="dropdown-item d-flex align-items-center gap-2 py-2"
-                          href="#"
-                        >
-                          <i className="bi bi-shield-lock-fill text-warning"></i>
-                          <span>Password changed successfully</span>
-                        </a>
-                      </li>
+                      {notifications &&
+                        notifications.map((notification, index) => (
+                          <>
+                            <li>
+                              <a
+                                className="dropdown-item d-flex align-items-center gap-2 py-2"
+                                href="#"
+                              >
+                                {/* <img src={notification.icon} /> */}
+                                <span>{notification.title}</span>
+                              </a>
+                            </li>
+                          </>
+                        ))}
 
                       <li>
                         <a
