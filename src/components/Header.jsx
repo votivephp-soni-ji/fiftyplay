@@ -22,13 +22,13 @@ const Header = () => {
   const [notifications, setNotifications] = useState([]);
 
   const fetchNoti = async () => {
-    const res = await fetchNotifications();
+    const res = await fetchNotifications({ limit: 3 });
     console.log("nofi", res);
-    setNotifications(res.notifications);
+    setNotifications(res.data);
   };
   useEffect(() => {
     fetchNoti();
-  }, []);
+  }, [user]);
 
   return (
     <>
@@ -121,7 +121,7 @@ const Header = () => {
                       <i className="bi bi-bell fs-5"></i>
 
                       <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                        3
+                        {notifications.length}
                       </span>
                     </a>
 
@@ -132,24 +132,24 @@ const Header = () => {
                     >
                       <li className="dropdown-header notification-text d-flex justify-content-between align-items-center">
                         Notifications
-                        <span className="badge bg-danger rounded-pill">3</span>
+                        <span className="badge bg-danger rounded-pill">
+                          {notifications.length}
+                        </span>
                       </li>
                       <li>
                         <hr className="dropdown-divider" />
                       </li>
                       {notifications &&
                         notifications.map((notification, index) => (
-                          <>
-                            <li>
-                              <a
-                                className="dropdown-item d-flex align-items-center gap-2 py-2"
-                                href="#"
-                              >
-                                {/* <img src={notification.icon} /> */}
-                                <span>{notification.title}</span>
-                              </a>
-                            </li>
-                          </>
+                          <li key={notification.id}>
+                            <a
+                              className="dropdown-item d-flex align-items-center gap-2 py-2"
+                              href="#"
+                            >
+                              {/* <img src={notification.icon} /> */}
+                              <span>{notification.title}</span>
+                            </a>
+                          </li>
                         ))}
 
                       <li>

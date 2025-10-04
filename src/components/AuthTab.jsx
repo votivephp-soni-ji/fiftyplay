@@ -12,9 +12,6 @@ export const AuthTab = () => {
     navigate("/");
   };
 
-  useEffect(() => {
-    console.log("Logged user", user);
-  });
   return (
     <>
       <div className="profile-info">
@@ -27,6 +24,9 @@ export const AuthTab = () => {
       <nav className="nav flex-column">
         <NavLink className="nav-link" to="/profile">
           <i className="bi bi-person"></i> Profile
+        </NavLink>
+        <NavLink className="nav-link" to="/notifications">
+          <i className="bi bi-bell fs-5"></i> Notifications
         </NavLink>
         <NavLink className="nav-link" to="/tickets-history">
           <i className="bi bi-ticket-perforated"></i> Purchased Tickets

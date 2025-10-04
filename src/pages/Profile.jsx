@@ -102,9 +102,8 @@ export default function Profile() {
       console.log("formdata after", formData);
 
       const response = await updateProfile(payload);
-
+      localStorage.setItem("user", JSON.stringify(response.user));
       setUser(response.user);
-
       toast.success("Profile updated successfully");
     } catch (err) {
       toast.error("Failed to update profile");
