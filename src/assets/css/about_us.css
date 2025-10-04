@@ -129,7 +129,7 @@
 }
 
 section.biggest-jackpots-await {
-    background: url('./images/biggest-jackpots-bg.png');
+    background: url('../images/biggest-jackpots-bg.png');
     background-repeat: no-repeat;
     background-size: cover;
     padding: 115px 0px;
@@ -162,10 +162,12 @@ section.biggest-jackpots-await {
     margin-top: 15px;
 }
 
+
+
 @media only screen and (max-width: 767px) {
 
     .event-details-add {
-        height: 200px;
+        height: 211px !important;
         display: flex;
     }
 
