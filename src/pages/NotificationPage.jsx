@@ -60,7 +60,7 @@ export const NotificationPage = () => {
                           <tr>
                             <th>Title</th>
                             <th>Message</th>
-                            <th>Notify At</th>
+                            {/* <th>Notify At</th> */}
                             <th className="text-end">Action</th>
                           </tr>
                         </thead>
@@ -84,7 +84,7 @@ export const NotificationPage = () => {
                               >
                                 {notification.body}
                               </td>
-                              <td>{notification.notify_at ?? "—"}</td>
+                              {/* <td>{notification.created_at ?? "—"}</td> */}
 
                               <td className="text-end">
                                 <div className="dropdown">
