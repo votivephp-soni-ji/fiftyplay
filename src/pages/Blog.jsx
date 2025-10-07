@@ -28,34 +28,49 @@ export default function Blog() {
   }, [page]);
 
   return (
-    <Container className="py-5">
-      {/* Header */}
-      <Box textAlign="center" mb={5}>
-        <Typography variant="h4" fontWeight={700}>
-          Blog
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          Home / Blog
-        </Typography>
-      </Box>
+    <>
+      <div className="">
+        <section className="page-header banner-top-add">
+          <div className="container">
+            <h1>Blogs</h1>
+            <nav aria-label="breadcrumb">
+              <ul className="breadcrumb">
+                <li className="breadcrumb-item">
+                  <a href="#">Home</a>
+                </li>
+                <li className="breadcrumb-item active" aria-current="page">
+                  Blogs
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </section>
+      </div>
+      <Container className="py-5">
+        {/* Header */}
 
-      {/* Blog Grid */}
-      {loading ? (
-        <Box sx={{ display: "flex", justifyContent: "center", py: 10 }}>
-          <CircularProgress aria-bus={true} sx={{ color: "#ee127b" }} />
-        </Box>
-      ) : (
-        <Row className="g-4">
-          {blogs.map((blog) => (
-            <Col key={blog.id} xs={12} sm={6} lg={4}>
-              <BlogCard blog={blog} />
-            </Col>
-          ))}
-        </Row>
-      )}
+        {/* Blog Grid */}
+        {loading ? (
+          <Box sx={{ display: "flex", justifyContent: "center", py: 10 }}>
+            <CircularProgress aria-bus={true} sx={{ color: "#ee127b" }} />
+          </Box>
+        ) : (
+          <Row className="g-4">
+            {blogs.map((blog) => (
+              <Col key={blog.id} xs={12} sm={6} lg={4}>
+                <BlogCard blog={blog} />
+              </Col>
+            ))}
+          </Row>
+        )}
 
-      {/* Pagination */}
-      <BlogPagination page={page} totalPages={totalPages} onChange={setPage} />
-    </Container>
+        {/* Pagination */}
+        <BlogPagination
+          page={page}
+          totalPages={totalPages}
+          onChange={setPage}
+        />
+      </Container>
+    </>
   );
 }
