@@ -21,6 +21,7 @@ import { PurchasedTickets } from "./pages/PurchasedTickets";
 import { FavouriteEvents } from "./pages/FavouriteEvents";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { NotificationPage } from "./pages/NotificationPage";
+import BlogDetail from "./pages/BlogDetail";
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/news" element={<News />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:slug" element={<BlogDetail />} />
           <Route path="/login" element={<Login />} />
           <Route path="/event-detail" element={<EventDetail />} />
           <Route element={<ProtectedRoute />}>
