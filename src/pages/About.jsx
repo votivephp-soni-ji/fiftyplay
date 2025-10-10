@@ -223,7 +223,7 @@ const About = () => {
             </div>
           </div>
 
-          <div className="cta-box mt-3">
+          {/* <div className="cta-box mt-3">
             <span>
               <i className="bi bi-person-check"></i> Ready to play? Create your
               account now.
@@ -231,7 +231,7 @@ const About = () => {
             <a href="#" className="btn btn-primary ms-auto">
               Register Now
             </a>
-          </div>
+          </div> */}
         </div>
       </section>
 

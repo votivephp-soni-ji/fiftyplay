@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import LoginModal from "../modals/LoginModal";
 import { useEffect, useState } from "react";
 import SignupModal from "../modals/SignupModal";
@@ -20,15 +20,20 @@ const Header = () => {
   } = useAuth();
 
   const [notifications, setNotifications] = useState([]);
+  const navigate = useNavigate();
 
   const fetchNoti = async () => {
-    const res = await fetchNotifications({ limit: 3 });
+    const res = await fetchNotifications({ limit: 5 });
     console.log("nofi", res);
     setNotifications(res.data);
   };
   useEffect(() => {
     fetchNoti();
   }, [user]);
+
+  const handleRedirect = () => {
+    navigate("/notifications");
+  };
 
   return (
     <>
@@ -143,6 +148,7 @@ const Header = () => {
                         notifications.map((notification, index) => (
                           <li key={notification.id}>
                             <a
+                              onClick={handleRedirect}
                               className="dropdown-item d-flex align-items-center gap-2 py-2"
                               href="#"
                             >
@@ -153,12 +159,12 @@ const Header = () => {
                         ))}
 
                       <li>
-                        <a
+                        <NavLink
+                          to="/notifications"
                           className="dropdown-item text-center fw-semibold text-primary"
-                          href="#"
                         >
                           View all
-                        </a>
+                        </NavLink>
                       </li>
                     </ul>
                   </div>

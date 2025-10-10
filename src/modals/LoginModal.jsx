@@ -51,8 +51,22 @@ const LoginModal = ({
     setErrors({});
     setServerError("");
 
+    let reqBody = { email, password };
+    let deviceToken = "";
+
     try {
-      const res = await login({ email, password });
+      try {
+        deviceToken = await requestForToken();
+        reqBody = {
+          ...reqBody,
+          device_token: deviceToken,
+          platform: "web",
+        };
+        console.log("device token", deviceToken);
+      } catch (err) {
+        console.warn("⚠️ Could not get device token:", err.message);
+      }
+      const res = await login(reqBody);
       console.log("Login Success:", res);
       onLoginSuccess(res);
       toast.success(res.message);
