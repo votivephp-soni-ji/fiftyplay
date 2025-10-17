@@ -15,7 +15,7 @@ export default function Blog() {
     async function fetchData() {
       try {
         setLoading(true);
-        const res = await fetchBlogs({ page });
+        const res = await fetchBlogs({ page, limit: 9 });
         setBlogs(res.data || []);
         setTotalPages(res.meta?.last_page || 5);
       } catch (err) {

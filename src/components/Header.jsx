@@ -5,6 +5,9 @@ import SignupModal from "../modals/SignupModal";
 import { useAuth } from "../context/AuthContext";
 import ForgotPasswordModal from "../modals/ForgotPasswordModal";
 import { fetchNotifications } from "../services/WebService";
+import { useTranslation } from "react-i18next"; // import hook
+import i18n from "../i18n";
+import FundraisingProducts from "../pages/FundraisingProducts";
 
 const Header = () => {
   const {
@@ -18,6 +21,8 @@ const Header = () => {
     setOpenForgot,
     logout,
   } = useAuth();
+
+  const { t } = useTranslation();
 
   const [notifications, setNotifications] = useState([]);
   const navigate = useNavigate();
@@ -65,12 +70,12 @@ const Header = () => {
             <ul className="navbar-nav mb-2 mb-lg-0 gap-lg-3">
               <li className="nav-item">
                 <NavLink className="nav-link" to="/">
-                  Home
+                  {t("home")}
                 </NavLink>
               </li>
               <li className="nav-item">
                 <NavLink className="nav-link" to="/fundraising-products">
-                  Fundraising Products
+                  {t("fundraisingProducts")}
                 </NavLink>
               </li>
               <li className="nav-item">
@@ -80,22 +85,22 @@ const Header = () => {
               </li>
               <li className="nav-item">
                 <NavLink className="nav-link" to="/our-team">
-                  Our Team
+                  {t("ourTeam")}
                 </NavLink>
               </li>
               <li className="nav-item">
                 <NavLink className="nav-link" to="/contact">
-                  Contact
+                  {t("contact")}
                 </NavLink>
               </li>
               <li className="nav-item">
                 <NavLink className="nav-link" to="/news">
-                  News
+                  {t("news")}
                 </NavLink>
               </li>
               <li className="nav-item">
                 <NavLink className="nav-link" to="/blog">
-                  Blog
+                  {t("blog")}
                 </NavLink>
               </li>
             </ul>

@@ -123,7 +123,7 @@ const Home = () => {
                 setFilters((prev) => ({ ...prev, date: e.target.value }))
               }
             />
-            <Button variant="contained" color="primary" onClick={handleSearch}>
+            <Button variant="contained" color="primary" onClick={handleSearch} >
               {searchLoad ? "Searching..." : "Search"}
             </Button>
           </form>
