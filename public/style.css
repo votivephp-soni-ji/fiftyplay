@@ -1002,6 +1002,7 @@ div#navbarNav ul.dropdown-menu a.dropdown-item:hover {
 div#navbarNav li.dropdown-header.notification-text {
     font-size: 15px;
     font-weight: 500;
+    padding-bottom: 8px;
 }
 
 div#navbarNav span.badge.bg-danger.rounded-pill {
@@ -1011,8 +1012,23 @@ div#navbarNav span.badge.bg-danger.rounded-pill {
     justify-content: center;
     align-items: center;
 }
+.right-side-login a.dropdown-item.d-flex.align-items-center.gap-2.py-2 span {
+    width: 310px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+tbody.ads-table-tickets td.text-wrap {
+    line-height: 1.5;
+}
 
+.profile-section-add select.form-select {
+    padding-left: 18px;
+}
 
+.sidebar.left-sidebar .profile-info i.bi.bi-check-lg {
+    margin-top: 0px !important;
+}
 
 
 
