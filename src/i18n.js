@@ -14,6 +14,18 @@ const resources = {
             updates: "Get instant updates on the latest offers, deals, and exclusive offers.",
             save: "Save Changes",
             saving: "Saving...",
+
+
+            home: "Home",
+            fundraisingProducts: "Fundraising Products",
+            about: "About",
+            ourTeam: "Our Team",
+            contact: "Contact",
+            news: "News",
+            blog: "Blog"
+
+
+
         },
     },
     es: {
@@ -28,6 +40,15 @@ const resources = {
             updates: "Recibe actualizaciones instantáneas sobre las últimas ofertas, promociones y ofertas exclusivas.",
             save: "Guardar Cambios",
             saving: "Guardando...",
+
+            home: "Inicio",
+            fundraisingProducts: "Productos para Recaudación de Fondos",
+            about: "Acerca de",
+            ourTeam: "Nuestro Equipo",
+            contact: "Contacto",
+            news: "Noticias",
+            blog: "Blog"
+
         },
     },
 };

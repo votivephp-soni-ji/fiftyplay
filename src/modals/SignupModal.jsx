@@ -7,6 +7,7 @@ import {
   Button,
   IconButton,
   InputAdornment,
+  Alert,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import PersonIcon from "@mui/icons-material/Person";
@@ -15,10 +16,8 @@ import LockIcon from "@mui/icons-material/Lock";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import FacebookIcon from "@mui/icons-material/Facebook";
-import GoogleIcon from "@mui/icons-material/Google";
 import AppleIcon from "@mui/icons-material/Apple";
 import { toast } from "react-toastify";
-
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -32,7 +31,6 @@ import {
 } from "../firebase";
 import { signInWithPopup } from "firebase/auth";
 
-// ✅ Validation schema
 const schema = yup.object({
   name: yup.string().required("Full name is required"),
   email: yup.string().email("Invalid email").required("Email is required"),
@@ -46,17 +44,12 @@ const schema = yup.object({
     .required("Confirm your password"),
 });
 
-const SignupModal = ({
-  open,
-  handleClose,
-  handleLoginClick,
-  onLoginSuccess,
-}) => {
+const SignupModal = ({ open, handleClose, handleLoginClick, onLoginSuccess }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [serverError, setServerError] = useState("");
 
-  // ✅ React Hook Form
   const {
     register,
     handleSubmit,
@@ -65,28 +58,15 @@ const SignupModal = ({
   } = useForm({ resolver: yupResolver(schema) });
 
   const onSubmit = async (data) => {
-    // Add user type
     setLoading(true);
-    let payload = {
-      ...data,
-      user_type: 5, // 🔹 change dynamically as needed
-    };
+    setServerError("");
+    let payload = { ...data, user_type: 5 };
 
     try {
-      let deviceToken = null;
-      try {
-        deviceToken = await requestForToken();
-        payload = {
-          ...payload,
-          device_token: deviceToken,
-          platform: "web",
-        };
-        console.log("device token", deviceToken);
-      } catch (err) {
-        console.warn("⚠️ Could not get device token:", err.message);
-      }
-      let res = await signup(payload);
+      const res = await signup(payload);
       onLoginSuccess(res);
+      toast.success("Signup successful!");
+      handleClose();
     } catch (err) {
       if (err.response?.status === 422) {
         const validationErrors = err.response.data.errors;
@@ -96,6 +76,10 @@ const SignupModal = ({
             message: validationErrors[field][0],
           });
         });
+      } else if (err.response?.data?.message) {
+        setServerError(err.response.data.message);
+      } else {
+        setServerError("Something went wrong. Try again.");
       }
     } finally {
       setLoading(false);
@@ -106,9 +90,7 @@ const SignupModal = ({
     try {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
-      let idToken = await user.getIdToken();
-
-      // Get FCM Device Token (for push notifications)
+      const idToken = await user.getIdToken();
 
       let deviceToken = null;
       try {
@@ -118,11 +100,12 @@ const SignupModal = ({
         console.warn("⚠️ Could not get device token:", err.message);
       }
 
-      let res = await socialLogin({
+      const res = await socialLogin({
         device_token: deviceToken,
         token: idToken,
         provider: type,
       });
+
       onLoginSuccess(res);
       toast.success(res.message || `${type} login successful!`);
       handleClose();
@@ -139,128 +122,145 @@ const SignupModal = ({
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          px: 2, // padding for small screens
+          px: 2,
+          fontFamily: '"Jost", sans-serif',
         }}
       >
         <Box
           sx={{
-            width: { xs: "100%", sm: 400 }, // responsive width
-            maxWidth: "100%",
+            width: { xs: "100%", sm: "90%", md: "480px" },
             bgcolor: "white",
-            borderRadius: "16px",
+            borderRadius: "20px",
             p: { xs: 3, sm: 4 },
             position: "relative",
             boxShadow: 24,
-            fontFamily: "Jost, sans-serif",
           }}
         >
           {/* Close Button */}
           <IconButton
-            sx={{ position: "absolute", top: 15, right: 15 }}
+            sx={{ position: "absolute", top: 14, right: 14 }}
             onClick={handleClose}
           >
             <CloseIcon />
           </IconButton>
 
+          {/* Logo */}
+          <Box sx={{ textAlign: "center", mb: 2 }}>
+            <img src="/images/logo.png" alt="logo" width="100" />
+          </Box>
+
           {/* Title */}
-          <Typography variant="h6" fontWeight="bold" mb={3}>
+          <Typography
+            variant="h5"
+            fontWeight="bold"
+            textAlign="center"
+            mb={3}
+            sx={{ fontFamily: '"Jost", sans-serif' }}
+          >
             Sign up
           </Typography>
 
+          {/* Server Error */}
+          {serverError && (
+            <Alert severity="error" sx={{ mb: 2 }}>
+              {serverError}
+            </Alert>
+          )}
+
           <form onSubmit={handleSubmit(onSubmit)}>
             {/* Full Name */}
-            <TextField
-              fullWidth
-              placeholder="Enter your full name"
-              variant="standard"
-              sx={{ mb: 2 }}
-              {...register("name")}
-              error={!!errors.name}
-              helperText={errors.name?.message}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <PersonIcon sx={{ color: "gray" }} />
-                  </InputAdornment>
-                ),
-              }}
-            />
+            <Box sx={{ display: "flex", alignItems: "center", mb: 3 }}>
+              <PersonIcon sx={{ mr: 1.5, color: "gray" }} />
+              <TextField
+                variant="standard"
+                placeholder="Enter your full name"
+                fullWidth
+                {...register("name")}
+                error={!!errors.name}
+                helperText={errors.name?.message}
+                InputProps={{
+                  style: { fontFamily: '"Jost", sans-serif' },
+                }}
+              />
+            </Box>
 
             {/* Email */}
-            <TextField
-              fullWidth
-              placeholder="Enter your email address"
-              variant="standard"
-              sx={{ mb: 2 }}
-              {...register("email")}
-              error={!!errors.email}
-              helperText={errors.email?.message}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <EmailIcon sx={{ color: "gray" }} />
-                  </InputAdornment>
-                ),
-              }}
-            />
+            <Box sx={{ display: "flex", alignItems: "center", mb: 3 }}>
+              <EmailIcon sx={{ mr: 1.5, color: "gray" }} />
+              <TextField
+                variant="standard"
+                placeholder="Enter your email address"
+                fullWidth
+                {...register("email")}
+                error={!!errors.email}
+                helperText={errors.email?.message}
+                InputProps={{
+                  style: { fontFamily: '"Jost", sans-serif' },
+                }}
+              />
+            </Box>
 
             {/* Password */}
-            <TextField
-              fullWidth
-              type={showPassword ? "text" : "password"}
-              placeholder="Enter your password"
-              variant="standard"
-              sx={{ mb: 2 }}
-              {...register("password")}
-              error={!!errors.password}
-              helperText={errors.password?.message}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <LockIcon sx={{ color: "gray" }} />
-                  </InputAdornment>
-                ),
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton onClick={() => setShowPassword(!showPassword)}>
-                      {showPassword ? <Visibility /> : <VisibilityOff />}
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-            />
+            <Box sx={{ display: "flex", alignItems: "center", mb: 3 }}>
+              <LockIcon sx={{ mr: 1.5, color: "gray" }} />
+              <TextField
+                type={showPassword ? "text" : "password"}
+                variant="standard"
+                placeholder="Enter your password"
+                fullWidth
+                {...register("password")}
+                error={!!errors.password}
+                helperText={errors.password?.message}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        onClick={() => setShowPassword(!showPassword)}
+                        edge="end"
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                  style: { fontFamily: '"Jost", sans-serif' },
+                }}
+              />
+            </Box>
 
             {/* Confirm Password */}
-            <TextField
-              fullWidth
-              type={showConfirmPassword ? "text" : "password"}
-              placeholder="Confirm your password"
-              variant="standard"
-              sx={{ mb: 3 }}
-              {...register("password_confirmation")}
-              error={!!errors.password_confirmation}
-              helperText={errors.password_confirmation?.message}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <LockIcon sx={{ color: "gray" }} />
-                  </InputAdornment>
-                ),
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton
-                      onClick={() =>
-                        setShowConfirmPassword(!showConfirmPassword)
-                      }
-                    >
-                      {showConfirmPassword ? <Visibility /> : <VisibilityOff />}
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-            />
+            <Box sx={{ display: "flex", alignItems: "center", mb: 3 }}>
+              <LockIcon sx={{ mr: 1.5, color: "gray" }} />
+              <TextField
+                type={showConfirmPassword ? "text" : "password"}
+                variant="standard"
+                placeholder="Confirm your password"
+                fullWidth
+                {...register("password_confirmation")}
+                error={!!errors.password_confirmation}
+                helperText={errors.password_confirmation?.message}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        onClick={() =>
+                          setShowConfirmPassword(!showConfirmPassword)
+                        }
+                        edge="end"
+                      >
+                        {showConfirmPassword ? (
+                          <VisibilityOff />
+                        ) : (
+                          <Visibility />
+                        )}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                  style: { fontFamily: '"Jost", sans-serif' },
+                }}
+              />
+            </Box>
 
-            {/* Register Button */}
+            {/* Button */}
             <Button
               type="submit"
               fullWidth
@@ -269,44 +269,28 @@ const SignupModal = ({
                 bgcolor: "#ff007f",
                 borderRadius: "30px",
                 py: 1.4,
-                fontWeight: "bold",
-                fontSize: "15px",
-                mb: 2,
                 textTransform: "none",
+                fontWeight: "bold",
+                fontSize: "16px",
+                mb: 3,
                 "&:hover": { bgcolor: "#e60073" },
               }}
               disabled={loading}
             >
-              Register
+              {loading ? "Registering..." : "Register"}
             </Button>
           </form>
-
-          {/* Already have account */}
-          <Typography align="center" variant="body2" mb={3}>
-            Already have an account?{" "}
-            <span
-              onClick={handleLoginClick}
-              style={{
-                color: "#7b1fa2",
-                fontWeight: "bold",
-                cursor: "pointer",
-              }}
-            >
-              Login
-            </span>
-          </Typography>
 
           {/* Divider */}
           <Typography
             align="center"
-            variant="body2"
-            color="textSecondary"
-            mb={2}
+            color="text.secondary"
+            sx={{ mb: 1, fontFamily: '"Jost", sans-serif' }}
           >
             or continue with
           </Typography>
 
-          {/* Social Icons */}
+          {/* Social Buttons */}
           <Box
             sx={{
               display: "flex",
@@ -338,6 +322,25 @@ const SignupModal = ({
               />
             </IconButton>
           </Box>
+
+          {/* Login Link */}
+          <Typography
+            align="center"
+            variant="body2"
+            sx={{ fontFamily: '"Jost", sans-serif' }}
+          >
+            Already have an account?{" "}
+            <span
+              onClick={handleLoginClick}
+              style={{
+                color: "#7b1fa2",
+                cursor: "pointer",
+                fontWeight: "bold",
+              }}
+            >
+              Login
+            </span>
+          </Typography>
         </Box>
       </Box>
     </Modal>

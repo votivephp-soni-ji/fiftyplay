@@ -20,6 +20,8 @@ import CheckoutNew from "./pages/CheckoutNew";
 import { PurchasedTickets } from "./pages/PurchasedTickets";
 import { FavouriteEvents } from "./pages/FavouriteEvents";
 import ProtectedRoute from "./components/ProtectedRoute";
+import { NotificationPage } from "./pages/NotificationPage";
+import BlogDetail from "./pages/BlogDetail";
 
 function App() {
   return (
@@ -38,12 +40,14 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/news" element={<News />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:slug" element={<BlogDetail />} />
           <Route path="/login" element={<Login />} />
           <Route path="/event-detail" element={<EventDetail />} />
           <Route element={<ProtectedRoute />}>
             <Route path="/favourite-events" element={<FavouriteEvents />} />
             <Route path="/tickets-history" element={<PurchasedTickets />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/notifications" element={<NotificationPage />} />
             <Route path="/checkout" element={<CheckoutNew />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/checkout/payment" element={<PaymentPage />} />

@@ -1,9 +1,13 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import LoginModal from "../modals/LoginModal";
 import { useEffect, useState } from "react";
 import SignupModal from "../modals/SignupModal";
 import { useAuth } from "../context/AuthContext";
 import ForgotPasswordModal from "../modals/ForgotPasswordModal";
+import { fetchNotifications } from "../services/WebService";
+import { useTranslation } from "react-i18next"; // import hook
+import i18n from "../i18n";
+import FundraisingProducts from "../pages/FundraisingProducts";
 
 const Header = () => {
   const {
@@ -18,7 +22,23 @@ const Header = () => {
     logout,
   } = useAuth();
 
+  const { t } = useTranslation();
+
   const [notifications, setNotifications] = useState([]);
+  const navigate = useNavigate();
+
+  const fetchNoti = async () => {
+    const res = await fetchNotifications({ limit: 5 });
+    console.log("nofi", res);
+    setNotifications(res.data);
+  };
+  useEffect(() => {
+    fetchNoti();
+  }, [user]);
+
+  const handleRedirect = () => {
+    navigate("/notifications");
+  };
 
   return (
     <>
@@ -50,12 +70,12 @@ const Header = () => {
             <ul className="navbar-nav mb-2 mb-lg-0 gap-lg-3">
               <li className="nav-item">
                 <NavLink className="nav-link" to="/">
-                  Home
+                  {t("home")}
                 </NavLink>
               </li>
               <li className="nav-item">
                 <NavLink className="nav-link" to="/fundraising-products">
-                  Fundraising Products
+                  {t("fundraisingProducts")}
                 </NavLink>
               </li>
               <li className="nav-item">
@@ -65,22 +85,22 @@ const Header = () => {
               </li>
               <li className="nav-item">
                 <NavLink className="nav-link" to="/our-team">
-                  Our Team
+                  {t("ourTeam")}
                 </NavLink>
               </li>
               <li className="nav-item">
                 <NavLink className="nav-link" to="/contact">
-                  Contact
+                  {t("contact")}
                 </NavLink>
               </li>
               <li className="nav-item">
                 <NavLink className="nav-link" to="/news">
-                  News
+                  {t("news")}
                 </NavLink>
               </li>
               <li className="nav-item">
                 <NavLink className="nav-link" to="/blog">
-                  Blog
+                  {t("blog")}
                 </NavLink>
               </li>
             </ul>
@@ -89,7 +109,6 @@ const Header = () => {
             <div className="d-flex mt-3 mt-lg-0 right-side-login">
               {!user ? (
                 <>
-                  <i className="bi bi-bag"></i>
                   <button className="btn btn-primary d-flex align-items-center gap-2 px-3 login-btn-add">
                     <i
                       className="bi bi-person-plus"
@@ -112,7 +131,7 @@ const Header = () => {
                       <i className="bi bi-bell fs-5"></i>
 
                       <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                        3
+                        {notifications.length}
                       </span>
                     </a>
 
@@ -123,46 +142,34 @@ const Header = () => {
                     >
                       <li className="dropdown-header notification-text d-flex justify-content-between align-items-center">
                         Notifications
-                        <span className="badge bg-danger rounded-pill">3</span>
+                        <span className="badge bg-danger rounded-pill">
+                          {notifications.length}
+                        </span>
                       </li>
                       <li>
                         <hr className="dropdown-divider" />
                       </li>
-                      <li>
-                        <a
-                          className="dropdown-item d-flex align-items-center gap-2 py-2"
-                          href="#"
-                        >
-                          <i className="bi bi-envelope-fill text-primary"></i>
-                          <span>New message from John</span>
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          className="dropdown-item d-flex align-items-center gap-2 py-2"
-                          href="#"
-                        >
-                          <i className="bi bi-box-seam text-success"></i>
-                          <span>Your order has been shipped</span>
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          className="dropdown-item d-flex align-items-center gap-2 py-2"
-                          href="#"
-                        >
-                          <i className="bi bi-shield-lock-fill text-warning"></i>
-                          <span>Password changed successfully</span>
-                        </a>
-                      </li>
+                      {notifications &&
+                        notifications.map((notification, index) => (
+                          <li key={notification.id}>
+                            <a
+                              onClick={handleRedirect}
+                              className="dropdown-item d-flex align-items-center gap-2 py-2"
+                              href="#"
+                            >
+                              {/* <img src={notification.icon} /> */}
+                              <span>{notification.title}</span>
+                            </a>
+                          </li>
+                        ))}
 
                       <li>
-                        <a
+                        <NavLink
+                          to="/notifications"
                           className="dropdown-item text-center fw-semibold text-primary"
-                          href="#"
                         >
                           View all
-                        </a>
+                        </NavLink>
                       </li>
                     </ul>
                   </div>

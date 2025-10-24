@@ -22,6 +22,9 @@ messaging.onBackgroundMessage((payload) => {
     const notificationOptions = {
         body: payload.notification?.body || "",
         icon: "/images/notity_favicon.png",
+        data: {
+            url: "https://fiftyplay.votivereact.in",
+        }
     };
 
     self.registration.showNotification(notificationTitle, notificationOptions);
