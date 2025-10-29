@@ -1,29 +1,23 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { IconButton } from "@mui/material";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import { addFavoriteEvent } from "../services/EventService";
+"use client";
+import { useState } from "react";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useAuth } from "../context/AuthContext";
-import { toast } from "react-toastify";
+import { addFavoriteEvent } from "../services/EventService";
 
-const EventCard = ({ event }) => {
-  const navigate = useNavigate();
+export default function EventCard({ event }) {
+  const router = useRouter();
+  const { user } = useAuth();
   const [isFavorite, setIsFavorite] = useState(event.is_favourite || false);
   const [loadingFav, setLoadingFav] = useState(false);
 
-  const { user } = useAuth();
-
   const handleFavorite = async () => {
-    if (!user) {
-      return false;
-    }
+    if (!user) return;
+
     setLoadingFav(true);
     try {
-      await addFavoriteEvent(event.id); // call API
+      await addFavoriteEvent(event.id);
       setIsFavorite(!isFavorite);
-    } catch (err) {
-      console.error("Error adding favorite:", err);
     } finally {
       setLoadingFav(false);
     }
@@ -34,13 +28,7 @@ const EventCard = ({ event }) => {
       <div className="card position-relative">
         <div className="exclusive-tab">
           <button>Exclusive</button>
-          <span
-            onClick={() => !loadingFav && handleFavorite(event.id)}
-            style={{
-              cursor: loadingFav ? "not-allowed" : "pointer",
-              opacity: loadingFav ? 0.5 : 1,
-            }}
-          >
+          <span onClick={!loadingFav ? handleFavorite : undefined}>
             {isFavorite ? (
               <i className="bi bi-heart-fill"></i>
             ) : (
@@ -49,14 +37,16 @@ const EventCard = ({ event }) => {
           </span>
         </div>
 
-        <img
-          src={event.banners?.[0] || "./images/latest-img.png"}
+        <Image
+          src={event.banners?.[0] || "/images/latest-img.png"}
+          width={400}
+          height={260}
           className="card-img-top"
           alt={event.title}
         />
 
         <span className="card-price">
-          <span className="contest-add">Contest</span>{" "}
+          <span className="contest-add">Contest</span>
           <small>{event.contest_no}</small>
         </span>
 
@@ -77,9 +67,7 @@ const EventCard = ({ event }) => {
 
           <button
             className="btn btn-custom"
-            onClick={() =>
-              navigate("/event-detail", { state: { event: event.id } })
-            }
+            onClick={() => router.push(`/event-detail/${event.id}`)}
           >
             View Details <i className="bi bi-arrow-right"></i>
           </button>
@@ -87,6 +75,4 @@ const EventCard = ({ event }) => {
       </div>
     </div>
   );
-};
-
-export default EventCard;
+}
