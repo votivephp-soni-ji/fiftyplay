@@ -22,7 +22,12 @@ const resources = {
             ourTeam: "Our Team",
             contact: "Contact",
             news: "News",
-            blog: "Blog"
+            blog: "Blog",
+
+            banner: {
+                title: "Your Game. Your Half. Your Win.",
+                tagLine: "COULD YOU BE OUR NEXT WINNER?"
+            }
 
 
 
@@ -47,7 +52,12 @@ const resources = {
             ourTeam: "Nuestro Equipo",
             contact: "Contacto",
             news: "Noticias",
-            blog: "Blog"
+            blog: "Blog",
+
+            banner: {
+                title: "Tu juego. Tu mitad. Tu victoria.",
+                tagLine: "¿Podrías ser nuestro próximo ganador?",
+            }
 
         },
     },

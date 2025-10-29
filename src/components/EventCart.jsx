@@ -69,7 +69,7 @@ const EventCard = ({ event }) => {
           </div>
 
           <div className="remaining-tab">
-            <p>{event.remain_tickets || 0} Remaining</p>
+            <p>Start date</p>
             <p className="inner-price-add">
               <i className="bi bi-stopwatch"></i> {event.start_date}
             </p>
