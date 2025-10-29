@@ -2,7 +2,7 @@ import { Link, NavLink } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="fifty-play-footer">
+    <footer className="fifty-play-footer about_mob">
       <div className="container">
         <div className="row gy-4">
           <div className="col-lg-3 col-md-6">
