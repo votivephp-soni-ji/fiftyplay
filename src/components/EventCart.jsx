@@ -1,23 +1,29 @@
-"use client";
-import { useState } from "react";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { useAuth } from "../context/AuthContext";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { IconButton } from "@mui/material";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import { addFavoriteEvent } from "../services/EventService";
+import { useAuth } from "../context/AuthContext";
+import { toast } from "react-toastify";
 
-export default function EventCard({ event }) {
-  const router = useRouter();
-  const { user } = useAuth();
+const EventCard = ({ event }) => {
+  const navigate = useNavigate();
   const [isFavorite, setIsFavorite] = useState(event.is_favourite || false);
   const [loadingFav, setLoadingFav] = useState(false);
 
-  const handleFavorite = async () => {
-    if (!user) return;
+  const { user } = useAuth();
 
+  const handleFavorite = async () => {
+    if (!user) {
+      return false;
+    }
     setLoadingFav(true);
     try {
-      await addFavoriteEvent(event.id);
+      await addFavoriteEvent(event.id); // call API
       setIsFavorite(!isFavorite);
+    } catch (err) {
+      console.error("Error adding favorite:", err);
     } finally {
       setLoadingFav(false);
     }
@@ -28,7 +34,13 @@ export default function EventCard({ event }) {
       <div className="card position-relative">
         <div className="exclusive-tab">
           <button>Exclusive</button>
-          <span onClick={!loadingFav ? handleFavorite : undefined}>
+          <span
+            onClick={() => !loadingFav && handleFavorite(event.id)}
+            style={{
+              cursor: loadingFav ? "not-allowed" : "pointer",
+              opacity: loadingFav ? 0.5 : 1,
+            }}
+          >
             {isFavorite ? (
               <i className="bi bi-heart-fill"></i>
             ) : (
@@ -37,16 +49,14 @@ export default function EventCard({ event }) {
           </span>
         </div>
 
-        <Image
-          src={event.banners?.[0] || "/images/latest-img.png"}
-          width={400}
-          height={260}
+        <img
+          src={event.banners?.[0] || "./images/latest-img.png"}
           className="card-img-top"
           alt={event.title}
         />
 
         <span className="card-price">
-          <span className="contest-add">Contest</span>
+          <span className="contest-add">Contest</span>{" "}
           <small>{event.contest_no}</small>
         </span>
 
@@ -67,7 +77,9 @@ export default function EventCard({ event }) {
 
           <button
             className="btn btn-custom"
-            onClick={() => router.push(`/event-detail/${event.id}`)}
+            onClick={() =>
+              navigate("/event-detail", { state: { event: event.id } })
+            }
           >
             View Details <i className="bi bi-arrow-right"></i>
           </button>
@@ -75,4 +87,6 @@ export default function EventCard({ event }) {
       </div>
     </div>
   );
-}
+};
+
+export default EventCard;
