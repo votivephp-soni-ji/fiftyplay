@@ -84,19 +84,19 @@ const Footer = () => {
           <div className="col-lg-3 get-in-touch">
             <h5>Get In Touch</h5>
             <div className="inner-get-in">
-              <img src="./images/footer-phone.png" />
+            <i class="bi bi-telephone-inbound"></i>
               <p>
                 Hotline: <span>(+62) 345-67890</span>
               </p>
             </div>
             <div className="inner-get-in">
-              <img src="./images/footer-phone.png" />
+            <i class="bi bi-envelope-arrow-down"></i>
               <p>
                 Email: <span>fiftyplay@gmail.com</span>
               </p>
             </div>
             <div className="inner-get-in">
-              <img src="./images/footer-phone.png" />
+            <i class="bi bi-geo-alt"></i>
               <p>
                 Address: <span>123, Address will goes here, 524005</span>
               </p>
