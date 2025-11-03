@@ -200,7 +200,6 @@ export default function Profile() {
                             onChange={handleChange}
                           >
                             <option value="en">English</option>
-                            <option value="es">Español</option>
                           </select>
                         </div>
                       </div>

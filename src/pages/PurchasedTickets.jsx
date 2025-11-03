@@ -4,6 +4,8 @@ import "../assets/css/event-products.css";
 import { AuthTab } from "../components/AuthTab";
 import { TicketHistory } from "../services/EventService";
 import { Box, CircularProgress } from "@mui/material";
+import ClaimModal from "../modals/ClaimModal"; // 👈 import modal
+import "../assets/css/winner_animation.css";
 
 export const PurchasedTickets = () => {
   const [tickets, setTickets] = useState([]);
@@ -11,21 +13,38 @@ export const PurchasedTickets = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [page, setPage] = useState(1);
 
+  const [openClaimModal, setOpenClaimModal] = useState(false);
+  const [selectedTicket, setSelectedTicket] = useState(null);
+
   useEffect(() => {
     const myTickets = async (pageNo = 1) => {
       setLoading(true);
       try {
-        const res = await TicketHistory({page:pageNo});
-        console.log("My Tickets", res.data);
+        const res = await TicketHistory({ page: pageNo });
         setTickets(res.data);
         setTotalPages(res.meta.last_page);
       } catch (error) {
+        console.error(error);
       } finally {
         setLoading(false);
       }
     };
     myTickets(page);
   }, [page]);
+
+  const handleOpenClaim = (ticket) => {
+    setSelectedTicket({
+      name: ticket.user_name || "",
+      event_id: ticket.event_id,
+      ticket_number: ticket.ticket_number,
+    });
+    setOpenClaimModal(true);
+  };
+
+  const handleCloseClaim = () => {
+    setOpenClaimModal(false);
+    setSelectedTicket(null);
+  };
 
   return (
     <div className="profile-section-add">
@@ -48,79 +67,54 @@ export const PurchasedTickets = () => {
                         py: 10,
                       }}
                     >
-                      <CircularProgress sx={{ color: "#ee127b" }} />
+                      <CircularProgress sx={{ color: "#00c853" }} />
                     </Box>
                   ) : (
                     <table className="table align-middle">
                       <thead className="table-light">
                         <tr>
-                          <th>Ads</th>
+                          <th>Event</th>
+                          <th>Ticket</th>
                           <th>Date</th>
-                          <th>Prices</th>
-                          <th>Status</th>
+                          <th>Price</th>
                           <th className="text-end">Action</th>
                         </tr>
                       </thead>
 
                       <tbody className="ads-table-tickets">
-                        {tickets.map((ticket) => (
-                          <tr>
+                        {tickets.map((ticket, index) => (
+                          <tr key={index}>
                             <td>
                               <div className="d-flex align-items-center">
-                                <img
-                                  src={ticket?.event_banner}
-                                  className="ticket-img me-3"
-                                  alt=""
-                                />
-                                <span>#{ticket.ticket_number}</span>
+                                {ticket?.event}
                               </div>
                             </td>
+
+                            <td>
+                              #{ticket.ticket_number}
+                              {ticket.is_winner && (
+                                <img
+                                  src="/images/prize.png"
+                                  alt="Winner"
+                                  className="winner-icon ms-2 bounce"
+                                  style={{ width: "30px", height: "30px" }}
+                                />
+                              )}
+                            </td>
+
                             <td>{ticket.purchase_at}</td>
                             <td className="fw-bold">${ticket.price}</td>
-                            <td>
-                              <span
-                                className={
-                                  ticket.status == "paid"
-                                    ? "status-active"
-                                    : ticket.status == "expired"
-                                    ? "status-expire"
-                                    : "status-cancel"
-                                }
-                              >
-                                <i className="bi bi-check2-circle me-1"></i>{" "}
-                                {ticket.status}
-                              </span>
-                            </td>
+
                             <td className="text-end">
-                              <div className="dropdown">
+                              {ticket.is_winner && (
                                 <button
-                                  className="btn btn-light btn-sm"
-                                  type="button"
-                                  data-bs-toggle="dropdown"
+                                  className="dropdown-item"
+                                  onClick={() => handleOpenClaim(ticket)}
                                 >
-                                  <i className="bi bi-three-dots"></i>
+                                  <i className="bi bi-gift me-2 text-success"></i>
+                                  Claim Now
                                 </button>
-                                <ul className="dropdown-menu dropdown-menu-end">
-                                  {/* <li>
-                                  <a className="dropdown-item" href="#">
-                                    <i className="bi bi-eye me-2"></i> View
-                                    Details
-                                  </a>
-                                </li> */}
-                                  <li>
-                                    <a className="dropdown-item" href="#">
-                                      <i className="bi bi-trash me-2"></i>{" "}
-                                      Delete Tickets
-                                    </a>
-                                  </li>
-                                  <li>
-                                    <a className="dropdown-item" href="#">
-                                      <i className="bi bi-gift me-2"></i> Claim
-                                      Now
-                                    </a>
-                                  </li>
-                                </ul>
-                              </div>
+                              )}
                             </td>
                           </tr>
                         ))}
@@ -131,10 +125,10 @@ export const PurchasedTickets = () => {
               </div>
             </div>
 
+            {/* Pagination */}
             {totalPages > 1 && (
               <nav aria-label="Page navigation example">
                 <ul className="pagination justify-content-center">
-                  {/* Back Button */}
                   <li className={`page-item ${page === 1 ? "disabled" : ""}`}>
                     <a
                       className="page-link"
@@ -148,7 +142,6 @@ export const PurchasedTickets = () => {
                     </a>
                   </li>
 
-                  {/* Page Numbers */}
                   {Array.from({ length: totalPages }, (_, i) => i + 1).map(
                     (p) => (
                       <li
@@ -169,7 +162,6 @@ export const PurchasedTickets = () => {
                     )
                   )}
 
-                  {/* Next Button */}
                   <li
                     className={`page-item ${
                       page === totalPages ? "disabled" : ""
@@ -192,6 +184,13 @@ export const PurchasedTickets = () => {
           </div>
         </div>
       </div>
+
+      {/* Claim Modal */}
+      <ClaimModal
+        open={openClaimModal}
+        handleClose={handleCloseClaim}
+        ticketData={selectedTicket}
+      />
     </div>
   );
 };

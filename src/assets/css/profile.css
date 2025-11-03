@@ -5,10 +5,12 @@ nav.navbar.navbar-expand-lg .dropdown a#dropdownMenuLink img {
     border-radius: 100px;
     object-position: center;
 }
+
 nav.navbar.navbar-expand-lg {
     background: #fff;
     padding: 0px;
 }
+
 nav.navbar.navbar-expand-lg .dropdown a#dropdownMenuLink span {
     color: #1a1a1a;
     font-weight: 500;
@@ -17,9 +19,11 @@ nav.navbar.navbar-expand-lg .dropdown a#dropdownMenuLink span {
 nav.navbar.navbar-expand-lg .dropdown-toggle::after {
     color: #000;
 }
+
 nav.nav.flex-column {
     padding-bottom: 25px;
 }
+
 .sidebar.left-sidebar {
     background: #fff;
     padding: 0px;
@@ -28,6 +32,7 @@ nav.nav.flex-column {
     height: 100%;
     margin-bottom: 20px;
 }
+
 .sidebar.left-sidebar .profile-info {
     text-align: center;
     display: flex;
@@ -35,12 +40,14 @@ nav.nav.flex-column {
     gap: 15px;
     padding: 20px 20px;
 }
+
 .sidebar.left-sidebar .profile-info img {
     width: 50px;
     height: 50px;
     border-radius: 50%;
     object-fit: cover;
 }
+
 .sidebar.left-sidebar .profile-info h6 {
     margin: 10px 0 2px;
     display: flex;
@@ -51,6 +58,7 @@ nav.nav.flex-column {
     color: #191f33;
     font-weight: 400;
 }
+
 .sidebar.left-sidebar .profile-info i.bi.bi-check-lg {
     background: #27c200;
     color: #fff;
@@ -62,9 +70,11 @@ nav.nav.flex-column {
     height: 20px;
     margin-top: -10px;
 }
+
 .sidebar.left-sidebar .profile-info small {
     color: gray;
 }
+
 .sidebar.left-sidebar .nav-link {
     font-size: 18px;
     color: #767E94;
@@ -74,6 +84,7 @@ nav.nav.flex-column {
     border-radius: 0px;
     border-left: solid #fff;
 }
+
 .sidebar.left-sidebar .nav-link.active,
 .sidebar .nav-link:hover {
     background: #f9037a33;
@@ -83,12 +94,16 @@ nav.nav.flex-column {
     font-size: 18px;
     font-family: "Jost";
 }
-.sidebar.left-sidebar .nav-link.active, .sidebar .nav-link:hover i {
+
+.sidebar.left-sidebar .nav-link.active,
+.sidebar .nav-link:hover i {
     color: #000;
 }
+
 a.nav-link.active i {
     color: #000;
 }
+
 a.nav-link i {
     font-size: 20px;
     padding-right: 10px;
@@ -109,10 +124,12 @@ li.dropdown-header.d-flex.justify-content-between.align-items-center {
     font-weight: 500;
     padding-bottom: 0px;
 }
+
 a.dropdown-item.d-flex.align-items-center.gap-2.py-2:hover {
     background: #fecde4;
     color: #000;
 }
+
 a.dropdown-item.text-center.fw-semibold.text-primary {
     background: #743289;
     color: #fff !important;
@@ -120,7 +137,7 @@ a.dropdown-item.text-center.fw-semibold.text-primary {
     margin-top: 10px;
 }
 
- a.dropdown-item:hover {
+a.dropdown-item:hover {
     background: #fecde4;
     color: #000;
 }
@@ -137,6 +154,7 @@ nav.navbar.navbar-expand-lg span.position-absolute.top-0.start-100.translate-mid
     display: flex;
     justify-content: center;
 }
+
 nav.navbar.navbar-expand-lg span.badge.bg-danger.rounded-pill {
     width: 20px;
     height: 20px;
@@ -144,15 +162,18 @@ nav.navbar.navbar-expand-lg span.badge.bg-danger.rounded-pill {
     justify-content: center;
     align-items: center;
 }
+
 .profile-card {
     background: #fff;
     border-radius: 8px;
     border: 1px solid #d7d7d7;
     padding: 0px;
 }
+
 .profile-card .card-body {
     padding: 20px 20px;
 }
+
 .profile-card .card-header {
     background: #f9037a33;
     border-bottom: none;
@@ -162,6 +183,7 @@ nav.navbar.navbar-expand-lg span.badge.bg-danger.rounded-pill {
     color: #181a20;
     font-weight: 500;
 }
+
 .profile-card .upload-btn {
     border: solid 1px #f9037a;
     background: #fff;
@@ -172,11 +194,13 @@ nav.navbar.navbar-expand-lg span.badge.bg-danger.rounded-pill {
     cursor: pointer;
     font-weight: 500;
 }
+
 .form-check-label {
     font-size: 14px;
     color: gray;
 }
- .profile-card .save-btn {
+
+.profile-card .save-btn {
     background: #743289;
     color: #fff;
     border: none;
@@ -188,19 +212,23 @@ nav.navbar.navbar-expand-lg span.badge.bg-danger.rounded-pill {
 .profile-section-add {
     margin-top: 55px;
 }
+
 .right-side-content h4 {
     font-size: 32px;
     width: 30%;
     font-weight: 400;
 }
+
 .right-side-content {
     padding-left: 35px;
     margin-bottom: 20px;
 }
+
 .profile-section-add label.form-label {
     margin-bottom: 0px;
     font-weight: 500;
 }
+
 .profile-section-add input.form-control {
     border: solid 1px #d1d5db;
     border-radius: 16px;
@@ -221,11 +249,13 @@ nav.navbar.navbar-expand-lg span.badge.bg-danger.rounded-pill {
     font-size: 14px;
     color: #000000;
 }
+
 .profile-card img {
     width: 50px;
     height: 50px;
     object-fit: cover;
 }
+
 .profile-card i.bi.bi-upload {
     padding-right: 8px;
 }
@@ -233,7 +263,3 @@ nav.navbar.navbar-expand-lg span.badge.bg-danger.rounded-pill {
 form.profile-form-add {
     width: 82%;
 }
-
-
-
-
