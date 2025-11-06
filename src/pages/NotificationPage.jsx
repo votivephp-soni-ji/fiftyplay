@@ -61,7 +61,6 @@ export const NotificationPage = () => {
                             <th>Title</th>
                             <th>Message</th>
                             {/* <th>Notify At</th> */}
-                            <th className="text-end">Action</th>
                           </tr>
                         </thead>
 
@@ -85,35 +84,6 @@ export const NotificationPage = () => {
                                 {notification.body}
                               </td>
                               {/* <td>{notification.created_at ?? "—"}</td> */}
-
-                              <td className="text-end">
-                                <div className="dropdown">
-                                  <button
-                                    className="btn btn-light btn-sm"
-                                    type="button"
-                                    data-bs-toggle="dropdown"
-                                  >
-                                    <i className="bi bi-three-dots"></i>
-                                  </button>
-                                  <ul className="dropdown-menu dropdown-menu-end shadow-sm">
-                                    <li>
-                                      <a
-                                        className="dropdown-item text-danger"
-                                        href="#"
-                                      >
-                                        <i className="bi bi-trash me-2"></i>{" "}
-                                        Delete
-                                      </a>
-                                    </li>
-                                    <li>
-                                      <a className="dropdown-item" href="#">
-                                        <i className="bi bi-gift me-2"></i>{" "}
-                                        Claim Now
-                                      </a>
-                                    </li>
-                                  </ul>
-                                </div>
-                              </td>
                             </tr>
                           ))}
                         </tbody>

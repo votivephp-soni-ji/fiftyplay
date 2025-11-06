@@ -127,7 +127,8 @@ export default function Profile() {
             ) : (
               <>
                 <h4>
-                  {t("welcome", { name: formData.fullName.split(" ")[0] })}
+                  Hi<span className="welcome_text"> {formData.fullName}</span>,<br />
+                  Welcome Back
                 </h4>
 
                 <div className="profile-card mt-4">
@@ -200,7 +201,6 @@ export default function Profile() {
                             onChange={handleChange}
                           >
                             <option value="en">English</option>
-                            <option value="es">Español</option>
                           </select>
                         </div>
                       </div>

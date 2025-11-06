@@ -51,7 +51,7 @@ const LoginModal = ({
     setErrors({});
     setServerError("");
 
-    let reqBody = { email, password };
+    let reqBody = { email, password, user_type: 5 };
     let deviceToken = "";
 
     try {

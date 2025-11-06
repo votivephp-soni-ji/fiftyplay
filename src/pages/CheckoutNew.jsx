@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { reserveTicket } from "../services/EventService";
+import { bookingTickets, reserveTicket } from "../services/EventService";
 import { toast } from "react-toastify";
 
 import "../assets/css/checkout.css";
@@ -39,26 +39,22 @@ export default function CheckoutNew() {
     try {
       let payload = {
         event_id: event.id,
-        multiple_price: event.multiple_price,
         package_id: packageId,
-        quantity: quantity,
-        total_price: selectedPackage
-          ? selectedPackage.price
-          : (event.ticket_price || 0) * quantity,
+        payment_method: "card",
       };
-      const res = await reserveTicket(payload);
-      console.log("reserve ticket", res);
-      navigate("/checkout/payment", {
-        state: { event, packageId, quantity },
-      });
+      const res = await bookingTickets(payload);
+      console.log("Booked response", res);
+
+      if (res.status) {
+        window.location.href = res.payment_url;
+      }
     } catch (err) {
       console.log("error", err);
       if (err.response?.status === 422) {
         toast.error(err.response.data.error);
       } else {
-        toast.danger("Something went wrong. Try again.");
+        toast.error("Something went wrong. Try again.");
       }
-    } finally {
       setLoading(false);
     }
   };
@@ -192,7 +188,11 @@ export default function CheckoutNew() {
                 </div>
               </div>
 
-              <button className="btn w-100 buy-btn" onClick={handleCheckout}>
+              <button
+                className="btn w-100 buy-btn"
+                onClick={handleCheckout}
+                disabled={loading}
+              >
                 {loading ? (
                   <>
                     <span

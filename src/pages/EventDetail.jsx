@@ -225,8 +225,10 @@ export default function EventDetail() {
                         })
                       : setOpenLogin(true)
                   }
+                  disabled={event.is_finalize ? true : false}
                 >
-                  BUY TICKETS <i className="bi bi-arrow-right ms-1"></i>
+                  {event.is_finalize ? "FINALIZED" : "BUY TICKETS"}{" "}
+                  <i className="bi bi-arrow-right ms-1"></i>
                 </button>
               </div>
             </div>

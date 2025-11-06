@@ -86,13 +86,13 @@ const Footer = () => {
             <div className="inner-get-in">
             <i class="bi bi-telephone-inbound"></i>
               <p>
-                Hotline: <span>(+62) 345-67890</span>
+                Hotline: <span>+17873034595</span>
               </p>
             </div>
             <div className="inner-get-in">
             <i class="bi bi-envelope-arrow-down"></i>
               <p>
-                Email: <span>fiftyplay@gmail.com</span>
+                Email: <span>thefiftyplay@gmail.com</span>
               </p>
             </div>
             <div className="inner-get-in">
