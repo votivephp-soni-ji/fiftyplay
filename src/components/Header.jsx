@@ -46,7 +46,7 @@ const Header = () => {
         <div className="container">
           {/* Logo */}
           <NavLink className="navbar-brand fw-bold" to="/">
-            <img src="/images/logo.png" alt="Logo" width="120" />
+            <img src="/images/logo.png" alt="Logo" width="80" />
           </NavLink>
 
           {/* Mobile Toggler */}
