@@ -127,7 +127,7 @@ export default function Profile() {
             ) : (
               <>
                 <h4>
-                  Hi<span className="welcome_text"> {formData.fullName}</span>,
+                  Hi<span className="welcome_text"> {formData.fullName}</span>,<br />
                   Welcome Back
                 </h4>
 
