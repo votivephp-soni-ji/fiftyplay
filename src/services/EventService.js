@@ -41,5 +41,9 @@ export const fetchFavourites = (params) => {
 }
 
 export const TicketHistory = (params) => {
-    return callApi('GET', `/event/ticket-history`,{},params);
+    return callApi('GET', `/event/ticket-history`, {}, params);
+}
+
+export const claimPrize = (payload) => {
+    return callApi('POST', '/claim-prize', payload);
 }

@@ -33,6 +33,7 @@ export const PurchasedTickets = () => {
   }, [page]);
 
   const handleOpenClaim = (ticket) => {
+    console.log("winner Ticker", ticket);
     setSelectedTicket({
       name: ticket.user_name || "",
       event_id: ticket.event_id,

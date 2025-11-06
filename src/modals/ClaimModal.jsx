@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Modal,
   Box,
@@ -11,38 +11,76 @@ import {
 import CloseIcon from "@mui/icons-material/Close";
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import { toast } from "react-toastify";
+import { claimPrize } from "../services/EventService";
 
 const ClaimModal = ({ open, handleClose, ticketData }) => {
-  const [name, setName] = useState(ticketData?.name || "");
-  const [eventId, setEventId] = useState(ticketData?.event_id || "");
-  const [ticketNumber, setTicketNumber] = useState(
-    ticketData?.ticket_number || ""
-  );
+  const [name, setName] = useState("");
+  const [eventId, setEventId] = useState("");
+  const [ticketNumber, setTicketNumber] = useState("");
+
+  const [nameError, setNameError] = useState("");
+  const [ticketError, setTicketError] = useState("");
+
   const [loading, setLoading] = useState(false);
   const [serverError, setServerError] = useState("");
 
+  useEffect(() => {
+    if (ticketData) {
+      setName(ticketData.name || "");
+      setEventId(ticketData.event_id || "");
+      setTicketNumber(ticketData.ticket_number || "");
+
+      setNameError("");
+      setTicketError("");
+      setServerError("");
+    }
+  }, [ticketData, open]);
+
+  const validate = () => {
+    let isValid = true;
+
+    if (!name.trim()) {
+      setNameError("Name is required");
+      isValid = false;
+    } else {
+      setNameError("");
+    }
+
+    if (!ticketNumber.trim()) {
+      setTicketError("Ticket number is required");
+      isValid = false;
+    } else {
+      setTicketError("");
+    }
+
+    return isValid;
+  };
+
   const handleSubmit = async () => {
+    if (!validate()) return;
+
     setLoading(true);
     setServerError("");
 
     try {
-      // Example payload
       const payload = {
         name,
         event_id: eventId,
         ticket_number: ticketNumber,
       };
 
-      console.log("Claim Data:", payload);
-
-      // 👉 Call your API here (example)
-      // const res = await claimWinner(payload);
-      // toast.success(res.message || "Claim submitted successfully!");
-
-      toast.success("🎉 Claim submitted successfully!");
+      const res = await claimPrize(payload);
+      toast.success("Claim submitted successfully!");
       handleClose();
     } catch (err) {
-      setServerError("Something went wrong. Try again.");
+      console.error("Server Error:", err);
+
+      const message =
+        err?.response?.data?.message ||
+        err?.response?.data?.error ||
+        "Unable to submit claim. Please try again.";
+      toast.error(message);
+      setServerError(message);
     } finally {
       setLoading(false);
     }
@@ -68,6 +106,7 @@ const ClaimModal = ({ open, handleClose, ticketData }) => {
             p: { xs: 3, sm: 4 },
             position: "relative",
             boxShadow: 24,
+            border: `1px solid #f9037a33`,
           }}
         >
           {/* Close Button */}
@@ -81,12 +120,10 @@ const ClaimModal = ({ open, handleClose, ticketData }) => {
           {/* Crown Image */}
           <Box sx={{ textAlign: "center", mb: 2 }}>
             <img
-              src="/winner.png" // 👑 your uploaded winner image path
+              src="./images/prize.png"
               alt="Winner Crown"
-              width="100"
-              style={{
-                animation: "bounce 1.5s infinite ease-in-out",
-              }}
+              width="80"
+              style={{ animation: "bounce 1.5s infinite ease-in-out" }}
             />
           </Box>
 
@@ -96,14 +133,14 @@ const ClaimModal = ({ open, handleClose, ticketData }) => {
             fontWeight="bold"
             textAlign="center"
             mb={3}
-            sx={{ color: "#00c853" }}
+            sx={{ color: "#f9037a" }}
           >
             Claim Your Prize
           </Typography>
 
           {/* Server Error */}
           {serverError && (
-            <Alert severity="error" sx={{ mb: 2 }}>
+            <Alert severity="error" sx={{ mb: 2, bgcolor: "#f9037a33" }}>
               {serverError}
             </Alert>
           )}
@@ -115,10 +152,10 @@ const ClaimModal = ({ open, handleClose, ticketData }) => {
             variant="standard"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            error={!!nameError}
+            helperText={nameError}
             sx={{ mb: 3 }}
           />
-
-
 
           {/* Ticket Number */}
           <TextField
@@ -127,6 +164,8 @@ const ClaimModal = ({ open, handleClose, ticketData }) => {
             variant="standard"
             value={ticketNumber}
             onChange={(e) => setTicketNumber(e.target.value)}
+            error={!!ticketError}
+            helperText={ticketError}
             sx={{ mb: 4 }}
           />
 
@@ -136,13 +175,16 @@ const ClaimModal = ({ open, handleClose, ticketData }) => {
             variant="contained"
             startIcon={<EmojiEventsIcon />}
             sx={{
-              bgcolor: "#00c853",
+              bgcolor: "#f9037a",
               borderRadius: "30px",
               py: 1.4,
               textTransform: "none",
               fontWeight: "bold",
               fontSize: "16px",
-              "&:hover": { bgcolor: "#00b248" },
+              "&:hover": {
+                bgcolor: "#f9037a",
+                boxShadow: `0 0 10px #f9037a33`,
+              },
             }}
             onClick={handleSubmit}
             disabled={loading}
