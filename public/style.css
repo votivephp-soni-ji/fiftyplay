@@ -1041,6 +1041,8 @@ tbody.ads-table-tickets td.text-wrap {
 
 
 @media (min-width:768px) and (max-width:1024px) {
+   
+
     .right-side-login {
         padding-bottom: 20px;
     }
@@ -1184,7 +1186,19 @@ tbody.ads-table-tickets td.text-wrap {
 
 
 @media only screen and (max-width: 767px) {
-
+    .sidebar.left-sidebar {
+        width: 90%;
+        margin: auto;
+    }
+    .right-side-content h4 {
+        font-size: 32px;
+        width: 100% !important; 
+    }
+    .right-side-content {
+        padding-left: 20px !important;
+        margin-bottom: 20px;
+        padding-right: 20px;
+    }
     #signupModal .btn-register {
         padding: 9px;
     }
