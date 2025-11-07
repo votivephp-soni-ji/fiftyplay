@@ -150,9 +150,9 @@ export default function EventDetail() {
                 <h6>
                   <i className="bi bi-trophy"></i> Enter now for a chance to win
                 </h6>
-                <p>
+                {/* <p>
                   <strong>${event.ticket_price}</strong> Per Ticket
-                </p>
+                </p> */}
               </div>
               <h3 className="fw-bold">{event.title}</h3>
               <p className="contest-number">
