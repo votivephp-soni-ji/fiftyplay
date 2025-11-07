@@ -84,21 +84,21 @@ const Footer = () => {
           <div className="col-lg-3 get-in-touch">
             <h5>Get In Touch</h5>
             <div className="inner-get-in">
-            <i class="bi bi-telephone-inbound"></i>
+              <i class="bi bi-telephone-inbound"></i>
               <p>
-                Hotline: <span>+17873034595</span>
+                Hotline: <span>+1 7878085000</span>
               </p>
             </div>
             <div className="inner-get-in">
-            <i class="bi bi-envelope-arrow-down"></i>
+              <i class="bi bi-envelope-arrow-down"></i>
               <p>
                 Email: <span>thefiftyplay@gmail.com</span>
               </p>
             </div>
             <div className="inner-get-in">
-            <i class="bi bi-geo-alt"></i>
+              <i class="bi bi-geo-alt"></i>
               <p>
-                Address: <span>123, Address will goes here, 524005</span>
+                Address: <span>52 Mendez Vigo W Mayaguez PR 00680</span>
               </p>
             </div>
           </div>
