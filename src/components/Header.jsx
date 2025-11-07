@@ -205,11 +205,11 @@ const Header = () => {
                           My Profile
                         </NavLink>
                       </li>
-                      <li>
+                      {/* <li>
                         <a className="dropdown-item" href="#">
                           Settings
                         </a>
-                      </li>
+                      </li> */}
                       <li>
                         <hr className="dropdown-divider" />
                       </li>
