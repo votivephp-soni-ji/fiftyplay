@@ -44,7 +44,12 @@ const schema = yup.object({
     .required("Confirm your password"),
 });
 
-const SignupModal = ({ open, handleClose, handleLoginClick, onLoginSuccess }) => {
+const SignupModal = ({
+  open,
+  handleClose,
+  handleLoginClick,
+  onLoginSuccess,
+}) => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [loading, setLoading] = useState(false);

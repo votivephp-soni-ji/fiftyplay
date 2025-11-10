@@ -254,9 +254,10 @@ const Header = () => {
       <SignupModal
         open={openSignup}
         handleClose={() => setOpenSignup(false)}
-        handleSignupClick={() => {
-          setOpenLogin(false); // close login
-          setOpenSignup(true); // open signup
+        handleLoginClick={() => {
+          setOpenSignup(false);
+          setOpenLogin(true); // close login
+          // open signup
         }}
         onLoginSuccess={handleLoginSuccess}
       />
