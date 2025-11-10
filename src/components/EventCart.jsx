@@ -63,10 +63,10 @@ const EventCard = ({ event }) => {
         <div className="card-body">
           <h5 className="card-title">{event.title}</h5>
 
-          <div className="ticket-price-tab">
+          {/* <div className="ticket-price-tab">
             <p>Ticket Price:</p>
             <p className="inner-price-add">${event.ticket_price}</p>
-          </div>
+          </div> */}
 
           <div className="remaining-tab">
             <p>Start date</p>
