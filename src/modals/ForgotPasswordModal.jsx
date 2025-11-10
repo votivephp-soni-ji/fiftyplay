@@ -13,6 +13,7 @@ import EmailIcon from "@mui/icons-material/Email";
 import { toast } from "react-toastify";
 import { forgotPassword } from "../services/ForgotService";
 import OtpVerification from "./OtpVerification";
+import "../assets/css/event-products.css";  
 
 const ForgotPasswordModal = ({ open, handleClose, handleBackToLogin }) => {
   const [email, setEmail] = useState("");

@@ -185,10 +185,47 @@ button.navbar-toggler {
     padding: 8px 8px;
     box-shadow: none !important;
 }
+p.MuiTypography-root.MuiTypography-body2.css-1nsv8f5-MuiTypography-root {
+    text-align: left;
+    color: #000;
+}
+
+.MuiBox-root.css-v2o9lh input{
+    border: solid 1px #4939C0;
+    border-radius: 12px;
+    width: 28px !important;
+    height: 20px !important;
+}
+p.MuiTypography-root.MuiTypography-body2.css-vbp1wi-MuiTypography-root {
+    color: #F9037A;
+    text-decoration: underline;
+    padding-top: 5px;
+    margin-bottom: 18px;
+}
+.MuiBox-root.css-v2o9lh .MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-colorPrimary.MuiInputBase-formControl.css-quhxjy-MuiInputBase-root-MuiOutlinedInput-root {
+    border-radius: 12px;
+}
+.MuiBox-root.css-v2o9lh {
+    gap: 26px;
+}
+.MuiBox-root.css-v2o9lh {
+    gap: 26px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+
 
 
 @media screen and (min-width: 768px) and (max-width: 1024px) {
 
+    .MuiBox-root.css-dnmkqg {
+        width: 65%;
+    }
+    .MuiModal-root.css-1g04pbp-MuiModal-root .css-1txfmsw {
+        width: 65% !important;
+        padding: 32px;
+    }
     .latest-events-add p.celebrate-text {
         width: 85%;
         margin: auto;
@@ -226,6 +263,13 @@ button.navbar-toggler {
 
 
 @media only screen and (max-width: 767px) {
+   
+    .cart-add-tickets-inner {
+        margin-top: 0px !important;
+    }
+    .event-testimonials {
+        margin-top: 0px !important;
+    }
     .page-header.banner-top-add h1 {
         font-size: 35px;
         font-weight: 600;
@@ -237,6 +281,9 @@ button.navbar-toggler {
 
     .latest-events-add {
         padding: 15px 0px;
+    }
+    section.cart-tickets-add.checkout-summary-form .container {
+        padding-top: 0px !important;
     }
 
     .latest-events-add p.celebrate-text {

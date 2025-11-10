@@ -4,6 +4,8 @@ import BlogCard from "../components/BlogCard";
 import BlogPagination from "../components/BlogPagination";
 import { Typography, Box, CircularProgress } from "@mui/material";
 import { fetchBlogs } from "../services/WebService";
+import "../assets/css/event-products.css";
+
 
 export default function Blog() {
   const [blogs, setBlogs] = useState([]);
