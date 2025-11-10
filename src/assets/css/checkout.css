@@ -4,7 +4,12 @@
     font-size: 20px;
 }
 
-
+.page-header.banner-top-add h1 {
+    padding-top: 80px;
+}
+.page-header.banner-top-add{
+    align-items: flex-start;
+}
 .checkout-summary-form select.form-select {
     padding: 10px 10px;
     border-radius: 15px;
