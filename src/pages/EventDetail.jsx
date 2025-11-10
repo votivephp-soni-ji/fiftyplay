@@ -7,6 +7,7 @@ import { useAuth } from "../context/AuthContext";
 import { collectedAmount, eventDetail } from "../services/EventService";
 import LoginModal from "../modals/LoginModal";
 import SignupModal from "../modals/SignupModal";
+import { toast } from "react-toastify";
 
 export default function EventDetail() {
   const [event, setEvent] = useState({});
@@ -101,6 +102,22 @@ export default function EventDetail() {
     return () => clearInterval(timer);
   }, [event?.draw_time]);
 
+  const checkout = () => {
+    if (event.visiblity == "offline") {
+      toast.warn("Online purchases unavailable for this event");
+      return false;
+    }
+
+    isAuthenticated
+      ? navigate("/checkout", {
+          state: {
+            event,
+            selectedPrice: event.multiple_price ? chosenPrice : null,
+          },
+        })
+      : setOpenLogin(true);
+  };
+
   return (
     <>
       {/* Banner */}
@@ -166,65 +183,58 @@ export default function EventDetail() {
 
             {/* Right sidebar */}
             <div className="col-lg-4 inner-content-win-left">
-              <div className="countdown text-center mb-3">
-                <p className="mb-1">This Raffle ends in:</p>
-                <h3>
-                  <span className="number-text-add">
-                    {timeLeft.days}{" "}
-                    <small className="days-text-add">Days</small>
-                  </span>
-                  <span className="number-text-add">
-                    {timeLeft.hours}{" "}
-                    <small className="days-text-add">Hours</small>
-                  </span>
-                  <span className="number-text-add">
-                    {timeLeft.minutes}{" "}
-                    <small className="days-text-add">Minutes</small>
-                  </span>
-                  <span className="number-text-add">
-                    {timeLeft.seconds}{" "}
-                    <small className="days-text-add">Seconds</small>
-                  </span>
-                </h3>
-              </div>
+              {event.end_date && (
+                <div className="countdown text-center mb-3">
+                  <p className="mb-1">This Raffle ends in:</p>
+                  <h3>
+                    <span className="number-text-add">
+                      {timeLeft.days}{" "}
+                      <small className="days-text-add">Days</small>
+                    </span>
+                    <span className="number-text-add">
+                      {timeLeft.hours}{" "}
+                      <small className="days-text-add">Hours</small>
+                    </span>
+                    <span className="number-text-add">
+                      {timeLeft.minutes}{" "}
+                      <small className="days-text-add">Minutes</small>
+                    </span>
+                    <span className="number-text-add">
+                      {timeLeft.seconds}{" "}
+                      <small className="days-text-add">Seconds</small>
+                    </span>
+                  </h3>
+                </div>
+              )}
 
               <div className="ticket-box text-center">
                 <h5>Total Amount</h5>
                 {/* // Total Sold Amount */}
                 <p>${collectAmt}</p>
-                {event.multiple_price == true && (
-                  <select
-                    id="tickets"
-                    name="tickets"
-                    onChange={(e) => {
-                      const selected = event.prices.find(
-                        (price) => price.id === parseInt(e.target.value)
-                      );
-                      setChosenPrice(selected);
-                    }}
-                  >
-                    {event.prices.map((price) => (
-                      <option key={price.id} value={price.id}>
-                        {price.quantity} Ticket{price.quantity > 1 ? "s" : ""} -
-                        ${price.price}
-                      </option>
-                    ))}
-                  </select>
-                )}
+
+                {event.visiblity != "offline" &&
+                  event.multiple_price == true && (
+                    <select
+                      id="tickets"
+                      name="tickets"
+                      onChange={(e) => {
+                        const selected = event.prices.find(
+                          (price) => price.id === parseInt(e.target.value)
+                        );
+                        setChosenPrice(selected);
+                      }}
+                    >
+                      {event.prices.map((price) => (
+                        <option key={price.id} value={price.id}>
+                          {price.quantity} Ticket{price.quantity > 1 ? "s" : ""}{" "}
+                          - ${price.price}
+                        </option>
+                      ))}
+                    </select>
+                  )}
                 <button
                   className="btn btn-buy"
-                  onClick={() =>
-                    isAuthenticated
-                      ? navigate("/checkout", {
-                          state: {
-                            event,
-                            selectedPrice: event.multiple_price
-                              ? chosenPrice
-                              : null,
-                          },
-                        })
-                      : setOpenLogin(true)
-                  }
+                  onClick={checkout}
                   disabled={event.is_finalize ? true : false}
                 >
                   {event.is_finalize ? "FINALIZED" : "BUY TICKETS"}{" "}
