@@ -29,9 +29,9 @@ export const FavouriteEvents = () => {
         setLoading(false);
       }
     };
-    
+
     favouriteEvents(page);
-    
+
     setShouldLoad(false);
   }, [shuldLoad, page]);
 
@@ -102,21 +102,18 @@ export const FavouriteEvents = () => {
                               </span>
                               <div className="card-body">
                                 <h5 className="card-title">{event.title}</h5>
-                                <div className="ticket-price-tab">
+                                {/* <div className="ticket-price-tab">
                                   <p>Ticket Price:</p>
                                   <p className="inner-price-add">
                                     ${event.ticket_price}
                                   </p>
-                                </div>
+                                </div> */}
 
                                 <div className="remaining-tab">
-                                  <p>
-                                    <i className="bi bi-ticket-perforated"></i>{" "}
-                                    {event.remain_tickets}
-                                  </p>
+                                  <p>Start date: </p>
                                   <p className="inner-price-add">
                                     <i className="bi bi-stopwatch"></i>{" "}
-                                    {event.draw_time}
+                                    {event.start_date}
                                   </p>
                                 </div>
                                 <button
@@ -140,63 +137,63 @@ export const FavouriteEvents = () => {
                 </div>
               </div>
               {totalPages > 1 && (
-              <nav aria-label="Page navigation example">
-                <ul className="pagination justify-content-center">
-                  {/* Back Button */}
-                  <li className={`page-item ${page === 1 ? "disabled" : ""}`}>
-                    <a
-                      className="page-link"
-                      href="#"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        if (page > 1) setPage(page - 1);
-                      }}
-                    >
-                      <i className="bi bi-chevron-left"></i> Back
-                    </a>
-                  </li>
-
-                  {/* Page Numbers */}
-                  {Array.from({ length: totalPages }, (_, i) => i + 1).map(
-                    (p) => (
-                      <li
-                        key={p}
-                        className={`page-item ${page === p ? "active" : ""}`}
+                <nav aria-label="Page navigation example">
+                  <ul className="pagination justify-content-center">
+                    {/* Back Button */}
+                    <li className={`page-item ${page === 1 ? "disabled" : ""}`}>
+                      <a
+                        className="page-link"
+                        href="#"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          if (page > 1) setPage(page - 1);
+                        }}
                       >
-                        <a
-                          className="page-link"
-                          href="#"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            setPage(p);
-                          }}
-                        >
-                          {p}
-                        </a>
-                      </li>
-                    )
-                  )}
+                        <i className="bi bi-chevron-left"></i> Back
+                      </a>
+                    </li>
 
-                  {/* Next Button */}
-                  <li
-                    className={`page-item ${
-                      page === totalPages ? "disabled" : ""
-                    }`}
-                  >
-                    <a
-                      className="page-link"
-                      href="#"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        if (page < totalPages) setPage(page + 1);
-                      }}
+                    {/* Page Numbers */}
+                    {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+                      (p) => (
+                        <li
+                          key={p}
+                          className={`page-item ${page === p ? "active" : ""}`}
+                        >
+                          <a
+                            className="page-link"
+                            href="#"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              setPage(p);
+                            }}
+                          >
+                            {p}
+                          </a>
+                        </li>
+                      )
+                    )}
+
+                    {/* Next Button */}
+                    <li
+                      className={`page-item ${
+                        page === totalPages ? "disabled" : ""
+                      }`}
                     >
-                      Next <i className="bi bi-chevron-right"></i>
-                    </a>
-                  </li>
-                </ul>
-              </nav>
-            )}
+                      <a
+                        className="page-link"
+                        href="#"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          if (page < totalPages) setPage(page + 1);
+                        }}
+                      >
+                        Next <i className="bi bi-chevron-right"></i>
+                      </a>
+                    </li>
+                  </ul>
+                </nav>
+              )}
             </div>
           </div>
         </div>
