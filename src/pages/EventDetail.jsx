@@ -173,7 +173,7 @@ export default function EventDetail() {
               </div>
               <h3 className="fw-bold">{event.title}</h3>
               <p className="contest-number">
-                Contest No. <b>{event.contest_no}</b> | Drawn: {event.end_date}
+                Contest No. <b>{event.contest_no}</b> | Drawn: {event.draw_time}
               </p>
               <h5 className="mt-4">Description</h5>
               <p>{event.description}</p>

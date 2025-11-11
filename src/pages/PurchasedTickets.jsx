@@ -76,8 +76,11 @@ export const PurchasedTickets = () => {
                         <tr>
                           <th>Event</th>
                           <th>Ticket</th>
+                          <th>Ticket Qty</th>
+                          <th>Ticket Price</th>
+                          <th>Total Price</th>
                           <th>Date</th>
-                          <th>Price</th>
+
                           <th className="text-end">Action</th>
                         </tr>
                       </thead>
@@ -102,9 +105,16 @@ export const PurchasedTickets = () => {
                                 />
                               )}
                             </td>
+                            <td>
+                              <div className="d-flex align-items-center">
+                                {ticket?.sold_tickets}
+                              </div>
+                            </td>
 
-                            <td>{ticket.purchase_at}</td>
                             <td className="fw-bold">${ticket.price}</td>
+
+                            <td className="fw-bold">${ticket.total_price}</td>
+                            <td>{ticket.purchase_at}</td>
 
                             <td className="text-end">
                               {ticket.is_winner && (
