@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { reserveTicket } from "../services/EventService";
 import { toast } from "react-toastify";
+import "../assets/css/event-products.css";
 
 //import "../assets/css/checkout.css";
 
