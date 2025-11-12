@@ -70,6 +70,10 @@ const ClaimModal = ({ open, handleClose, ticketData }) => {
       };
 
       const res = await claimPrize(payload);
+      if(res.status === false){
+        toast.error(res.message)
+        return;
+      }
       toast.success("Claim submitted successfully!");
       handleClose();
     } catch (err) {
