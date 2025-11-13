@@ -103,11 +103,6 @@ export default function EventDetail() {
   }, [event?.draw_time]);
 
   const checkout = () => {
-    if (event.visiblity == "offline") {
-      toast.warn("Online purchases unavailable for this event");
-      return false;
-    }
-
     isAuthenticated
       ? navigate("/checkout", {
           state: {
@@ -173,39 +168,41 @@ export default function EventDetail() {
               </div>
               <h3 className="fw-bold">{event.title}</h3>
               <p className="contest-number">
-                Contest No. <b>{event.contest_no}</b> | Draw: {event.draw_time}
+                Contest No. <b>{event.contest_no}</b>{" "}
+                {event.draw_time && <>| Draw: {event.draw_time}</>}
               </p>
-              <h5 className="mt-4">Description</h5>
-              <p>{event.description}</p>
+              {/* <h5 className="mt-4">Description</h5>
+              <p>{event.description}</p> */}
               <h5 className="mt-4">Fundraiser Details</h5>
               <p>{event.cause}</p>
             </div>
 
             {/* Right sidebar */}
             <div className="col-lg-4 inner-content-win-left">
-              {event.end_date && (
-                <div className="countdown text-center mb-3">
-                  <p className="mb-1">This Raffle ends in:</p>
-                  <h3>
-                    <span className="number-text-add">
-                      {timeLeft.days}{" "}
-                      <small className="days-text-add">Days</small>
-                    </span>
-                    <span className="number-text-add">
-                      {timeLeft.hours}{" "}
-                      <small className="days-text-add">Hours</small>
-                    </span>
-                    <span className="number-text-add">
-                      {timeLeft.minutes}{" "}
-                      <small className="days-text-add">Minutes</small>
-                    </span>
-                    <span className="number-text-add">
-                      {timeLeft.seconds}{" "}
-                      <small className="days-text-add">Seconds</small>
-                    </span>
-                  </h3>
-                </div>
-              )}
+              {event.end_date &&
+                event.draw_time(
+                  <div className="countdown text-center mb-3">
+                    <p className="mb-1">This Raffle ends in:</p>
+                    <h3>
+                      <span className="number-text-add">
+                        {timeLeft.days}{" "}
+                        <small className="days-text-add">Days</small>
+                      </span>
+                      <span className="number-text-add">
+                        {timeLeft.hours}{" "}
+                        <small className="days-text-add">Hours</small>
+                      </span>
+                      <span className="number-text-add">
+                        {timeLeft.minutes}{" "}
+                        <small className="days-text-add">Minutes</small>
+                      </span>
+                      <span className="number-text-add">
+                        {timeLeft.seconds}{" "}
+                        <small className="days-text-add">Seconds</small>
+                      </span>
+                    </h3>
+                  </div>
+                )}
 
               <div className="ticket-box text-center">
                 <h5>Total Amount</h5>
@@ -235,11 +232,21 @@ export default function EventDetail() {
                 <button
                   className="btn btn-buy"
                   onClick={checkout}
-                  disabled={event.is_finalize ? true : false}
+                  disabled={
+                    event.is_finalize || event.visiblity == "offline"
+                      ? true
+                      : false
+                  }
                 >
                   {event.is_finalize ? "FINALIZED" : "BUY TICKETS"}{" "}
                   <i className="bi bi-arrow-right ms-1"></i>
                 </button>
+                {event.visiblity == "offline" && (
+                  <>
+                    <br />
+                    <h6>Online donations are not available.</h6>
+                  </>
+                )}
               </div>
             </div>
           </div>
