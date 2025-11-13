@@ -13,9 +13,6 @@ export const PurchasedTickets = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [page, setPage] = useState(1);
 
-  const [openClaimModal, setOpenClaimModal] = useState(false);
-  const [selectedTicket, setSelectedTicket] = useState(null);
-
   useEffect(() => {
     const myTickets = async (pageNo = 1) => {
       setLoading(true);
@@ -31,21 +28,6 @@ export const PurchasedTickets = () => {
     };
     myTickets(page);
   }, [page]);
-
-  const handleOpenClaim = (ticket) => {
-    console.log("winner Ticker", ticket);
-    setSelectedTicket({
-      name: ticket.user_name || "",
-      event_id: ticket.event_id,
-      ticket_number: ticket.ticket_number,
-    });
-    setOpenClaimModal(true);
-  };
-
-  const handleCloseClaim = () => {
-    setOpenClaimModal(false);
-    setSelectedTicket(null);
-  };
 
   return (
     <div className="profile-section-add">
@@ -80,8 +62,6 @@ export const PurchasedTickets = () => {
                           <th>Ticket Price</th>
                           <th>Total Price</th>
                           <th>Date</th>
-
-                          <th className="text-end">Action</th>
                         </tr>
                       </thead>
 
@@ -115,20 +95,6 @@ export const PurchasedTickets = () => {
 
                             <td className="fw-bold">${ticket.total_price}</td>
                             <td>{ticket.purchase_at}</td>
-
-                           <td className="text-end">
-                              {ticket.is_winner && (
-                                <button
-                                  className="dropdown-item"
-                                  onClick={() => handleOpenClaim(ticket)}
-                                  disabled={ticket.is_claimed}
-                                >
-                                  <i className="bi bi-gift me-2 text-success"></i>
-                                 {ticket.is_claimed ? 'Claimed' : 'Claim Now'}
-                                </button>
-                              )}
-                            </td>
-
                           </tr>
                         ))}
                       </tbody>
@@ -197,13 +163,6 @@ export const PurchasedTickets = () => {
           </div>
         </div>
       </div>
-
-      {/* Claim Modal */}
-      <ClaimModal
-        open={openClaimModal}
-        handleClose={handleCloseClaim}
-        ticketData={selectedTicket}
-      />
     </div>
   );
 };
