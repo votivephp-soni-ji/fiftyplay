@@ -116,17 +116,19 @@ export const PurchasedTickets = () => {
                             <td className="fw-bold">${ticket.total_price}</td>
                             <td>{ticket.purchase_at}</td>
 
-                            <td className="text-end">
+                           <td className="text-end">
                               {ticket.is_winner && (
                                 <button
                                   className="dropdown-item"
                                   onClick={() => handleOpenClaim(ticket)}
+                                  disabled={ticket.is_claimed}
                                 >
                                   <i className="bi bi-gift me-2 text-success"></i>
-                                  Claim Now
+                                 {ticket.is_claimed ? 'Claimed' : 'Claim Now'}
                                 </button>
                               )}
                             </td>
+
                           </tr>
                         ))}
                       </tbody>
