@@ -23,6 +23,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import { NotificationPage } from "./pages/NotificationPage";
 import BlogDetail from "./pages/BlogDetail";
 import AboutMob from "./pages/AboutMob";
+import PastEvents from "./pages/PastEvents";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
             path="/fundraising-products"
             element={<FundraisingProducts />}
           />
+          <Route path="/past-events" element={<PastEvents />} />
           <Route path="/about" element={<About />} />
           <Route path="/our-team" element={<OurTeam />} />
           <Route path="/contact" element={<Contact />} />

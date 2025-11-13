@@ -5,6 +5,11 @@ export const fetchEvents = (params) => {
     return callApi('GET', '/events', {}, params)
 }
 
+export const pastEvents = (params) => {
+
+    return callApi('GET', '/past-events', {}, params)
+}
+
 export const fetchCategories = () => {
     return callApi('GET', 'event/categories');
 }

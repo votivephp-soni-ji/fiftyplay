@@ -79,6 +79,11 @@ const Header = () => {
                 </NavLink>
               </li>
               <li className="nav-item">
+                <NavLink className="nav-link" to="/past-events">
+                  Past Events
+                </NavLink>
+              </li>
+              <li className="nav-item">
                 <NavLink className="nav-link" to="/about">
                   About
                 </NavLink>
@@ -93,11 +98,11 @@ const Header = () => {
                   {t("contact")}
                 </NavLink>
               </li>
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <NavLink className="nav-link" to="/news">
                   {t("news")}
                 </NavLink>
-              </li>
+              </li> */}
               <li className="nav-item">
                 <NavLink className="nav-link" to="/blog">
                   {t("blog")}

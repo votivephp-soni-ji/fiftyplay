@@ -238,8 +238,7 @@ export default function EventDetail() {
                       : false
                   }
                 >
-                  {event.is_finalize ? "FINALIZED" : "BUY TICKETS"}{" "}
-                  <i className="bi bi-arrow-right ms-1"></i>
+                  Donate <i className="bi bi-arrow-right ms-1"></i>
                 </button>
                 {event.visiblity == "offline" && (
                   <>
