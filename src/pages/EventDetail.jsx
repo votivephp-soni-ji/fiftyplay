@@ -178,7 +178,7 @@ export default function EventDetail() {
               <h5 className="mt-4">Description</h5>
               <p>{event.description}</p>
               <h5 className="mt-4">Fundraiser Details</h5>
-              <p>{event.description}</p>
+              <p>{event.cause}</p>
             </div>
 
             {/* Right sidebar */}
