@@ -180,7 +180,7 @@ export default function EventDetail() {
             {/* Right sidebar */}
             <div className="col-lg-4 inner-content-win-left">
               {event.end_date &&
-                event.draw_time(
+                event.draw_time && (
                   <div className="countdown text-center mb-3">
                     <p className="mb-1">This Raffle ends in:</p>
                     <h3>
