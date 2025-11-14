@@ -1,8 +1,10 @@
 import React from "react";
 import { Box } from "@mui/material";
 import "../assets/css/about_us.css";
+import { useNavigate } from "react-router-dom";
 
 const About = () => {
+  const navigate = useNavigate();
   return (
     <>
       <section class="event-details-add">
@@ -242,8 +244,8 @@ const About = () => {
             Enter for a chance to win life-changing prizes with the largest
             raffle jackpots online. Your dream win starts with a single ticket.
           </p>
-          <button>
-            BUY TICKETS <i className="bi bi-arrow-right"></i>
+          <button onClick={() => navigate("/fundraising-products")}>
+            Donate Now <i className="bi bi-arrow-right"></i>
           </button>
         </div>
       </section>
