@@ -5,7 +5,6 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { addFavoriteEvent } from "../services/EventService";
 import { useAuth } from "../context/AuthContext";
-import { toast } from "react-toastify";
 import ClaimModal from "../modals/ClaimModal";
 
 const EventCard = ({ event }) => {
@@ -31,7 +30,8 @@ const EventCard = ({ event }) => {
   console.log("isFavorite", isFavorite);
 
   const handleFavorite = async () => {
-    if (!user) {
+    if (!isAuthenticated) {
+      setOpenLogin(true);
       return false;
     }
     setLoadingFav(true);
@@ -69,21 +69,20 @@ const EventCard = ({ event }) => {
         <div className="exclusive-tab">
           <button>Exclusive</button>
           {!event.is_finalize && (
-             <span
-            onClick={() => !loadingFav && handleFavorite(event.id)}
-            style={{
-              cursor: loadingFav ? "not-allowed" : "pointer",
-              opacity: loadingFav ? 0.5 : 1,
-            }}
-          >
-            {isFavorite ? (
-              <i className="bi bi-heart-fill"></i>
-            ) : (
-              <i className="bi bi-heart"></i>
-            )}
-          </span>
+            <span
+              onClick={() => !loadingFav && handleFavorite(event.id)}
+              style={{
+                cursor: loadingFav ? "not-allowed" : "pointer",
+                opacity: loadingFav ? 0.5 : 1,
+              }}
+            >
+              {isFavorite ? (
+                <i className="bi bi-heart-fill"></i>
+              ) : (
+                <i className="bi bi-heart"></i>
+              )}
+            </span>
           )}
-         
         </div>
 
         <img
