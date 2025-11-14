@@ -8,8 +8,7 @@ const Footer = () => {
           <div className="col-lg-3 col-md-6">
             <img src="./images/logo-footer.png" />
             <p className="simply-text-add">
-              Create your account in just a few minutes. Simply register your
-              account in just a few.
+              Create your account in just a few minutes. Simply register
             </p>
             <div className="social-icons">
               <a href="#">
