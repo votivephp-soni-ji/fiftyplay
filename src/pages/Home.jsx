@@ -123,7 +123,7 @@ const Home = () => {
                 setFilters((prev) => ({ ...prev, date: e.target.value }))
               }
             />
-            <Button variant="contained" color="primary" onClick={handleSearch} >
+            <Button variant="contained" color="primary" onClick={handleSearch}>
               {searchLoad ? "Searching..." : "Search"}
             </Button>
           </form>
@@ -331,8 +331,8 @@ const Home = () => {
           {!localStorage.getItem("authToken") && (
             <div className="cta-box mt-3">
               <span>
-                <i className="bi bi-person-check"></i> Ready to play? Create
-                your account now.
+                <i className="bi bi-person-check"></i> Ready to donate and win?
+                Create your account now.
               </span>
               <a
                 href="#"

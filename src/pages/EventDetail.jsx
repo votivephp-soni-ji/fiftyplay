@@ -160,7 +160,8 @@ export default function EventDetail() {
             <div className="col-lg-8 inner-content-win-right">
               <div className="enter-now-chance">
                 <h6>
-                  <i className="bi bi-trophy"></i> Enter now for a chance to win
+                  <i className="bi bi-trophy"></i> Enter now for a chance to
+                  donate and win
                 </h6>
                 {/* <p>
                   <strong>${event.ticket_price}</strong> Per Ticket
