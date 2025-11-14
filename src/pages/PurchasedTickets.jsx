@@ -39,7 +39,7 @@ export const PurchasedTickets = () => {
 
           <div className="col-md-9 right-side-content">
             <div className="profile-card">
-              <div className="card-header">Purchased Tickets History</div>
+              <div className="card-header">Donate History</div>
               <div className="card-body purchased-tickets">
                 <div className="tickets-history">
                   {loading ? (

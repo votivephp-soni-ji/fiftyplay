@@ -179,30 +179,29 @@ export default function EventDetail() {
 
             {/* Right sidebar */}
             <div className="col-lg-4 inner-content-win-left">
-              {event.end_date &&
-                event.draw_time && (
-                  <div className="countdown text-center mb-3">
-                    <p className="mb-1">This Raffle ends in:</p>
-                    <h3>
-                      <span className="number-text-add">
-                        {timeLeft.days}{" "}
-                        <small className="days-text-add">Days</small>
-                      </span>
-                      <span className="number-text-add">
-                        {timeLeft.hours}{" "}
-                        <small className="days-text-add">Hours</small>
-                      </span>
-                      <span className="number-text-add">
-                        {timeLeft.minutes}{" "}
-                        <small className="days-text-add">Minutes</small>
-                      </span>
-                      <span className="number-text-add">
-                        {timeLeft.seconds}{" "}
-                        <small className="days-text-add">Seconds</small>
-                      </span>
-                    </h3>
-                  </div>
-                )}
+              {event.end_date && event.draw_time && (
+                <div className="countdown text-center mb-3">
+                  <p className="mb-1">This Raffle ends in:</p>
+                  <h3>
+                    <span className="number-text-add">
+                      {timeLeft.days}{" "}
+                      <small className="days-text-add">Days</small>
+                    </span>
+                    <span className="number-text-add">
+                      {timeLeft.hours}{" "}
+                      <small className="days-text-add">Hours</small>
+                    </span>
+                    <span className="number-text-add">
+                      {timeLeft.minutes}{" "}
+                      <small className="days-text-add">Minutes</small>
+                    </span>
+                    <span className="number-text-add">
+                      {timeLeft.seconds}{" "}
+                      <small className="days-text-add">Seconds</small>
+                    </span>
+                  </h3>
+                </div>
+              )}
 
               <div className="ticket-box text-center">
                 <h5>Total Amount</h5>
@@ -238,7 +237,7 @@ export default function EventDetail() {
                       : false
                   }
                 >
-                  Donate <i className="bi bi-arrow-right ms-1"></i>
+                  Donate Now <i className="bi bi-arrow-right ms-1"></i>
                 </button>
                 {event.visiblity == "offline" && (
                   <>

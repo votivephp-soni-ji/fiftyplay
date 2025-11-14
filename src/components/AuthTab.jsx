@@ -29,7 +29,7 @@ export const AuthTab = () => {
           <i className="bi bi-bell fs-5"></i> Notifications
         </NavLink>
         <NavLink className="nav-link" to="/tickets-history">
-          <i className="bi bi-ticket-perforated"></i> Purchased Tickets
+          <i className="bi bi-ticket-perforated"></i> Donate History
         </NavLink>
         {/* <NavLink className="nav-link" to="/">
           <i className="bi bi-gift"></i> Claim
