@@ -17,7 +17,6 @@ const EventCard = ({ event }) => {
   const [openClaimModal, setOpenClaimModal] = useState(false);
   const [selectedTicket, setSelectedTicket] = useState(null);
 
-
   const {
     handleLoginSuccess,
     openLogin,
@@ -114,7 +113,7 @@ const EventCard = ({ event }) => {
             <div className="winner-banner mt-3 p-3 rounded-4">
               <h6 className="text-primary fw-bold mb-1">🎉 Winner Announced</h6>
               <p className="mb-0">
-                Won Ticket:{" "}
+                Won Donate:{" "}
                 <strong className="text-default fs-7">
                   #{event.won_ticket}
                 </strong>
