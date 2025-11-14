@@ -15,7 +15,7 @@ import SignupModal from "../modals/SignupModal";
 import LoginModal from "../modals/LoginModal";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { fetchCategories } from "../services/EventService";
+import { fetchCategories, fetchEvents } from "../services/EventService";
 import EventCard from "../components/EventCart";
 import ForgotPasswordModal from "../modals/ForgotPasswordModal";
 
@@ -43,15 +43,17 @@ const Home = () => {
   const baseUrl = import.meta.env.VITE_BASE_URL; // replace with your actual base_url
 
   useEffect(() => {
-    axios
-      .get(`${baseUrl}/events?visiblity=online&status=active&limit=6`)
-      .then((res) => {
-        setEvents(res.data.data || []);
-        console.log(res.data.data); // assuming response has {data: [...]}
-      })
-      .catch((err) => {
+    async function lateEvents() {
+      try {
+        const res = await fetchEvents({ limit: 6 });
+        console.log("data", res.data);
+        setEvents(res.data);
+      } catch (err) {
         console.error("Error fetching events:", err);
-      });
+      } finally {
+      }
+    }
+
     const getCategories = async () => {
       let res = await fetchCategories();
       console.log("categ", res);
@@ -60,6 +62,7 @@ const Home = () => {
       }
     };
 
+    lateEvents();
     getCategories();
   }, []);
 

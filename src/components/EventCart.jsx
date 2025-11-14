@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { IconButton } from "@mui/material";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
@@ -11,10 +11,12 @@ import ClaimModal from "../modals/ClaimModal";
 const EventCard = ({ event }) => {
   const navigate = useNavigate();
   const [isFavorite, setIsFavorite] = useState(event.is_favourite || false);
+
   const [loadingFav, setLoadingFav] = useState(false);
 
   const [openClaimModal, setOpenClaimModal] = useState(false);
   const [selectedTicket, setSelectedTicket] = useState(null);
+
 
   const {
     handleLoginSuccess,
@@ -26,6 +28,8 @@ const EventCard = ({ event }) => {
   } = useAuth();
 
   const isAuthenticated = !!localStorage.getItem("authToken");
+
+  console.log("isFavorite", isFavorite);
 
   const handleFavorite = async () => {
     if (!user) {
