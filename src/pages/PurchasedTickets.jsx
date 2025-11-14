@@ -58,8 +58,8 @@ export const PurchasedTickets = () => {
                         <tr>
                           <th>Event</th>
                           <th>Ticket</th>
-                          <th>Ticket Qty</th>
-                          <th>Ticket Price</th>
+                          <th>Qty</th>
+                          <th>Price</th>
                           <th>Total Price</th>
                           <th>Date</th>
                         </tr>
