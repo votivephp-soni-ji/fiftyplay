@@ -68,7 +68,8 @@ const EventCard = ({ event }) => {
       <div className="card position-relative">
         <div className="exclusive-tab">
           <button>Exclusive</button>
-          <span
+          {!event.is_finalize && (
+             <span
             onClick={() => !loadingFav && handleFavorite(event.id)}
             style={{
               cursor: loadingFav ? "not-allowed" : "pointer",
@@ -81,6 +82,8 @@ const EventCard = ({ event }) => {
               <i className="bi bi-heart"></i>
             )}
           </span>
+          )}
+         
         </div>
 
         <img
