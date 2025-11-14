@@ -53,7 +53,7 @@ const About = () => {
             </p>
           </div>
 
-          <div className="container">
+          {/* <div className="container">
             <div className="row justify-content-center text-center stats-box">
               <div className="col-6 col-md-3">
                 <h4>28</h4>
@@ -72,7 +72,7 @@ const About = () => {
                 <p>Payouts to Winners</p>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </section>
 
