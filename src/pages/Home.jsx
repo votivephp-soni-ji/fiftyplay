@@ -219,7 +219,10 @@ const Home = () => {
                 </div>
               </div>
 
-              <button className="btn btn-dark btn-play mt-3">
+              <button
+                onClick={() => navigate("/fundraising-products")}
+                className="btn btn-dark btn-play mt-3"
+              >
                 Play Lottery <i className="bi bi-arrow-right ms-1"></i>
               </button>
             </div>
