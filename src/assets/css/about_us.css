@@ -265,3 +265,42 @@ section.biggest-jackpots-await {
 
 
 }
+
+/* ------------------------------- */
+
+.mission-vision-section {
+  margin-top: 50px;
+}
+
+.mv-card {
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 18px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  height: 90%;
+}
+
+.mv-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.12);
+}
+
+.mv-title {
+  font-weight: 700;
+  font-size: 22px;
+  margin-bottom: 15px;
+  color: #4b0082; /* Purple tone matching your site */
+}
+
+.mv-title i {
+  margin-right: 8px;
+  color: #ff0077; /* your pink gradient accent */
+  font-size: 24px;
+}
+
+.mv-card p {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #333;
+}

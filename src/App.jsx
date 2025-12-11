@@ -24,6 +24,8 @@ import { NotificationPage } from "./pages/NotificationPage";
 import BlogDetail from "./pages/BlogDetail";
 import AboutMob from "./pages/AboutMob";
 import PastEvents from "./pages/PastEvents";
+import Rules from "./pages/Rules";
+import FAQ from "./pages/Faq";
 
 function App() {
   return (
@@ -39,13 +41,16 @@ function App() {
           />
           <Route path="/past-events" element={<PastEvents />} />
           <Route path="/about" element={<About />} />
-          <Route path="/our-team" element={<OurTeam />} />
+          {/* <Route path="/our-team" element={<OurTeam />} /> */}
+          <Route path="/faq" element={<FAQ />} />
+          <Route path="/rules" element={<Rules />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/news" element={<News />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogDetail />} />
           <Route path="/login" element={<Login />} />
           <Route path="/event-detail" element={<EventDetail />} />
+           
           <Route element={<ProtectedRoute />}>
             <Route path="/favourite-events" element={<FavouriteEvents />} />
             <Route path="/tickets-history" element={<PurchasedTickets />} />
