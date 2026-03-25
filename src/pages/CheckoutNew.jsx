@@ -149,6 +149,7 @@ export default function CheckoutNew() {
                       >
                         {event.prices.map((price) => (
                           <option key={price.id} value={price.id}>
+                            {price.product_name ? `${price.product_name} - ` : ""}
                             {price.quantity} Ticket
                             {price.quantity > 1 ? "s" : ""} - ${price.price}
                           </option>
