@@ -11,13 +11,16 @@ const Footer = () => {
               Create your account in just a few minutes. Simply register
             </p>
             <div className="social-icons">
-              <a href="#">
+              <a
+                href="https://www.facebook.com/people/The-Fifty-Play/61579650910359/"
+                target="_blank"
+              >
                 <i className="bi bi-facebook"></i>
               </a>
-              <a href="#">
-                <i className="bi bi-twitter"></i>
-              </a>
-              <a href="#">
+              <a
+                href="https://www.instagram.com/the_fifty_play?igsh=MXVjd2NxeXdnaGNncA"
+                target="_blank"
+              >
                 <i className="bi bi-instagram"></i>
               </a>
             </div>
@@ -34,12 +37,17 @@ const Footer = () => {
             <NavLink to="/fundraising-products">
               <i className="bi bi-chevron-right"></i> Products
             </NavLink>
-            <NavLink to="/our-team">
+            {/* <NavLink to="/our-team">
               <i className="bi bi-chevron-right"></i> Our Team
+            </NavLink> */}
+
+            <NavLink to="/rules">
+              <i className="bi bi-chevron-right"></i> Rules
             </NavLink>
+            {/* 
             <NavLink href="#">
               <i className="bi bi-chevron-right"></i> Lottery
-            </NavLink>
+            </NavLink> */}
           </div>
 
           <div className="col-lg-2 col-md-6">
@@ -53,28 +61,26 @@ const Footer = () => {
             <a href="#">
               <i className="bi bi-chevron-right"></i> Lottery
             </a>
-            <a href="#">
-              <i className="bi bi-chevron-right"></i> Betting
-            </a>
-            <a href="#">
+           
+            {/* <a href="#">
               <i className="bi bi-chevron-right"></i> Business
-            </a>
+            </a> */}
           </div>
 
           <div className="col-lg-2 col-md-6">
             <h5>Help & Support</h5>
-            <NavLink href="#">
+            <NavLink to="/faq">
               <i className="bi bi-chevron-right"></i> FAQ
             </NavLink>
             <NavLink to="/contact">
               <i className="bi bi-chevron-right"></i> Contact Us
             </NavLink>
-            <NavLink to="/blog">
+            {/* <NavLink to="/blog">
               <i className="bi bi-chevron-right"></i> Blog
-            </NavLink>
-            <NavLink to="/news">
+            </NavLink> */}
+            {/* <NavLink to="/news">
               <i className="bi bi-chevron-right"></i> News
-            </NavLink>
+            </NavLink> */}
             <NavLink href="#">
               <i className="bi bi-chevron-right"></i> Login
             </NavLink>
@@ -91,7 +97,7 @@ const Footer = () => {
             <div className="inner-get-in">
               <i class="bi bi-envelope-arrow-down"></i>
               <p>
-                Email: <span>thefiftyplay@gmail.com</span>
+                Email: <span>info@thefiftyplay.com</span>
               </p>
             </div>
             <div className="inner-get-in">
@@ -108,8 +114,8 @@ const Footer = () => {
             &copy; {new Date().getFullYear()} Fifty Play - Raffle
           </p>
           <div className="inner-text-add">
-            <a href="#">Help & Support</a> | <a href="#">Terms & Conditions</a>{" "}
-            |<a href="#">Privacy Policy</a>
+            <Link to="/help">Help & Support</Link> | <Link to="/terms">Terms & Conditions</Link>{" "}
+            <Link to="/privacy-policy">Privacy Policy</Link>
           </div>
         </div>
       </div>

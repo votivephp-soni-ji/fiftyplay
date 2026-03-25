@@ -12,6 +12,7 @@ import {
 import CloseIcon from "@mui/icons-material/Close";
 import PersonIcon from "@mui/icons-material/Person";
 import EmailIcon from "@mui/icons-material/Email";
+import PhoneIcon from '@mui/icons-material/Smartphone';
 import LockIcon from "@mui/icons-material/Lock";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
@@ -34,6 +35,10 @@ import { signInWithPopup } from "firebase/auth";
 const schema = yup.object({
   name: yup.string().required("Full name is required"),
   email: yup.string().email("Invalid email").required("Email is required"),
+  phone: yup
+    .string()
+    .matches(/^[0-9]{10,15}$/, "Enter valid phone number")
+    .required("Phone number is required"),
   password: yup
     .string()
     .min(6, "At least 6 characters")
@@ -69,8 +74,8 @@ const SignupModal = ({
 
     try {
       const res = await signup(payload);
-      onLoginSuccess(res);
-      toast.success("Signup successful!");
+      // onLoginSuccess(res);
+      toast.success("Email varification link is sent successfully. please verify your email");
       handleClose();
     } catch (err) {
       if (err.response?.status === 422) {
@@ -129,6 +134,7 @@ const SignupModal = ({
           justifyContent: "center",
           px: 2,
           fontFamily: '"Jost", sans-serif',
+          overflowY: "auto", 
         }}
       >
         <Box
@@ -204,6 +210,21 @@ const SignupModal = ({
                 }}
               />
             </Box>
+                <Box sx={{ display: "flex", alignItems: "center", mb: 3 }}>
+              <PhoneIcon sx={{ mr: 1.5, color: "gray" }} />
+              <TextField
+                variant="standard"
+                placeholder="Enter your phone number"
+                fullWidth
+                {...register("phone")}
+                error={!!errors.phone}
+                helperText={errors.phone?.message}
+                InputProps={{
+                  style: { fontFamily: '"Jost", sans-serif' },
+                }}
+              />
+            </Box>
+            
 
             {/* Password */}
             <Box sx={{ display: "flex", alignItems: "center", mb: 3 }}>

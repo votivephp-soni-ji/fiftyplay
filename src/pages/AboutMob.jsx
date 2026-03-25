@@ -41,30 +41,36 @@ const AboutMob = () => {
             </h6>
             <h2>WE DREAM BIG SO YOU CAN WIN BIG</h2>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed
-              ex eget mi sollicitudin consequat. Sed rhoncus ligula vel justo
-              dignissim aliquam. Maecenas non est vitae ipsum luctus feugiat.
-              Fusce purus nunc, sodales at condimentum sed, ullamcorper a nulla.
-              Nam justo est, venenatis quis tellus in, volutpat eleifend nunc.
-              Vestibulum congue laoreet mi non interdum. Ut ut dapibus tellus.
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed
-              ex eget mi sollicitudin consequat. Sed rhoncus ligula vel justo
-              dignissim aliquam. Maecenas non est vitae ipsum luctus feugiat.
+               FiftyPlay is an innovative digital fundraising platform founded in
+              2025 under its parent company, Ticket Plus, owned by Carlos
+              CrespoMüller. We were created with the mission of transforming how
+              non-profit organizations, sports teams, foundations, and community
+              entities generate funds by integrating modern technology with a
+              transparent, secure, and accessible 50/50 raffle system. Our
+              platform enables individuals to support causes through the
+              purchase of official items, turning every acquisition into a
+              meaningful contribution to social, athletic, and community
+              projects. Through our 50/50 model, 50% of all funds raised go
+              directly to the benefiting organization, while the remaining 50%
+              is awarded to the raffle winner—ensuring an exciting and fair
+              experience.
             </p>
             <p className="mt-3 second-text-add">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed
-              ex eget mi sollicitudin consequat. Sed rhoncus ligula vel justo
-              dignissim aliquam. Maecenas non est vitae ipsum luctus feugiat.
-              Fusce purus nunc, sodales at condimentum sed, ullamcorper a nulla.
-              Nam justo est, venenatis quis tellus in, volutpat eleifend nunc.
-              Vestibulum congue laoreet mi non interdum. Ut ut dapibus tellus.
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed
-              ex eget mi sollicitudin consequat. Sed rhoncus ligula vel justo
-              dignissim aliquam. Maecenas non est vitae ipsum luctus feugiat.
+              At FiftyPlay, we believe in transparency, innovation, and social
+              impact. That is why we develop digital tools that allow users to
+              track the pot in real time, receive instant notifications, and
+              manage events with processes that are auditable, secure, and
+              reliable. We serve as a bridge between causes and community. Our
+              commitment is to empower organizations to raise funds more
+              efficiently while strengthening their connection with supporters
+              and collaborators. With the vision of Carlos Crespo Müller and the
+              corporate backing of Ticket Plus, FiftyPlay continues to grow as a
+              leading solution for fundraising in both in-person and digital
+              events
             </p>
           </div>
 
-          <div className="container">
+          {/* <div className="container">
             <div className="row justify-content-center text-center stats-box">
               <div className="col-6 col-md-3">
                 <h4>28</h4>
@@ -83,7 +89,7 @@ const AboutMob = () => {
                 <p>Payouts to Winners</p>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </section>
 

@@ -1,0 +1,70 @@
+/* Page Background */
+.privacy-section {
+  padding: 70px 0;
+  background: #f6f7fb;
+}
+
+/* Card Layout */
+.privacy-card {
+  background: #ffffff;
+  padding: 50px;
+  border-radius: 12px;
+  max-width: 900px;
+  margin: auto;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+/* Title */
+.privacy-title {
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+/* Blocks */
+.privacy-block {
+  margin-bottom: 30px;
+}
+
+/* Section Titles */
+.privacy-block h4 {
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #222;
+}
+
+/* Paragraphs */
+.privacy-block p {
+  color: #555;
+  line-height: 1.7;
+  margin-bottom: 10px;
+}
+
+/* Lists */
+.privacy-block ul {
+  padding-left: 20px;
+}
+
+.privacy-block ul li {
+  margin-bottom: 6px;
+  color: #555;
+}
+
+/* Contact */
+.contact {
+  font-weight: 500;
+  color: #000;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+
+  .privacy-card {
+    padding: 25px;
+  }
+
+  .privacy-title {
+    font-size: 22px;
+  }
+
+}

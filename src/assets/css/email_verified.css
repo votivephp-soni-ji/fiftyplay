@@ -1,0 +1,66 @@
+.email-verified-wrapper{
+    min-height:70vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background: linear-gradient(135deg,#ee127b,#6a2c91);
+    padding:80px 0;
+}
+
+.verified-card{
+    background:white;
+    padding:50px 40px;
+    border-radius:16px;
+    max-width:520px;
+    margin:auto;
+    box-shadow:0 15px 40px rgba(0,0,0,0.15);
+}
+
+.success-icon{
+    width:90px;
+    height:90px;
+    background:#ee127b;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin:0 auto 20px;
+}
+
+.success-icon i{
+    color:white;
+    font-size:40px;
+}
+
+.verified-tag{
+    font-weight:600;
+    color:#ee127b;
+    margin-bottom:10px;
+}
+
+.verified-title{
+    font-weight:700;
+    margin-bottom:15px;
+}
+
+.verified-desc{
+    color:#6c757d;
+    margin-bottom:30px;
+}
+
+.verified-btn{
+    padding:12px 30px;
+    font-weight:600;
+}
+
+@media(max-width:576px){
+
+    .verified-card{
+        padding:35px 25px;
+    }
+
+    .verified-title{
+        font-size:22px;
+    }
+
+}

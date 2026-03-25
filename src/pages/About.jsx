@@ -28,51 +28,75 @@ const About = () => {
             <h6>
               <i className="bi bi-trophy"></i> A few words about us
             </h6>
-            <h2>WE DREAM BIG SO YOU CAN WIN BIG</h2>
+            <h2 className="bold">WE DREAM BIG SO YOU CAN WIN BIG</h2>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed
-              ex eget mi sollicitudin consequat. Sed rhoncus ligula vel justo
-              dignissim aliquam. Maecenas non est vitae ipsum luctus feugiat.
-              Fusce purus nunc, sodales at condimentum sed, ullamcorper a nulla.
-              Nam justo est, venenatis quis tellus in, volutpat eleifend nunc.
-              Vestibulum congue laoreet mi non interdum. Ut ut dapibus tellus.
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed
-              ex eget mi sollicitudin consequat. Sed rhoncus ligula vel justo
-              dignissim aliquam. Maecenas non est vitae ipsum luctus feugiat.
+              FiftyPlay is an innovative digital fundraising platform founded in
+              2025 under its parent company, Ticket Plus, owned by Carlos
+              CrespoMüller. We were created with the mission of transforming how
+              non-profit organizations, sports teams, foundations, and community
+              entities generate funds by integrating modern technology with a
+              transparent, secure, and accessible 50/50 raffle system. Our
+              platform enables individuals to support causes through the
+              purchase of official items, turning every acquisition into a
+              meaningful contribution to social, athletic, and community
+              projects. Through our 50/50 model, 50% of all funds raised go
+              directly to the benefiting organization, while the remaining 50%
+              is awarded to the raffle winner—ensuring an exciting and fair
+              experience.
             </p>
-            <p className="mt-3 second-text-add">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed
-              ex eget mi sollicitudin consequat. Sed rhoncus ligula vel justo
-              dignissim aliquam. Maecenas non est vitae ipsum luctus feugiat.
-              Fusce purus nunc, sodales at condimentum sed, ullamcorper a nulla.
-              Nam justo est, venenatis quis tellus in, volutpat eleifend nunc.
-              Vestibulum congue laoreet mi non interdum. Ut ut dapibus tellus.
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed
-              ex eget mi sollicitudin consequat. Sed rhoncus ligula vel justo
-              dignissim aliquam. Maecenas non est vitae ipsum luctus feugiat.
+            <p className="mt-2 second-text-add">
+              At FiftyPlay, we believe in transparency, innovation, and social
+              impact. That is why we develop digital tools that allow users to
+              track the pot in real time, receive instant notifications, and
+              manage events with processes that are auditable, secure, and
+              reliable. We serve as a bridge between causes and community. Our
+              commitment is to empower organizations to raise funds more
+              efficiently while strengthening their connection with supporters
+              and collaborators. With the vision of Carlos Crespo Müller and the
+              corporate backing of Ticket Plus, FiftyPlay continues to grow as a
+              leading solution for fundraising in both in-person and digital
+              events.
             </p>
           </div>
 
-          {/* <div className="container">
-            <div className="row justify-content-center text-center stats-box">
-              <div className="col-6 col-md-3">
-                <h4>28</h4>
-                <p>Winners From Last Month</p>
-              </div>
-              <div className="col-6 col-md-3">
-                <h4>2500+</h4>
-                <p>Tickets Sold</p>
-              </div>
-              <div className="col-6 col-md-3 mt-3 mt-md-0">
-                <h4>28</h4>
-                <p>Prizes & Winners</p>
-              </div>
-              <div className="col-6 col-md-3 mt-3 mt-md-0">
-                <h4>28387K</h4>
-                <p>Payouts to Winners</p>
+          <div className="mission-vision-section mt-5">
+            <div className="container">
+              <div className="row g-4">
+                {/* Mission */}
+                <div className="col-md-6">
+                  <div className="mv-card">
+                    <h4 className="mv-title">
+                      <i className="bi bi-bullseye"></i> Our Mission
+                    </h4>
+                    <p>
+                      Our mission is to revolutionize fundraising by providing
+                      modern, transparent, and secure digital raffle solutions
+                      that empower organizations to raise more, connect deeper,
+                      and create lasting social impact. We aim to make every
+                      raffle simple, fair, and rewarding for both organizations
+                      and participants.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Vision */}
+                <div className="col-md-6">
+                  <div className="mv-card">
+                    <h4 className="mv-title">
+                      <i className="bi bi-eye"></i> Our Vision
+                    </h4>
+                    <p>
+                      Our vision is to become the most trusted and innovative
+                      fundraising platform, enabling communities across the
+                      world to support causes they care about. We imagine a
+                      future where technology bridges generosity and social
+                      good, making charitable giving effortless and impactful.
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
-          </div> */}
+          </div>
         </div>
       </section>
 
@@ -177,9 +201,11 @@ const About = () => {
             How It’s <span>Works</span>
           </h2>
           <p className="celebrate-text mb-5">
-            We celebrate every win, no matter how big or small. Our platform is
-            buzzing with excitement as players hit jackpots and score massive
-            crypto payouts daily.
+            FiftyPlay makes fundraising simple. Participants support a cause by
+            purchasing an official item, and each purchase automatically
+            generates an entry into a 50/50 raffle. The prize pool grows in real
+            time, and at the end of the event, 50% goes to the organization and
+            50% to the winning participant.
           </p>
 
           <div className="row align-items-center">
@@ -188,7 +214,7 @@ const About = () => {
               <h6>
                 Step _ <span>01</span>
               </h6>
-              <p className="step-title">Sign Up Instantly</p>
+              {/* <p className="step-title">Sign Up Instantly</p> */}
               <p className="small">
                 Create your account in just a few minutes. Simply register
               </p>
@@ -203,7 +229,7 @@ const About = () => {
               <h6>
                 Step _ <span>02</span>
               </h6>
-              <p className="step-title">Deposit Securely</p>
+              {/* <p className="step-title">Deposit Securely</p> */}
               <p className="small">
                 Create your account in just a few minutes. Simply register
               </p>
@@ -218,22 +244,51 @@ const About = () => {
               <h6>
                 Step _ <span>03</span>
               </h6>
-              <p className="step-title">Win Real Amount</p>
+              {/* <p className="step-title">Win Real Amount</p> */}
               <p className="small">
                 Create your account in just a few minutes. Simply register
               </p>
             </div>
           </div>
 
-          {/* <div className="cta-box mt-3">
-            <span>
-              <i className="bi bi-person-check"></i> Ready to play? Create your
-              account now.
-            </span>
-            <a href="#" className="btn btn-primary ms-auto">
-              Register Now
-            </a>
-          </div> */}
+          <div className="row align-items-center">
+            <div className="col-md-3 step-box">
+              <img src="./images/user-icons.png" />
+              <h6>
+                Step _ <span>04</span>
+              </h6>
+              {/* <p className="step-title">Sign Up Instantly</p> */}
+              <p className="small">Track the prize pool live in the app.</p>
+            </div>
+
+            <div className="col-md-1 d-none d-md-block arrow">
+              <img src="./images/long-arrow-icon.png" />
+            </div>
+
+            <div className="col-md-3 step-box">
+              <img src="./images/deposite.png" />
+              <h6>
+                Step _ <span>05</span>
+              </h6>
+              {/* <p className="step-title">Deposit Securely</p> */}
+              <p className="small">A random drawing determines the winner.</p>
+            </div>
+
+            <div className="col-md-1 d-none d-md-block arrow">
+              <img src="./images/long-arrow-icon.png" />
+            </div>
+
+            <div className="col-md-3 step-box">
+              <img src="./images/winner-icons.png" />
+              <h6>
+                Step _ <span>06</span>
+              </h6>
+              <p className="small">
+                The organization receives its funds, and winners are notified
+                instantly.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 

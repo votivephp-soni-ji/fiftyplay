@@ -96,6 +96,7 @@ const LoginModal = ({
       try {
         deviceToken = await requestForToken();
         console.log("device token", deviceToken);
+        console.log("idToken", idToken)
       } catch (err) {
         console.warn("⚠️ Could not get device token:", err.message);
       }

@@ -312,7 +312,7 @@ const Home = () => {
               <h6>
                 Step _ <span>02</span>
               </h6>
-              <p className="step-title">Deposit Securely</p>
+              <p className="step-title">Donate Securely</p>
               <p className="small">
                 Create your account in just a few minutes. Simply register
               </p>

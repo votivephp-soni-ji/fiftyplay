@@ -14,6 +14,8 @@ const Login = () => {
       console.log("User:", user);
       console.log("ID Token:", idToken);
 
+      
+
       // 🔹 Send ID Token to Laravel backend
       await fetch("http://localhost:8000/api/auth/social-login", {
         method: "POST",

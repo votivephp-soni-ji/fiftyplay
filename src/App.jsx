@@ -24,6 +24,14 @@ import { NotificationPage } from "./pages/NotificationPage";
 import BlogDetail from "./pages/BlogDetail";
 import AboutMob from "./pages/AboutMob";
 import PastEvents from "./pages/PastEvents";
+import Rules from "./pages/Rules";
+import FAQ from "./pages/Faq";
+import Privacy from "./pages/Privacy";
+import Terms from "./pages/Terms";
+import PrivacyMob from "./pages/PrivacyMob";
+import TermsMob from "./pages/TermsMob";
+import EmailVerified from "./pages/EmailVarified";
+import HelpSupport from "./pages/HelpSupport";
 
 function App() {
   return (
@@ -31,6 +39,7 @@ function App() {
       <Header />
       <main>
         <Routes>
+       
           <Route path="/" element={<Home />} />
 
           <Route
@@ -39,13 +48,30 @@ function App() {
           />
           <Route path="/past-events" element={<PastEvents />} />
           <Route path="/about" element={<About />} />
-          <Route path="/our-team" element={<OurTeam />} />
+          {/* <Route path="/our-team" element={<OurTeam />} /> */}
+          <Route path="/faq" element={<FAQ />} />
+          <Route path="/rules" element={<Rules />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/news" element={<News />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogDetail />} />
           <Route path="/login" element={<Login />} />
           <Route path="/event-detail" element={<EventDetail />} />
+
+            <Route path="/privacy-policy" element={<Privacy />} />
+
+            <Route path="/privacy-policy-mob" element={<PrivacyMob />} />
+
+            <Route path="/terms" element={<Terms />} />
+
+            <Route path="/help" element={<HelpSupport />} />
+
+            <Route path="/terms-mob" element={<TermsMob />} />
+
+            <Route path="/about-mobile" element={<AboutMob />} />
+
+            <Route path="/email-varified" element={<EmailVerified />} />
+
           <Route element={<ProtectedRoute />}>
             <Route path="/favourite-events" element={<FavouriteEvents />} />
             <Route path="/tickets-history" element={<PurchasedTickets />} />
@@ -55,9 +81,11 @@ function App() {
             <Route path="/cart" element={<Cart />} />
             <Route path="/checkout/payment" element={<PaymentPage />} />
 
-            <Route path="/about-mobile" element={<AboutMob />} />
+            
           </Route>
+             
         </Routes>
+       
       </main>
       <Footer />
       <ToastContainer position="bottom-right" autoClose={3000} />
