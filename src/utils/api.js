@@ -29,11 +29,9 @@ export const callApi = async (method, url, data = {}, params = {}) => {
         data,
         params,
         headers: isFormData
-            ? { "Content-Type": "multipart/form-data" }
-            : { "Content-Type": "application/json" },
+            ? { "Content-Type": "multipart/form-data","Accept": "application/json", }
+            : { "Content-Type": "application/json", "Accept": "application/json", },
     });
     return response.data;
 
 };
-
-

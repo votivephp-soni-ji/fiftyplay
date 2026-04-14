@@ -27,6 +27,28 @@ export const NotificationPage = () => {
     myNotifications(page);
   }, [page]);
 
+  const getPageNumbers = () => {
+  const pages = [];
+  const maxVisible = 5;
+
+  let start = Math.max(1, page - 2);
+  let end = Math.min(totalPages, page + 2);
+
+  if (page <= 3) {
+    end = Math.min(totalPages, maxVisible);
+  }
+
+  if (page >= totalPages - 2) {
+    start = Math.max(1, totalPages - maxVisible + 1);
+  }
+
+  for (let i = start; i <= end; i++) {
+    pages.push(i);
+  }
+
+  return pages;
+};
+
   return (
     <div className="profile-section-add">
       <div className="container">
@@ -95,63 +117,75 @@ export const NotificationPage = () => {
             </div>
 
             {totalPages > 1 && (
-              <nav aria-label="Page navigation example">
-                <ul className="pagination justify-content-center">
-                  {/* Back Button */}
-                  <li className={`page-item ${page === 1 ? "disabled" : ""}`}>
-                    <a
-                      className="page-link"
-                      href="#"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        if (page > 1) setPage(page - 1);
-                      }}
-                    >
-                      <i className="bi bi-chevron-left"></i> Back
-                    </a>
-                  </li>
+  <nav>
+    <ul className="pagination justify-content-center">
 
-                  {/* Page Numbers */}
-                  {Array.from({ length: totalPages }, (_, i) => i + 1).map(
-                    (p) => (
-                      <li
-                        key={p}
-                        className={`page-item ${page === p ? "active" : ""}`}
-                      >
-                        <a
-                          className="page-link"
-                          href="#"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            setPage(p);
-                          }}
-                        >
-                          {p}
-                        </a>
-                      </li>
-                    )
-                  )}
+      {/* Prev */}
+      <li className={`page-item ${page === 1 ? "disabled" : ""}`}>
+        <button
+          className="page-link"
+          onClick={() => setPage(page - 1)}
+        >
+          <i className="bi bi-chevron-left"></i>
+        </button>
+      </li>
 
-                  {/* Next Button */}
-                  <li
-                    className={`page-item ${
-                      page === totalPages ? "disabled" : ""
-                    }`}
-                  >
-                    <a
-                      className="page-link"
-                      href="#"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        if (page < totalPages) setPage(page + 1);
-                      }}
-                    >
-                      Next <i className="bi bi-chevron-right"></i>
-                    </a>
-                  </li>
-                </ul>
-              </nav>
-            )}
+      {/* First page */}
+      {page > 3 && (
+        <>
+          <li className="page-item">
+            <button className="page-link" onClick={() => setPage(1)}>
+              1
+            </button>
+          </li>
+          <li className="page-item disabled">
+            <span className="page-link">...</span>
+          </li>
+        </>
+      )}
+
+      {/* Dynamic pages */}
+      {getPageNumbers().map((p) => (
+        <li key={p} className={`page-item ${page === p ? "active" : ""}`}>
+          <button
+            className="page-link"
+            onClick={() => setPage(p)}
+          >
+            {p}
+          </button>
+        </li>
+      ))}
+
+      {/* Last page */}
+      {page < totalPages - 2 && (
+        <>
+          <li className="page-item disabled">
+            <span className="page-link">...</span>
+          </li>
+          <li className="page-item">
+            <button
+              className="page-link"
+              onClick={() => setPage(totalPages)}
+            >
+              {totalPages}
+            </button>
+          </li>
+        </>
+      )}
+
+      {/* Next */}
+      <li className={`page-item ${page === totalPages ? "disabled" : ""}`}>
+        <button
+          className="page-link"
+          onClick={() => setPage(page + 1)}
+        >
+          <i className="bi bi-chevron-right"></i>
+        </button>
+      </li>
+
+    </ul>
+  </nav>
+)}
           </div>
         </div>
       </div>

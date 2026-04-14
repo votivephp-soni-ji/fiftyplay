@@ -32,6 +32,7 @@ import PrivacyMob from "./pages/PrivacyMob";
 import TermsMob from "./pages/TermsMob";
 import EmailVerified from "./pages/EmailVarified";
 import HelpSupport from "./pages/HelpSupport";
+import TicketDetail from "./pages/TicketDetail";
 
 function App() {
   return (
@@ -71,6 +72,8 @@ function App() {
             <Route path="/about-mobile" element={<AboutMob />} />
 
             <Route path="/email-varified" element={<EmailVerified />} />
+
+            <Route path="/ticket-detail" element={<TicketDetail />} />
 
           <Route element={<ProtectedRoute />}>
             <Route path="/favourite-events" element={<FavouriteEvents />} />

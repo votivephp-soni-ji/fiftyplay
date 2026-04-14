@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Carousel } from "react-bootstrap";
 
 import "../assets/css/event_details.css";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate  } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { collectedAmount, eventDetail } from "../services/EventService";
 import LoginModal from "../modals/LoginModal";
@@ -24,7 +24,11 @@ export default function EventDetail() {
 
   const location = useLocation();
   const navigate = useNavigate();
-  const eventId = location.state?.event;
+  const queryParams = new URLSearchParams(location.search);
+  const queryEventId = queryParams.get("event_id");
+
+  const eventId = queryEventId || location.state?.event;
+
 
   const isAuthenticated = !!localStorage.getItem("authToken");
 
@@ -38,6 +42,8 @@ export default function EventDetail() {
   useEffect(() => {
     const loadEvent = async () => {
       try {
+        
+         console.log("event id", eventId);
         let res = await eventDetail(eventId);
         console.log("event info", res);
         setEvent(res.data);
@@ -69,7 +75,7 @@ export default function EventDetail() {
     fetchCollectedAmount();
 
     // poll every 5 seconds
-    const interval = setInterval(fetchCollectedAmount, 7000);
+    const interval = setInterval(fetchCollectedAmount, 15000);
     return () => clearInterval(interval);
   }, [eventId]);
 
@@ -180,7 +186,7 @@ export default function EventDetail() {
 
             {/* Right sidebar */}
             <div className="col-lg-4 inner-content-win-left">
-              {event.end_date && event.draw_time && (
+              {event.end_date && event.draw_time && event.winner_type !== "manual" && (
                 <div className="countdown text-center mb-3">
                   <p className="mb-1">This Raffle ends in:</p>
                   <h3>
