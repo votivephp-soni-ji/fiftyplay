@@ -76,7 +76,10 @@ const Footer = () => {
               <p>No categories found</p>
             ) : (
               categories.map((cat) => (
-                <NavLink to={`/category/${cat.id}`} key={cat.id}>
+                <NavLink 
+                  to={`/fundraising-products?category=${cat.id}`} 
+                  key={cat.id}
+                >
                   <i className="bi bi-chevron-right"></i> {cat.name}
                 </NavLink>
               ))

@@ -48,9 +48,10 @@ const FundraisingProducts = () => {
     }
   };
 
-  useEffect(() => {
-    loadEvents(page);
-  }, [page]);
+useEffect(() => {
+  setPage(1); // Reset to page 1 on filter change
+  loadEvents(1);
+}, [searchParams]); // ← listen to searchParams changes
 
   const handlePageChange = (event, value) => {
     setPage(value);
@@ -90,7 +91,9 @@ const FundraisingProducts = () => {
               <Box sx={{ display: "flex", justifyContent: "center", py: 10 }}>
                 <CircularProgress sx={{ color: "#ee127b" }} />
               </Box>
-            ) : (
+            ) : events.length === 0 ? (
+              <h2 className="m-5 text-center">No events found</h2>
+            ): (
               <div className="row g-4">
                 {events.map((event) => (
                   <EventCard key={event.id} event={event} />
