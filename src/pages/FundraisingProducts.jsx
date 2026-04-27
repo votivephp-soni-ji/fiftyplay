@@ -38,7 +38,6 @@ const FundraisingProducts = () => {
       const category = searchParams.get("category") || "";
 
       const res = await fetchEvents({ page: pageNo, location, date, category });
-      console.log("data", res.data);
       setEvents(res.data);
       setTotalPages(res.meta.last_page);
     } catch (err) {
@@ -48,14 +47,26 @@ const FundraisingProducts = () => {
     }
   };
 
-useEffect(() => {
-  setPage(1); // Reset to page 1 on filter change
-  loadEvents(1);
-}, [searchParams]); // ← listen to searchParams changes
+  // 1. When searchParams change (category/filter) → reset to page 1 and fetch
+  useEffect(() => {
+    if (page !== 1) {
+      setPage(1); // this will trigger the page useEffect below
+    } else {
+      loadEvents(1); // already on page 1, just fetch
+    }
+  }, [searchParams]);
+
+  // 2. When page changes → fetch events for that page
+  useEffect(() => {
+    loadEvents(page);
+  }, [page]);
 
   const handlePageChange = (event, value) => {
     setPage(value);
   };
+
+  const categoryId = searchParams.get("category");
+  const categoryName = searchParams.get("categoryName");
 
   return (
     <>
@@ -78,14 +89,21 @@ useEffect(() => {
       <div className="latest-events-add">
         <div className="container">
           <h1 className="text-center">
-            Latest <span className="events-text">Events</span>
+            {categoryName ? (
+              <>
+                Events in <span className="events-text">{categoryName}</span>
+              </>
+            ) : (
+              <>
+                Latest <span className="events-text">Events</span>
+              </>
+            )}
           </h1>
           <p className="text-center celebrate-text">
             We celebrate every win, no matter how big or small. Our platform is
             buzzing with excitement as players hit jackpots and score massive
             crypto payouts daily.
           </p>
-
           <div className="latest-events-inner-added">
             {loading ? (
               <Box sx={{ display: "flex", justifyContent: "center", py: 10 }}>
@@ -93,7 +111,7 @@ useEffect(() => {
               </Box>
             ) : events.length === 0 ? (
               <h2 className="m-5 text-center">No events found</h2>
-            ): (
+            ) : (
               <div className="row g-4">
                 {events.map((event) => (
                   <EventCard key={event.id} event={event} />
@@ -136,14 +154,12 @@ useEffect(() => {
                           {p}
                         </a>
                       </li>
-                    )
+                    ),
                   )}
 
                   {/* Next Button */}
                   <li
-                    className={`page-item ${
-                      page === totalPages ? "disabled" : ""
-                    }`}
+                    className={`page-item ${page === totalPages ? "disabled" : ""}`}
                   >
                     <a
                       className="page-link"
