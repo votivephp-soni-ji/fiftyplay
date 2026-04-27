@@ -1,6 +1,24 @@
+import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 
 const Footer = () => {
+  const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch(`${import.meta.env.VITE_BASE_URL}/event/categories`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("API Response:", data);
+        setCategories(data?.categories || []);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Error fetching categories:", err);
+        setLoading(false);
+      });
+  }, []);
+
   return (
     <footer className="fifty-play-footer about_mob">
       <div className="container">
@@ -52,16 +70,18 @@ const Footer = () => {
 
           <div className="col-lg-2 col-md-6">
             <h5>Categories</h5>
-            <a href="#">
-              <i className="bi bi-chevron-right"></i> Gaming
-            </a>
-            <a href="#">
-              <i className="bi bi-chevron-right"></i> Sports
-            </a>
-            <a href="#">
-              <i className="bi bi-chevron-right"></i> Lottery
-            </a>
-           
+            {loading ? (
+              <p>Loading...</p>
+            ) : categories.length === 0 ? (
+              <p>No categories found</p>
+            ) : (
+              categories.map((cat) => (
+                <NavLink to={`/category/${cat.id}`} key={cat.id}>
+                  <i className="bi bi-chevron-right"></i> {cat.name}
+                </NavLink>
+              ))
+            )}
+
             {/* <a href="#">
               <i className="bi bi-chevron-right"></i> Business
             </a> */}
@@ -114,7 +134,8 @@ const Footer = () => {
             &copy; {new Date().getFullYear()} Fifty Play - Raffle
           </p>
           <div className="inner-text-add">
-            <Link to="/help">Help & Support</Link> | <Link to="/terms">Terms & Conditions</Link>{" "}
+            <Link to="/help">Help & Support</Link> |{" "}
+            <Link to="/terms">Terms & Conditions</Link>{" "}
             <Link to="/privacy-policy">Privacy Policy</Link>
           </div>
         </div>
